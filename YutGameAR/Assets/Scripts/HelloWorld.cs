@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 public class HelloWorld : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         Debug.Log("Hello World2");
         Debug.Log("Hello World3");
@@ -13,7 +14,12 @@ public class HelloWorld : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
+    {
+        
+    }
+
+    private void FixedUpdate()
     {
         
     }
