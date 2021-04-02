@@ -18,7 +18,7 @@ public class YutThrow : MonoBehaviour
         set { _throwing = value; }
     }
 
-    public List<int> selectNumber
+    public List<int> SelectNumber
     {
         get { return _selectNumber; }
         set { _selectNumber = value; }

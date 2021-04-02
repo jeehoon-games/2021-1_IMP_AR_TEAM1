@@ -27,7 +27,7 @@ public class PieceMove : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && GameObject.Find("Button").GetComponent<YutThrow>().throwing)
         {
-            Debug.Log("pathfind");
+            //Debug.Log("pathfind");
             RaycastHit hit;
             
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -41,7 +41,7 @@ public class PieceMove : MonoBehaviour
                     _select = true;
                     _selectedPiece = hit.collider.gameObject;
                     
-                    hit.collider.GetComponent<PathFinding>().PathFind(_selectedPiece, GameObject.Find("Button").GetComponent<YutThrow>().selectNumber);
+                    hit.collider.GetComponent<PathFinding>().PathFind(_selectedPiece, GameObject.Find("Button").GetComponent<YutThrow>().SelectNumber);
                     
 
 

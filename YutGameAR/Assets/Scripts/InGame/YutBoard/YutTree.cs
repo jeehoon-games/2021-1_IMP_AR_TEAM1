@@ -98,9 +98,13 @@ public class YutTree : MonoBehaviour
             int j = i * 5;
             _nodeName["FootHold_" + j].IsIntersection = true;
         }
+        _nodeName["FootHold_29"].IsIntersection = true;
+
         _nodeName["FootHold_5"].IsTwoway = true;
         _nodeName["FootHold_10"].IsTwoway = true;
         _nodeName["FootHold_20"].IsTwoway = true;
+
+        //_nodeName["FootHold_29"].LeftChild = new TreeNode(null);
 
 
         _rootNode = _nodeName["FootHold_" + 0];
