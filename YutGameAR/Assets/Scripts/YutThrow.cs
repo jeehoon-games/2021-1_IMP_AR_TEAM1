@@ -50,6 +50,7 @@ public class YutThrow : MonoBehaviour
     void Start()
     {
         button = GetComponent<Button>();
+       
         button.onClick.AddListener(OnClickButton);
     }
 

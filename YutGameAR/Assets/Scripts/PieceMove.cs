@@ -21,10 +21,13 @@ public class PieceMove : MonoBehaviour
 
     
 
+    
+
     void selectAndMove()
     {
         if (Input.GetMouseButtonDown(0) && GameObject.Find("Button").GetComponent<YutThrow>().throwing)
         {
+            Debug.Log("pathfind");
             RaycastHit hit;
             
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -37,20 +40,22 @@ public class PieceMove : MonoBehaviour
                     hit.collider.GetComponent<Renderer>().material.color = Color.red;
                     _select = true;
                     _selectedPiece = hit.collider.gameObject;
-                    hit.collider.GetComponent<PathFinding>().enableFootHold(_selectedPiece.GetComponent<Pieces>().posNumber, GameObject.Find("Button").GetComponent<YutThrow>().selectNumber);
-
+                    
+                    hit.collider.GetComponent<PathFinding>().PathFind(_selectedPiece, GameObject.Find("Button").GetComponent<YutThrow>().selectNumber);
+                    
 
 
                 }
                 else if (hit.collider.gameObject.CompareTag("FootHold") && _select)
                 {
-                    int index = GameObject.Find("Main Camera").GetComponent<GameManager>().FootSet.IndexOf(hit.collider.gameObject);
-                    List<GameObject> set = GameObject.Find("Main Camera").GetComponent<GameManager>().FootSet;
+                    int index = GameObject.Find("Main Camera").GetComponent<YutTree>().FootSet.IndexOf(hit.collider.gameObject);
+                    Debug.Log(index);
+                    List<GameObject> set = GameObject.Find("Main Camera").GetComponent<YutTree>().FootSet;
                    
                     
                     StartCoroutine(MoveTo(_selectedPiece, set[index-1].transform.position, set[index].transform.position));
                
-                    _selectedPiece.GetComponent<Pieces>().posNumber = index;
+                    //_selectedPiece.GetComponent<Pieces>().posNumber = index;
                     _selectedPiece.GetComponent<Renderer>().material.color = new Color(102 / 255f, 123 / 255f, 255 / 255f, 255 / 255f);
                     _select = false;
 

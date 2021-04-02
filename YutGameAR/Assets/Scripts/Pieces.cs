@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Pieces : MonoBehaviour
 {
-    private int _posNumber = 0;
+    private string _posName = "FootHold_0";
 
-    public int posNumber
+    public string PosName
     {
-        get { return _posNumber; }
-        set { _posNumber = value; }
+        get { return _posName; }
+        set { _posName = value; }
     }
 
     // Start is called before the first frame update

@@ -6,21 +6,12 @@ public class GameManager : MonoBehaviour
 {
     float m_fOldToucDis = 0f;       // 터치 이전 거리를 저장합니다.
     float m_fFieldOfView = 60f;     // 카메라의 FieldOfView의 기본값을 60으로 정합니다.
-    private List<GameObject> _FootSet = new List<GameObject>();
-
-    public List<GameObject> FootSet
-    {
-        get { return _FootSet; }
-    }
+    
 
     private void Start()
     {
 
-        _FootSet.AddRange(GameObject.FindGameObjectsWithTag("FootHold"));
-        for(int i = 0; i < _FootSet.Count; i++)
-        {
-            Debug.Log(_FootSet[i]);
-        }        
+           
     }
 
     void Update()
