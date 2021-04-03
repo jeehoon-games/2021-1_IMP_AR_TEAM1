@@ -1,10 +1,6 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class LogoManager : MonoBehaviour
 {
@@ -16,58 +12,48 @@ public class LogoManager : MonoBehaviour
 
     private void Init()
     {
-        if (audioSource == null) { print("Cannot Find Component : AudioSource"); }
-        if (canvasGroup == null) { print("Cannot Find Component : CanvasGroup"); }
-        //audioSource.Play();
-        StartCoroutine("FadeIn");
-        canvasGroup.alpha = 0.01f;
+        if (audioSource == null) { print("Cannot find component : AudioSource"); }
+        if (canvasGroup == null) { print("Cannot find component : CanvasGroup"); }
+        canvasGroup.alpha = 0;
+        StartCoroutine(FadeIn());
+        audioSource.Play();
     }
     
     #endregion
 
     
-    #region Unity Event Function
+    
+    #region Unity Event Functions
     
     void Start()
     {
         Init();
     }
 
-    void Update()
-    {
-        if (canvasGroup.alpha >= 1.0f)
-        {
-            StopCoroutine("FadeIn");
-            StartCoroutine("FadeOut");
-        }
-        if (canvasGroup.alpha <= 0f)
-        {
-            StopCoroutine("FadeOut");
-            SceneManager.LoadScene("LoginScene");
-        }
-    }
-
     #endregion
 
+    
     
     #region Coroutines for fade effect
     
     IEnumerator FadeIn()
     {
-        while (true)
+        while (canvasGroup.alpha < 1.0f)
         {
             canvasGroup.alpha += 0.01f;
             yield return new WaitForSeconds(fadeTime * 0.01f);
         }
+        StartCoroutine(FadeOut());
     }
 
     IEnumerator FadeOut()
     {
-        while (true)
+        while (canvasGroup.alpha > 0)
         {
             canvasGroup.alpha -= 0.01f;
             yield return new WaitForSeconds(fadeTime * 0.01f);
         }
+        SceneManager.LoadScene("LoginScene");
     }
     #endregion
 }
