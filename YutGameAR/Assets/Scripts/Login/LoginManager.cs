@@ -19,15 +19,20 @@ public class LoginManager : MonoBehaviour
     {
         public string userID;
         public string userPW;
+        public string userName;
+        public string userNickName;
+        public string userBirthday;
     }
 
     private FMSocketIOManager _instance;
     private NetworkCore _networkCore;
     private Canvas _currCvs;
-    private float _fadeTime = 1f;
+    private float _fadeTime = 0.25f;
     private bool _isCvsChanging;
     private bool _isEmailAuthed;
+    private bool _isNickNameAuthed;
     private bool _isConnected;
+    private string _authCode;
     
     private void Init()
     {
@@ -48,11 +53,14 @@ public class LoginManager : MonoBehaviour
         signInCvs.GetComponentsInChildren<Button>()[0].onClick.AddListener(delegate { OnSignInClick(); }); 
         signInCvs.GetComponentsInChildren<Button>()[1].onClick.AddListener(delegate { OnCvsChangeBtnClick(signInCvs, signUpCvs); });
         
-        signUpCvs.GetComponentsInChildren<Button>()[0].onClick.AddListener(delegate { OnIdVerityClick(); });
+        signUpCvs.GetComponentsInChildren<Button>()[0].onClick.AddListener(delegate { OnCvsChangeBtnClick(signUpCvs, authCvs); });
         signUpCvs.GetComponentsInChildren<Button>()[1].onClick.AddListener(delegate { OnNicknameVerifyClick(); });
         signUpCvs.GetComponentsInChildren<Button>()[2].onClick.AddListener(delegate { OnSignUpRequestClick(); });
         signUpCvs.GetComponentsInChildren<Button>()[3].onClick.AddListener(delegate { OnCvsChangeBtnClick(signUpCvs, findIdCvs); });
         signUpCvs.GetComponentsInChildren<Button>()[4].onClick.AddListener(delegate { OnCvsChangeBtnClick(signUpCvs, resetPwCvs); });
+        
+        authCvs.GetComponentsInChildren<Button>()[0].onClick.AddListener(delegate { OnSendCodeBtnClick(); });
+        authCvs.GetComponentsInChildren<Button>()[1].onClick.AddListener(delegate { OnAuthBtnClick(); });
     }
 
     #endregion
@@ -77,24 +85,18 @@ public class LoginManager : MonoBehaviour
             UserInfo info = new UserInfo();
             info.userID = signInCvs.GetComponentsInChildren<InputField>()[0].text;
             info.userPW = Crypto.SHAhash(signInCvs.GetComponentsInChildren<InputField>()[1].text, "sha256");
-            string jsonStr = JsonUtility.ToJson(info);
-            _instance.Emit("Event_SignIn", jsonStr);
+            _instance.Emit("Event_SignIn", JsonUtility.ToJson(info));
         }
     }
 
     // Sign Up Canvas Buttons event
-    void OnIdVerityClick()
-    {
-        if (!_isCvsChanging && _instance.IsWebSocketConnected())
-        {
-            
-        }
-    }
     void OnNicknameVerifyClick()
     {
         if (!_isCvsChanging && _instance.IsWebSocketConnected())
         {
-            
+            UserInfo info = new UserInfo();
+            info.userNickName = signUpCvs.GetComponentsInChildren<InputField>()[1].text;
+            _instance.Emit("Event_CheckNickName", JsonUtility.ToJson(info));
         }
     }
 
@@ -102,7 +104,69 @@ public class LoginManager : MonoBehaviour
     {
         if (!_isCvsChanging && _instance.IsWebSocketConnected())
         {
-            
+            InputField[] fields = signUpCvs.GetComponentsInChildren<InputField>();
+
+            if (!_isEmailAuthed)
+            {
+                print("Please complete the email authentication.");
+            }
+            else if (!_isNickNameAuthed)
+            {
+                print("Please complete the nickname authentication.");
+            }
+            else if (!fields[4].text.Equals(fields[5].text))
+            {
+                print("Please check your password / password confirm.");
+            }
+            else
+            {
+                UserInfo info = new UserInfo();
+                info.userID = fields[0].text;
+                info.userNickName = fields[1].text;
+                info.userName = fields[2].text;
+                info.userBirthday = fields[3].text;
+                info.userPW = Crypto.SHAhash(fields[4].text, "sha256");
+                _instance.Emit("Event_SignUp", JsonUtility.ToJson(info));
+                ChangeCanvas(signUpCvs, signInCvs);
+            }
+        }
+    }
+    
+    void OnSendCodeBtnClick()
+    {
+        if (!_isCvsChanging && _instance.IsWebSocketConnected())
+        {
+            UserInfo info = new UserInfo();
+            info.userID = authCvs.GetComponentsInChildren<InputField>()[0].text;
+            _instance.Emit("Event_Authentication", JsonUtility.ToJson(info));
+        }
+    }
+
+    void OnAuthBtnClick()
+    {
+        if (!_isCvsChanging)
+        {
+            string hashCode = Crypto.SHAhash(authCvs.GetComponentsInChildren<InputField>()[1].text, "sha256");
+
+            if (hashCode.Equals(_authCode))
+            {
+                InputField field = signUpCvs.GetComponentsInChildren<InputField>()[0];
+                Color color = field.gameObject.GetComponent<Image>().color;
+                field.gameObject.GetComponent<Image>().color = new Color(color.r, color.g, color.b, 0.5f);
+                field.enabled = false;
+                
+                Button btn = signUpCvs.GetComponentsInChildren<Button>()[0];
+                color = btn.gameObject.GetComponent<Image>().color;
+                btn.gameObject.GetComponent<Image>().color = new Color(color.r, color.g, color.b, 0.5f);
+                btn.enabled = false;
+                
+                _isEmailAuthed = true;
+                ChangeCanvas(authCvs, signUpCvs);
+            }
+            else
+            {
+                print("wrong code");
+            }
         }
     }
 
@@ -132,6 +196,30 @@ public class LoginManager : MonoBehaviour
         {
             print("Cannot find component: CanvasGroup");
             return;
+        }
+
+        if (!to.Equals(signUpCvs))
+        {
+            _isEmailAuthed = false;
+            _isNickNameAuthed = false;
+            
+            InputField authField = signUpCvs.GetComponentsInChildren<InputField>()[0];
+            Color color = authField.gameObject.GetComponent<Image>().color;
+            authField.gameObject.GetComponent<Image>().color = new Color(color.r, color.g, color.b, 1);
+
+            Button authBtn = signUpCvs.GetComponentsInChildren<Button>()[0];
+            color = authBtn.gameObject.GetComponent<Image>().color;
+            authBtn.gameObject.GetComponent<Image>().color = new Color(color.r, color.g, color.b, 1);
+
+            InputField field = signUpCvs.GetComponentsInChildren<InputField>()[1];
+            color = field.gameObject.GetComponent<Image>().color;
+            field.gameObject.GetComponent<Image>().color = new Color(color.r, color.g, color.b, 1);
+
+            Button btn = signUpCvs.GetComponentsInChildren<Button>()[1];
+            color = btn.gameObject.GetComponent<Image>().color;
+            btn.gameObject.GetComponent<Image>().color = new Color(color.r, color.g, color.b, 1);
+            
+            authField.enabled = authBtn.enabled = field.enabled = btn.enabled = true;
         }
 
         _isCvsChanging = true;
@@ -241,10 +329,28 @@ public class LoginManager : MonoBehaviour
             GameData gData = JsonUtility.FromJson<GameData>(e.data);
             _networkCore.GameData = gData;
         });
-
-        _instance.On("test", (e) =>
+        
+        _instance.On("Event_CheckNickName_Result", (e) =>
         {
-            print(e.data);
+            if (e.data.Equals("true"))
+            {
+                InputField field = signUpCvs.GetComponentsInChildren<InputField>()[1];
+                Color color = field.gameObject.GetComponent<Image>().color;
+                field.gameObject.GetComponent<Image>().color = new Color(color.r, color.g, color.b, 0.6f);
+                field.enabled = false;
+                
+                Button btn = signUpCvs.GetComponentsInChildren<Button>()[1];
+                color = btn.gameObject.GetComponent<Image>().color;
+                btn.gameObject.GetComponent<Image>().color = new Color(color.r, color.g, color.b, 0.6f);
+                btn.enabled = false;
+                
+                _isNickNameAuthed = true;
+            }
+        });
+        
+        _instance.On("Event_SendAuthCode", (e) =>
+        {
+            _authCode = e.data.Substring(1, e.data.Length - 2);
         });
     }
     

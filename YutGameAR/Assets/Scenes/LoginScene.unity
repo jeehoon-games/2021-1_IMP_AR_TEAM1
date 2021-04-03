@@ -2417,7 +2417,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Verify
+  m_Text: Send
 --- !u!222 &318905695
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6405,7 +6405,7 @@ GameObject:
   - component: {fileID: 1366756257}
   - component: {fileID: 1366756256}
   m_Layer: 5
-  m_Name: IdVerifyBtn
+  m_Name: IdAuthBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7579,7 +7579,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Verify
+  m_Text: Auth
 --- !u!222 &1617770368
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8480,7 +8480,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Verify
+  m_Text: Send
 --- !u!222 &1893774216
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8709,7 +8709,7 @@ MonoBehaviour:
       m_Calls: []
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
-  m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
+  m_SelectionColor: {r: 0.6933962, g: 0.82685906, b: 1, a: 0.7529412}
   m_Text: 
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1

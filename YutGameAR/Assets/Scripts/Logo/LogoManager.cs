@@ -8,7 +8,7 @@ public class LogoManager : MonoBehaviour
     
     public AudioSource audioSource;
     public CanvasGroup canvasGroup;
-    public float fadeTime = 2f;   // 2.5sec
+    public float fadeTime = 1.0f;   // 2.5sec
 
     private void Init()
     {
