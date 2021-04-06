@@ -163,8 +163,8 @@ public class FMSocketIOManager : MonoBehaviour {
     public void Action_OnReceivedData(string _string) { Debug.Log(_string); }
     public void Action_OnReceivedData(byte[] _byte) { Debug.Log("byte: "+_byte.Length); }
 
-    //Sender functions
-#region Sender
+    //Sender functions 
+    #region Sender
     /// <summary>
     /// Send string to connected clients and/or server, depending on FMSocketIOEmitType
     /// </summary>

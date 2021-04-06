@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,15 +23,15 @@ public class LogoManager : MonoBehaviour
     
     #endregion
 
-    
-    
+
+
     #region Unity Event Functions
     
     void Start()
     {
         Init();
     }
-
+    
     #endregion
 
     
