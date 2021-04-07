@@ -5,6 +5,7 @@ using UnityEngine;
 public class Pieces : MonoBehaviour
 {
     private string _posName = "FootHold_0";
+    public string teamColor;
 
     public string PosName
     {
@@ -12,15 +13,5 @@ public class Pieces : MonoBehaviour
         set { _posName = value; }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  
 }

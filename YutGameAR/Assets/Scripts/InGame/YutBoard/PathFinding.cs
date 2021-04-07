@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PathFinding : MonoBehaviour
 {
@@ -9,28 +10,37 @@ public class PathFinding : MonoBehaviour
     private GameObject _piece;
     private string _pieceName;
     private List<int> _countNum = new List<int>();
+    private List<int> _distictNum = new List<int>();
     private Dictionary<string,YutTree.TreeNode> _nodeName;
-    private Dictionary<string, YutTree.TreeNode> _enableNode;
+    private Dictionary<string, YutTree.TreeNode> _enableNode = new Dictionary<string, YutTree.TreeNode>();
 
-    private void init(GameObject piece, List<int> countNum)
+    private void Init(GameObject piece, List<int> countNum)
     {
         _piece = piece;
         _pieceName = piece.GetComponent<Pieces>().PosName;
         _countNum = countNum;
         _nodeName = GameObject.Find("Main Camera").GetComponent<YutTree>().NodeName;
-        _enableNode = new Dictionary<string, YutTree.TreeNode>();
+        _enableNode.Clear();
     }
+
 
     // calculating the position of the foothold that the piece can go.
     public Dictionary<string, YutTree.TreeNode> PathFind(GameObject piece, List<int> countNum)
     {
-        
-        init(piece, countNum);
-        for(int i = 0; i < countNum.Count; i++)
+        Init(piece, countNum);
+        _distictNum = countNum.Distinct().ToList();
+        for (int i = 0; i < _distictNum.Count; i++)
         {
-            Path(_pieceName, _countNum[i]);
+            if(_distictNum[i] == -1)
+            {
+                BackPath(_pieceName, _distictNum[i]);
+            }
+            else
+            {
+                Path(_pieceName, _distictNum[i]);
+            }
+            
         }
-        //GameObject.Find("Button").GetComponent<YutThrow>().selectNumber.Clear();
         return _enableNode;
     }
 
@@ -43,17 +53,18 @@ public class PathFinding : MonoBehaviour
         startNode = _nodeName[Name];
 
         //교차로가 아니면서 길이 하나인 node
-        if (!_nodeName[Name].IsIntersection /*&& !_nodeName[Name].IsTwoway*/)
+        if (!_nodeName[Name].IsIntersection)
         {
             //교차로가 아닌 node들
             if (_nodeName[Name].RightChild == null)
             {
+                
                 //startNode = _nodeName[Name];
                 for (int i = 0; i < count; i++)
                 {
+                    if (CheckTheEnd(startNode)) { break; }
                     nextNode = startNode.LeftChild;
                     if (nextNode.IsIntersection) { throughNode = nextNode; }
-                    
                     startNode = nextNode;
                 }       
             }
@@ -63,6 +74,7 @@ public class PathFinding : MonoBehaviour
                 //startNode = _nodeName[Name];
                 for (int i = 0; i < count; i++)
                 {
+                    if (CheckTheEnd(startNode)) { break; }
                     if (!exchange)
                     {
                         nextNode = startNode.RightChild;
@@ -89,6 +101,7 @@ public class PathFinding : MonoBehaviour
         {
             for (int i = 0; i < count; i++)
             {
+                if (CheckTheEnd(startNode)) { break; }
                 if (!exchange)
                 {
                     nextNode = startNode.RightChild;
@@ -109,30 +122,63 @@ public class PathFinding : MonoBehaviour
         {
             for (int i = 0; i < count; i++)
             {
+                if (CheckTheEnd(startNode)) { break; }
                 nextNode = startNode.LeftChild;
                 startNode = nextNode;
             }
             
         }
-        
+        /*
         //마지막 node
         else if (_nodeName[Name].FootHold.name == "FootHold_29")
         {
-            if(count != -1)
-            {
-                //끝
-                
-            }
+            startNode = _nodeName["FootHold_30"];
         }
-
-        //_piece.GetComponent<Pieces>().PosName = startNode.FootHold.name;
-        markingFootHold(startNode.FootHold.transform.position);
+        */
+        MarkingFootHold(startNode.FootHold.transform.position);
         _enableNode.Add(startNode.FootHold.name, throughNode);
-        startNode.Enable = true;
+        startNode.Step = count;
 
     }
 
-    private void markingFootHold(Vector3 postion)
+    // the path of the piece when it is BackDo(빽도)
+    private void BackPath(string Name, int count)
+    {
+        YutTree.TreeNode startNode, nextNode;
+
+
+        startNode = _nodeName[Name];
+
+        if(Name.Equals("FootHold_20") || Name.Equals("FootHold_29"))
+        {
+            //나중에 추가할 예정 빽도
+        }
+        else
+        {
+            nextNode = startNode.LeftParent;
+            startNode = nextNode;
+        }
+            
+        
+        MarkingFootHold(startNode.FootHold.transform.position);
+        _enableNode.Add(startNode.FootHold.name, null);
+        startNode.Step = count;
+    }
+
+    private bool CheckTheEnd(YutTree.TreeNode theEnd)
+    {
+        if (theEnd.FootHold.name.Equals("FootHold_30"))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    // Marking the available FootHold
+    private void MarkingFootHold(Vector3 postion)
     {
         Instantiate(Arrow, new Vector3(postion.x, postion.y + 5, postion.z), Quaternion.identity);
     }

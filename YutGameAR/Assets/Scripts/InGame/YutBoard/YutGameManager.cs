@@ -5,17 +5,22 @@ using UnityEngine;
 public class YutGameManager : MonoBehaviour
 {
     private bool _select = false;
-    private Vector3 _movePosition;
     private GameObject _selectedPiece;
     private Dictionary<string, YutTree.TreeNode> _enableNode;
 
-    public bool select { get { return _select; } }
-    public Vector3 movePosition { get { return _movePosition; } }
+    private int BlueScore = 0;
+    private YutThrow YutComponent;
+    private YutTree TreeComponent;
+
+    public bool Select { get { return _select; } }
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        YutComponent = GameObject.Find("Button").GetComponent<YutThrow>();
+        TreeComponent = GameObject.Find("Main Camera").GetComponent<YutTree>();
+
     }
 
     // Update is called once per frame
@@ -27,7 +32,7 @@ public class YutGameManager : MonoBehaviour
     void selectAndMove()
     {
         // 윷을 던진 상태에서 터치를 하는 경우
-        if (Input.GetMouseButtonDown(0) && GameObject.Find("Button").GetComponent<YutThrow>().throwing)
+        if (Input.GetMouseButtonDown(0) && YutComponent.Throwing)
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -45,20 +50,20 @@ public class YutGameManager : MonoBehaviour
                     _select = true;
                     _selectedPiece = hit.collider.gameObject;
 
-                    _enableNode = hit.collider.GetComponent<PathFinding>().PathFind(_selectedPiece, GameObject.Find("Button").GetComponent<YutThrow>().SelectNumber);
+                    _enableNode = hit.collider.GetComponent<PathFinding>().PathFind(_selectedPiece, YutComponent.SelectNumber);
 
                 }
 
                 // 말을 터치한 후 갈 발판을 터치한 경우
                 else if (hit.collider.gameObject.CompareTag("FootHold") && _select && _enableNode.ContainsKey(hit.collider.name))
                 {
+                    // when the pieces didn't start
                     if(_enableNode[hit.collider.name] == null)
                     {
-
                         if(_selectedPiece.GetComponent<Pieces>().PosName == "FootHold_0") { StartCoroutine(MoveTo(_selectedPiece,new Vector3(20,0,-20), hit.collider.transform.position)); }
                         else { StartCoroutine(MoveTo(_selectedPiece, hit.collider.transform.position)); }
-                        
                     }
+                    // else
                     else { StartCoroutine(MoveTo(_selectedPiece, _enableNode[hit.collider.name].FootHold.transform.position, hit.collider.transform.position)); }
                     
                     //_selectedPiece.GetComponent<Pieces>().posNumber = index;
@@ -66,11 +71,18 @@ public class YutGameManager : MonoBehaviour
                     _selectedPiece.GetComponent<Renderer>().material.color = new Color(102 / 255f, 123 / 255f, 255 / 255f, 255 / 255f);
                     _select = false;
                     DestroyArrow();
-                    GameObject.Find("Main Camera").GetComponent<YutTree>().NodeName[hit.collider.name].Enable = false;
-                    GameObject.Find("Button").GetComponent<YutThrow>().throwing = false;
-                    GameObject.Find("Button").GetComponent<YutThrow>().SelectNumber.Clear();
+                    
 
-
+                    // 여러번 움직일 때
+                    if(YutComponent.SelectNumber.Count > 1)
+                    {
+                        YutComponent.SelectNumber.Remove(TreeComponent.NodeName[hit.collider.name].Step);
+                    }
+                    else
+                    {
+                        YutComponent.Throwing = false;
+                        YutComponent.SelectNumber.Clear();
+                    }
                 }
 
                 // 그 외의 경우 초기로 돌려줌
@@ -105,6 +117,13 @@ public class YutGameManager : MonoBehaviour
             Destroy(arrow[i]);
     }
 
+    void GoalInSetting(GameObject piece)
+    {
+        Destroy(piece);
+        BlueScore += 1;
+        Debug.Log("BlueScore : " + BlueScore);
+    }
+
 
 
 
@@ -126,6 +145,13 @@ public class YutGameManager : MonoBehaviour
                 if (count2 >= 1)
                 {
                     piece.transform.position = toPos;
+                    
+                    // the piece reached the finish line 
+                    if (toPos.x == TreeComponent.NodeName["FootHold_30"].FootHold.transform.position.x)
+                    {
+                        GoalInSetting(piece);
+
+                    }
 
                     break;
                 }
@@ -147,6 +173,12 @@ public class YutGameManager : MonoBehaviour
             if (count >= 1)
             {
                 piece.transform.position = toPos;
+
+                if (toPos.x == TreeComponent.NodeName["FootHold_30"].FootHold.transform.position.x)
+                {
+                    GoalInSetting(piece);
+
+                }
 
                 break;
             }

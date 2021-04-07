@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
 
 public class YutThrow : MonoBehaviour
 {
@@ -12,7 +14,7 @@ public class YutThrow : MonoBehaviour
     private List<int> _selectNumber = new List<int>();
 
 
-    public bool throwing 
+    public bool Throwing 
     { 
         get { return _throwing; } 
         set { _throwing = value; }
@@ -49,22 +51,27 @@ public class YutThrow : MonoBehaviour
     
     void Start()
     {
-        button = GetComponent<Button>();
-       
+        button = GetComponent<Button>();  
         button.onClick.AddListener(OnClickButton);
-    }
-
-
-    void Update()
-    {
-    
     }
 
     void OnClickButton()
     {
         
-        _selectNumber.Add(RandomNumber());
+        button.GetComponentInChildren<Text>().text = "Throw!";
+        int step = RandomNumber();
+        _selectNumber.Add(step);
+        
         Debug.Log(_selectNumber[0]);
-        _throwing = true;
+        if(step == 4 || step == 5)
+        {
+            Debug.Log("onemore!");
+            _throwing = false;
+            button.GetComponentInChildren<Text>().text = "One More!";
+        }
+        else
+        {
+            _throwing = true;
+        }
     }
 }
