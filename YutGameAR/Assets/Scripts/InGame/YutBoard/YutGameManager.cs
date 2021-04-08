@@ -11,6 +11,7 @@ public class YutGameManager : MonoBehaviour
     private int BlueScore = 0;
     private YutThrow YutComponent;
     private YutTree TreeComponent;
+    private GameObject[] PiecesSet; 
 
     public bool Select { get { return _select; } }
 
@@ -20,7 +21,8 @@ public class YutGameManager : MonoBehaviour
     {
         YutComponent = GameObject.Find("Button").GetComponent<YutThrow>();
         TreeComponent = GameObject.Find("Main Camera").GetComponent<YutTree>();
-
+        PiecesSet = GameObject.FindGameObjectsWithTag("Piece");
+        
     }
 
     // Update is called once per frame
@@ -45,8 +47,8 @@ public class YutGameManager : MonoBehaviour
                 // 터치하는 것이 말일 경우
                 if (hit.collider.gameObject.CompareTag("Piece") && !_select)
                 {
-
-                    hit.collider.GetComponent<Renderer>().material.color = Color.red;
+                    
+                    //hit.collider.GetComponent<Renderer>().material.color = Color.red;
                     _select = true;
                     _selectedPiece = hit.collider.gameObject;
 
@@ -57,6 +59,7 @@ public class YutGameManager : MonoBehaviour
                 // 말을 터치한 후 갈 발판을 터치한 경우
                 else if (hit.collider.gameObject.CompareTag("FootHold") && _select && _enableNode.ContainsKey(hit.collider.name))
                 {
+
                     // when the pieces didn't start
                     if(_enableNode[hit.collider.name] == null)
                     {
@@ -65,10 +68,66 @@ public class YutGameManager : MonoBehaviour
                     }
                     // else
                     else { StartCoroutine(MoveTo(_selectedPiece, _enableNode[hit.collider.name].FootHold.transform.position, hit.collider.transform.position)); }
+
+                    for(int i = 0; i < PiecesSet.Length; i++)
+                    {
+                        Debug.Log(PiecesSet[i].name);
+                        if (hit.collider.name.Equals(PiecesSet[i].GetComponent<Pieces>().PosName))
+                        {
+                            Pieces ps = PiecesSet[i].GetComponent<Pieces>();
+                            if (_selectedPiece.GetComponent<Pieces>().teamColor.Equals(ps.teamColor))
+                            {
+                                
+                                
+                                ps.Point += 1;
+                                Debug.Log(ps.Point + "포인트");
+                                _selectedPiece.GetComponent<Pieces>().Point = 0;
+                                _selectedPiece.GetComponent<Pieces>().PosName = "FootHold_0";
+                                PiecesSet[i].SetActive(false);
+                                
+
+                            }
+                            else
+                            {
+                                if(ps.Point > 1)
+                                {
+                                    
+                                    for (int j = 0; j< PiecesSet.Length; j++)
+                                    {
+                                        if (!PiecesSet[j].activeInHierarchy)
+                                        {
+                                            
+                                            PiecesSet[j].SetActive(true);
+                                            Pieces ps2 = PiecesSet[j].GetComponent<Pieces>();
+                                            if (ps2.teamColor.Equals(ps.teamColor) && ps2.Point == 0)
+                                            {
+                                                //ps2.PosName = "FootHold_0";
+                                                PiecesSet[j].transform.position = ps2.InitPosition;
+                                                ps2.Point = 1;
+                                                Debug.Log(ps2.PosName);
+                                                Debug.Log(ps2.Point);
+                                                //PiecesSet[j].SetActive(true);
+                                            }
+                                        }
+                                        
+                                    }
+                                }
+                                
+                                PiecesSet[i].transform.position = ps.InitPosition;
+                                ps.PosName = "FootHold_0";
+                                ps.Point = 1;
+                                
+                                
+
+
+                            }
+                        }
+                    }
+                        
                     
-                    //_selectedPiece.GetComponent<Pieces>().posNumber = index;
+                    
                     _selectedPiece.GetComponent<Pieces>().PosName = hit.collider.name;
-                    _selectedPiece.GetComponent<Renderer>().material.color = new Color(102 / 255f, 123 / 255f, 255 / 255f, 255 / 255f);
+                    //_selectedPiece.GetComponent<Renderer>().material.color = new Color(102 / 255f, 123 / 255f, 255 / 255f, 255 / 255f);
                     _select = false;
                     DestroyArrow();
                     
@@ -90,7 +149,7 @@ public class YutGameManager : MonoBehaviour
                 {
                     DestroyArrow();
                     _select = false;
-                    _selectedPiece.GetComponent<Renderer>().material.color = new Color(102 / 255f, 123 / 255f, 255 / 255f, 255 / 255f);
+                    //_selectedPiece.GetComponent<Renderer>().material.color = new Color(102 / 255f, 123 / 255f, 255 / 255f, 255 / 255f);
                 }
             }
             

@@ -142,6 +142,7 @@ public class PathFinding : MonoBehaviour
     }
 
     // the path of the piece when it is BackDo(빽도)
+    //윷 빽도 나왔을때 즉,말이 없는상태로 백도가 나왓을때 경우 고칠것!!!!!!!!!!!!
     private void BackPath(string Name, int count)
     {
         YutTree.TreeNode startNode, nextNode;
