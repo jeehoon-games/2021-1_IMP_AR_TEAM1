@@ -8,6 +8,8 @@ public class YutTree : MonoBehaviour
     private List<GameObject> _footSet = new List<GameObject>();
     private Dictionary<string, TreeNode> _nodeName = new Dictionary<string, TreeNode>();
     private TreeNode _rootNode;
+    
+    public GameObject go;
 
     
     public List<GameObject> FootSet
@@ -29,7 +31,8 @@ public class YutTree : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < 30; i++)
+        
+        for(int i = 0; i < 31; i++)
         {
             _footSet.Add(GameObject.Find("FootHold_" + i));
         }
@@ -37,13 +40,6 @@ public class YutTree : MonoBehaviour
         CreateTreeNode(_footSet);
         MakeTree();
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-
     }
 
     void CreateTreeNode(List<GameObject> footset)
@@ -104,7 +100,7 @@ public class YutTree : MonoBehaviour
         _nodeName["FootHold_10"].IsTwoway = true;
         _nodeName["FootHold_20"].IsTwoway = true;
 
-        //_nodeName["FootHold_29"].LeftChild = new TreeNode(null);
+        _nodeName["FootHold_29"].LeftChild = _nodeName["FootHold_29"].RightChild = _nodeName["FootHold_30"];
 
 
         _rootNode = _nodeName["FootHold_" + 0];
@@ -143,7 +139,9 @@ public class YutTree : MonoBehaviour
         private TreeNode _leftChild;
         private bool _isIntersection;
         private bool _isTwoway;
-        private bool _enable;
+
+        private int _step;
+        
 
         public TreeNode(GameObject foothold)
         {
@@ -154,7 +152,7 @@ public class YutTree : MonoBehaviour
             _leftChild = null;
             _isIntersection = false;
             _isTwoway = false;
-            _enable = false;
+            _step = 0;
         }
 
         public GameObject FootHold
@@ -199,10 +197,10 @@ public class YutTree : MonoBehaviour
             set { _isTwoway = value; }
         }
 
-        public bool Enable
+        public int Step
         {
-            get { return _enable; }
-            set { _enable = value; }
+            get { return _step; }
+            set { _step = value; }
         }
 
 

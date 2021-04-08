@@ -25,11 +25,10 @@ public class PieceMove : MonoBehaviour
 
     void selectAndMove()
     {
-        if (Input.GetMouseButtonDown(0) && GameObject.Find("Button").GetComponent<YutThrow>().throwing)
+        if (Input.GetMouseButtonDown(0) && GameObject.Find("Button").GetComponent<YutThrow>().Throwing)
         {
             //Debug.Log("pathfind");
             RaycastHit hit;
-            
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Physics.Raycast(ray, out hit);
             if (hit.collider.gameObject != null)
@@ -59,7 +58,7 @@ public class PieceMove : MonoBehaviour
                     _selectedPiece.GetComponent<Renderer>().material.color = new Color(102 / 255f, 123 / 255f, 255 / 255f, 255 / 255f);
                     _select = false;
 
-                    GameObject.Find("Button").GetComponent<YutThrow>().throwing = false;
+                    GameObject.Find("Button").GetComponent<YutThrow>().Throwing = false;
 
 
                 }

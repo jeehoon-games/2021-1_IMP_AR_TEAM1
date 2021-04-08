@@ -343,7 +343,7 @@ RectTransform:
   - {fileID: 2090836718}
   - {fileID: 1623659944}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -414,8 +414,94 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1421158898
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1421158900}
+  - component: {fileID: 1421158901}
+  - component: {fileID: 1421158899}
+  m_Layer: 0
+  m_Name: NetworkCore
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1421158899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421158898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5556b407e66f57e45b13229b44797711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1421158900
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421158898}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 540, y: 980, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1421158901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421158898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 702689e52154b40358899eca78c2d027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AutoInit: 0
+  NetworkType: 1
+  Settings:
+    IP: 125.130.209.31
+    port: 8001
+    sslEnabled: 0
+    sslProtocols: 240
+    reconnectDelay: 5
+    ackExpirationTime: 1800
+    pingInterval: 25
+    pingTimeout: 60
+    socketID: 
+    portRequired: 1
+    socketIORequired: 1
+    DefaultQueryString: 1
+    CustomisedQueryString: ?EIO=3&transport=websocket
+  socketIO: {fileID: 0}
+  socketIOWebGL: {fileID: 0}
+  DelayInitThreshold: 1
+  Ready: 0
+  OnReceivedByteDataEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnReceivedStringDataEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnReceivedRawMessageEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  DebugMode: 0
 --- !u!1 &1623659943
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,7 +672,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1745542169
 GameObject:
