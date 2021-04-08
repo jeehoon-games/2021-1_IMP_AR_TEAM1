@@ -16,9 +16,11 @@ public class Yut : MonoBehaviour
     public string Name;
     public YutSide[] yutSides;
     public bool sideground;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        Physics.gravity = new Vector3(0, -4, 0);
         initPosition = transform.position;
         rb.useGravity = false;
     }
@@ -28,6 +30,7 @@ public class Yut : MonoBehaviour
     {
         if (rb.IsSleeping()&&!hasLanded && Throw)
         {
+            Debug.Log(Physics.gravity);
             hasLanded = true;
             Valuecheck();
         }
@@ -38,9 +41,11 @@ public class Yut : MonoBehaviour
         Reset();
         if (!Throw && !hasLanded)
         {
-            Throw=true;
+            Throw =true;
             rb.useGravity = true;
-            rb.AddTorque(Random.Range(0, 300), Random.Range(0, 300), Random.Range(0, 300));
+            rb.AddTorque(Random.Range(300, 600), Random.Range(300, 600), Random.Range(300, 600));
+            rb.AddForce(10,10,10);
+            Debug.Log("hi");
 
         }
     }

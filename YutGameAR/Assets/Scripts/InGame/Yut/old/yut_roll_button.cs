@@ -13,6 +13,7 @@ public class yut_roll_button : MonoBehaviour
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(Onclick);
+        
     }
     void Onclick()
     {
