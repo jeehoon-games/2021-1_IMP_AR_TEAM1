@@ -887,7 +887,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3271023728655121734, guid: b48b5fdf31ac10e40aa1782da64c2e03, type: 3}
       propertyPath: m_Name
-      value: GameObject
+      value: yut_board
       objectReference: {fileID: 0}
     - target: {fileID: 6926128135467120288, guid: b48b5fdf31ac10e40aa1782da64c2e03, type: 3}
       propertyPath: m_RootOrder
@@ -895,7 +895,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6926128135467120288, guid: b48b5fdf31ac10e40aa1782da64c2e03, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.521675
+      value: 7.2
       objectReference: {fileID: 0}
     - target: {fileID: 6926128135467120288, guid: b48b5fdf31ac10e40aa1782da64c2e03, type: 3}
       propertyPath: m_LocalPosition.y

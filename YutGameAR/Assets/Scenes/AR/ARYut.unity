@@ -833,8 +833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e886b9e37f4b6264e90ba57ff1afc74b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yutboard_Prefab: {fileID: 6386732041785087346, guid: 4e0aba49a3ee9ae4992c9e5d717adb1a, type: 3}
-  yut_roll_board_Prefab: {fileID: 4330773892207974210, guid: 082f2bd170c802f4293ac67ca808705e, type: 3}
+  yutboard_Prefab: {fileID: 1833388119152393185, guid: a6c23bdea4a9c0c45abab794f1aa1895, type: 3}
 --- !u!114 &1884846265
 MonoBehaviour:
   m_ObjectHideFlags: 0

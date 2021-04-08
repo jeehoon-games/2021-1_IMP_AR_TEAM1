@@ -13,7 +13,7 @@ public class ARplane : MonoBehaviour
 
     [SerializeField]
     private GameObject yutboard_Prefab;
-    public GameObject yut_roll_board_Prefab;
+    
 
     static List<ARRaycastHit> s_hits = new List<ARRaycastHit>();
 
@@ -45,8 +45,7 @@ public class ARplane : MonoBehaviour
 
             if (yutboard == null)
             {
-                yutboard = Instantiate(yutboard_Prefab, hitPose.position + new Vector3(0, -0.2f, 0), hitPose.rotation);
-                yut_roll_board = Instantiate(yut_roll_board_Prefab, hitPose.position+ new Vector3(0.2f,0 , 0), hitPose.rotation);
+                yutboard = Instantiate(yutboard_Prefab, hitPose.position , hitPose.rotation);
             }
             
             
