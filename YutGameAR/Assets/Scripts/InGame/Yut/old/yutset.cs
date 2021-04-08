@@ -5,19 +5,18 @@ using UnityEngine;
 public class yutset : MonoBehaviour
 {
     public Yut[] yut;
-    bool grounded=false;
+    public int ch_result = 0;
     private int frontcount=0;
     private int sbackcount = 0;
     private int backcount=0;
+    public string combination=" ";
     void Update()
     {
-            allground();
-        
+        all_ground();
     }
-    void checkCombination()
+
+    void check_combination()
     {
-        if (grounded == true)
-        {
             foreach (Yut instantyut in yut)
             {
                 if (instantyut.YutValue == "front")
@@ -35,35 +34,55 @@ public class yutset : MonoBehaviour
             }
             if (sbackcount == 1 && frontcount == 3)
             {
-                Debug.Log("»ªµµ");
+                combination = ("»ªµµ");
             }
             else if (backcount == 1&&frontcount==3)
             {
-                Debug.Log("µµ");
+                combination = ("µµ");
             }
             else if (frontcount == 2)
             {
-                Debug.Log("°³");
+                combination = ("°³");
             }
             else if (frontcount==1)
             {
-                Debug.Log("°É");
+                combination = ("°É");
             }
             else if (frontcount == 4)
             {
-                Debug.Log("¸ð");
+                combination = ("¸ð");
             }
             else if (backcount == 3 && sbackcount == 1)
             {
-                Debug.Log("À·");
+                combination = ("À·");
             }
+        Debug.Log("hi");
             frontcount = 0;
             backcount = 0;
             sbackcount = 0;
-            grounded = false;
-        }
+            ch_result = 1;
     }
-    bool allground()
+    void all_ground()
+    {
+        if (!check_ground())
+        {
+            //À·ÀÌ ¸ðµÎ ¸ØÃßÁö¾Ê¾ÒÀ»¶§
+        }
+        else //À·ÀÌ ¸ðµÎ ¸ØÃèÀ»¶§  
+        {
+            if(ch_result==0)
+                check_combination();
+        }
+     
+    }
+    public void roll_all_yut()
+    {
+        foreach (Yut instantyut in yut)
+            {
+                instantyut.rollyut();
+            }
+    }
+    public bool check_ground()
     {
         foreach (Yut instantyut in yut)
         {
@@ -72,9 +91,6 @@ public class yutset : MonoBehaviour
                 return false;
             }
         }
-        grounded = true;
-        checkCombination();
         return true;
     }
-   
 }

@@ -8,6 +8,8 @@ public class Yut : MonoBehaviour
     bool hasLanded;
     bool Throw;
 
+    public 
+
     Vector3 initPosition;
 
     public string YutValue;
@@ -24,31 +26,22 @@ public class Yut : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            rollyut();
-        }
         if (rb.IsSleeping()&&!hasLanded && Throw)
         {
             hasLanded = true;
             Valuecheck();
         }
-        else if (rb.IsSleeping() && !hasLanded && YutValue == " ")
-        {
-            rollagain();
-        }
     }
-    void rollyut()
+
+    public void rollyut()
     {
+        Reset();
         if (!Throw && !hasLanded)
         {
             Throw=true;
             rb.useGravity = true;
-            rb.AddTorque(Random.Range(0, 100), Random.Range(0, 100), Random.Range(0, 100));
-        }
-        else if (Throw && hasLanded)
-        {
-            Reset();
+            rb.AddTorque(Random.Range(0, 300), Random.Range(0, 300), Random.Range(0, 300));
+
         }
     }
     private void Reset()
@@ -57,15 +50,10 @@ public class Yut : MonoBehaviour
         Throw = false;
         hasLanded = false;
         rb.useGravity=false;
+        sideground = false;
         YutValue = " ";
     }
-    private void rollagain()
-    {
-        Reset();
-        Throw = true;
-        rb.useGravity = true;
-        rb.AddTorque(Random.Range(0, 100), Random.Range(0, 100), Random.Range(0, 100));
-    }
+    
 
     void Valuecheck()
     {
