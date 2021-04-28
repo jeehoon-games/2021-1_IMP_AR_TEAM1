@@ -7,19 +7,19 @@ using TMPro;
 
 public class YutThrow : MonoBehaviour
 {
-    private Button button;
-    private bool _throwing = false;
-    private int total = 10000;
-    private int[] weight = { 384, 1152, 3456, 3456, 1296, 256 };
-    private List<int> _selectNumber = new List<int>();
-
+    public GameObject yutPlate;
+    //private Button button;
+    private bool _throwing;
+    //private int total = 10000;
+    //private int[] weight = { 384, 1152, 3456, 3456, 1296, 256 };
+    private List<int> _selectNumber;
+    private YutManager _yutMgr;
 
     public bool Throwing 
     { 
         get { return _throwing; } 
         set { _throwing = value; }
     }
-
     public List<int> SelectNumber
     {
         get { return _selectNumber; }
@@ -27,8 +27,8 @@ public class YutThrow : MonoBehaviour
     }
 
     // get RandomNumber based on weight
-    // weights are the probability of ª™µµ,µµ,∞≥,∞…,¿∑,∏.
-    public int RandomNumber()
+    // weights are the probability of ÎπΩÎèÑ,ÎèÑ,Í∞ú,Í±∏,Ïú∑,Î™®.
+    /*&public int RandomNumber()
     {
         int currentWeight = 0;
         int selectNum = 0;
@@ -47,15 +47,29 @@ public class YutThrow : MonoBehaviour
             }
         }
         return 0;
-    }
+    }*/
     
     void Start()
     {
-        button = GetComponent<Button>();  
-        button.onClick.AddListener(OnClickButton);
+        _yutMgr = yutPlate.GetComponent<YutManager>();
+        _selectNumber = new List<int>();
     }
 
-    void OnClickButton()
+    void Update()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch t0 = Input.GetTouch(0);
+            if (t0.phase == TouchPhase.Began)
+            {
+                _throwing = false;
+                _yutMgr.ThrowYut();
+                StartCoroutine(MakeResult());
+            }
+        }
+    }
+
+    /*void OnClickButton()
     {
         
         button.GetComponentInChildren<Text>().text = "Throw!";
@@ -68,6 +82,24 @@ public class YutThrow : MonoBehaviour
             Debug.Log("onemore!");
             _throwing = false;
             button.GetComponentInChildren<Text>().text = "One More!";
+        }
+        else
+        {
+            _throwing = true;
+        }
+    }*/
+
+    IEnumerator MakeResult()
+    {
+        while (!_yutMgr.done)
+        {
+            yield return null;
+        }
+        _selectNumber.Add(_yutMgr.yType);
+        if (_yutMgr.yType == 4 || _yutMgr.yType == 5)
+        {
+            _yutMgr.ThrowYut();
+            StartCoroutine(MakeResult());
         }
         else
         {

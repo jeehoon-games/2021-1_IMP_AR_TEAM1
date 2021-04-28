@@ -33,7 +33,7 @@ public class YutGameManager : MonoBehaviour
 
     void selectAndMove()
     {
-        // À·À» ´øÁø »óÅÂ¿¡¼­ ÅÍÄ¡¸¦ ÇÏ´Â °æ¿ì
+        // ìœ·ì„ ë˜ì§„ ìƒíƒœì—ì„œ í„°ì¹˜ë¥¼ í•˜ëŠ” ê²½ìš°
         if (Input.GetMouseButtonDown(0) && YutComponent.Throwing)
         {
             RaycastHit hit;
@@ -45,7 +45,7 @@ public class YutGameManager : MonoBehaviour
             {
                 Debug.Log("kjh       " + hit.collider.tag);
                 
-                // ÅÍÄ¡ÇÏ´Â °ÍÀÌ ¸»ÀÏ °æ¿ì
+                // í„°ì¹˜í•˜ëŠ” ê²ƒì´ ë§ì¼ ê²½ìš°
                 if (hit.collider.gameObject.CompareTag("Piece") && !_select)
                 {
                     //hit.collider.GetComponent<Renderer>().material.color = Color.red;
@@ -57,7 +57,7 @@ public class YutGameManager : MonoBehaviour
 
                 }
 
-                // ¸»À» ÅÍÄ¡ÇÑ ÈÄ °¥ ¹ßÆÇÀ» ÅÍÄ¡ÇÑ °æ¿ì
+                // ë§ì„ í„°ì¹˜í•œ í›„ ê°ˆ ë°œíŒì„ í„°ì¹˜í•œ ê²½ìš°
                 else if (hit.collider.gameObject.CompareTag("FootHold") && _select && _enableNode.ContainsKey(hit.collider.name))
                 {
                     
@@ -81,7 +81,7 @@ public class YutGameManager : MonoBehaviour
                                 
                                 
                                 ps.Point += 1;
-                                Debug.Log(ps.Point + "Æ÷ÀÎÆ®");
+                                Debug.Log(ps.Point + "í¬ì¸íŠ¸");
                                 _selectedPiece.GetComponent<Pieces>().Point = 0;
                                 _selectedPiece.GetComponent<Pieces>().PosName = "FootHold_0";
                                 PiecesSet[i].SetActive(false);
@@ -133,7 +133,7 @@ public class YutGameManager : MonoBehaviour
                     DestroyArrow();
                     
 
-                    // ¿©·¯¹ø ¿òÁ÷ÀÏ ¶§
+                    // ì—¬ëŸ¬ë²ˆ ì›€ì§ì¼ ë•Œ
                     if(YutComponent.SelectNumber.Count > 1)
                     {
                         YutComponent.SelectNumber.Remove(TreeComponent.NodeName[hit.collider.name].Step);
@@ -145,7 +145,7 @@ public class YutGameManager : MonoBehaviour
                     }
                 }
 
-                // ±× ¿ÜÀÇ °æ¿ì ÃÊ±â·Î µ¹·ÁÁÜ
+                // ê·¸ ì™¸ì˜ ê²½ìš° ì´ˆê¸°ë¡œ ëŒë ¤ì¤Œ
                 else
                 {
                     DestroyArrow();

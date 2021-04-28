@@ -5,7 +5,8 @@ using UnityEngine;
 public class YutManager : MonoBehaviour
 {
     public Queue<int> resultQueue;
-    public int rType;   // 0: 모, 1: 도, 2: 개, 3: 걸, 4: 윷, 5: 빽도
+    public int yType;   // -1: 빽도, 1: 도, 2: 개, 3: 걸, 4: 윷, 5: 모
+    public bool done;
     
     private struct YutForce
     {
@@ -23,7 +24,6 @@ public class YutManager : MonoBehaviour
         resultQueue = new Queue<int>();
         _forceArr = new YutForce[4];
         _yutContArr = GetComponentsInChildren<YutController>();
-        rType = -1;
     }
     
     void Start()
@@ -38,14 +38,15 @@ public class YutManager : MonoBehaviour
             ThrowYut();
         }
         
-        Debug.Log(rType);
+        Debug.Log(yType);
     }
 
     public void ThrowYut()
     {
         resultQueue.Clear();
-        rType = -1;
-        
+        yType = 0;
+        done = false;
+
         for (int i = 0; i < _forceArr.Length; i++)
         {
             _forceArr[i].xTorque = Random.Range(200, 500);
@@ -63,23 +64,29 @@ public class YutManager : MonoBehaviour
         {
             yield return null;
         }
-
-        rType = 0;
+        
         for (int i = 0; i < 4; i++)
         {
-            rType += resultQueue.Dequeue();
+            yType += resultQueue.Dequeue();
         }
 
-        if (rType == 1)
+        if (yType == 0)
+        {
+            yType = 5;
+        }
+
+        if (yType == 1)
         {
             foreach (YutController yCont in _yutContArr)
             {
                 if (yCont.yid == 1 && yCont.result == 1)
                 {
-                    rType = 5;
+                    yType = -1;
                     break;
                 }
             }
         }
+
+        done = true;
     }
 }
