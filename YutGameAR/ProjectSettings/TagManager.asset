@@ -10,6 +10,8 @@ TagManager:
   - Piece
   - Arrow
   - ARPlane
+  - FootHold
+  - YutPlate
   layers:
   - Default
   - TransparentFX

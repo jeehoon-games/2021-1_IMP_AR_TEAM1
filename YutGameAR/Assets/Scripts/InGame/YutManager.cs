@@ -55,11 +55,13 @@ public class YutManager : MonoBehaviour
             _forceArr[i].yForce = Random.Range(50, 100);
             _yutContArr[i].Throw(_forceArr[i].xTorque, _forceArr[i].yTorque, _forceArr[i].zTorque, _forceArr[i].yForce, ForceMode.Force);
         }
+        
         StartCoroutine(MakeResult());
     }
 
     IEnumerator MakeResult()
     {
+        
         while (resultQueue.Count < 4)
         {
             yield return null;
@@ -86,7 +88,7 @@ public class YutManager : MonoBehaviour
                 }
             }
         }
-
+        
         done = true;
     }
 }

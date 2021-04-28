@@ -34,10 +34,13 @@ public class YutController : MonoBehaviour
     }
     void Update()
     {
+        
         if (_onBump)
         {
+            
             if (_rigidbody.velocity.Equals(Vector3.zero) && _rigidbody.angularVelocity.Equals(Vector3.zero))
             {
+                
                 float zAngle = transform.rotation.eulerAngles.z;
                 result = (zAngle >= 0 && zAngle <= 90) || (zAngle >= 270 && zAngle <= 360) ? 0 : 1;     // 0 = front, 1 = back
                 _yutMgr.resultQueue.Enqueue(result);
@@ -73,7 +76,8 @@ public class YutController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.name.Equals("YutPlate"))
+        
+        if (other.gameObject.CompareTag("YutPlate"))
         {
             _onBump = true;
         }

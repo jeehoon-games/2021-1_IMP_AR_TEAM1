@@ -57,11 +57,13 @@ public class YutThrow : MonoBehaviour
 
     void Update()
     {
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 && !_throwing)
         {
+            
             Touch t0 = Input.GetTouch(0);
             if (t0.phase == TouchPhase.Began)
             {
+                
                 _throwing = false;
                 _yutMgr.ThrowYut();
                 StartCoroutine(MakeResult());
@@ -94,8 +96,11 @@ public class YutThrow : MonoBehaviour
         while (!_yutMgr.done)
         {
             yield return null;
+            
         }
+        Debug.Log("kjh       222222222" + _yutMgr.yType);
         _selectNumber.Add(_yutMgr.yType);
+        
         if (_yutMgr.yType == 4 || _yutMgr.yType == 5)
         {
             _yutMgr.ThrowYut();

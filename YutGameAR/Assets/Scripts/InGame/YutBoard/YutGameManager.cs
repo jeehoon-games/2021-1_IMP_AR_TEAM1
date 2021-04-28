@@ -19,7 +19,7 @@ public class YutGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        YutComponent = GameObject.Find("ThrowBtn").GetComponent<YutThrow>();
+        YutComponent = GetComponent<YutThrow>();
         TreeComponent = GetComponent<YutTree>();
         PiecesSet = GameObject.FindGameObjectsWithTag("Piece");
         
@@ -43,8 +43,7 @@ public class YutGameManager : MonoBehaviour
             
             if (hit.collider.gameObject != null)
             {
-                Debug.Log("kjh       " + hit.collider.tag);
-                
+                                
                 // 터치하는 것이 말일 경우
                 if (hit.collider.gameObject.CompareTag("Piece") && !_select)
                 {

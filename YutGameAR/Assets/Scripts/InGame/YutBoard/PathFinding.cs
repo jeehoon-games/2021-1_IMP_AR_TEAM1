@@ -140,7 +140,6 @@ public class PathFinding : MonoBehaviour
             startNode = _nodeName["FootHold_30"];
         }
         */
-        Debug.Log("kjh       111111111    " + startNode.FootHold.transform.position);
         MarkingFootHold(startNode.FootHold.transform.position);
         _enableNode.Add(startNode.FootHold.name, throughNode);
         startNode.Step = count;

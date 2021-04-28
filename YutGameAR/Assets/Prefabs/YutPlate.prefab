@@ -583,7 +583,7 @@ GameObject:
   - component: {fileID: 8260882472274108116}
   m_Layer: 0
   m_Name: YutPlate
-  m_TagString: Untagged
+  m_TagString: YutPlate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -667,7 +667,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da5c0a7c9577b842ab49ad325d0d175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rType: 0
+  yType: 0
+  done: 0
 --- !u!65 &8260882472274108116
 BoxCollider:
   m_ObjectHideFlags: 0
