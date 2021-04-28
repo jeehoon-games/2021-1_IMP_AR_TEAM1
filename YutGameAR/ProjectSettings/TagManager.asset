@@ -7,6 +7,9 @@ TagManager:
   - Ground
   - Network
   - Yut
+  - Piece
+  - Arrow
+  - ARPlane
   layers:
   - Default
   - TransparentFX
