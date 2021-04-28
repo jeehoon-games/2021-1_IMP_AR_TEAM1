@@ -43,25 +43,26 @@ public class YutGameManager : MonoBehaviour
             
             if (hit.collider.gameObject != null)
             {
-                Debug.Log("kjh       " + hit.collider.name);
+                Debug.Log("kjh       " + hit.collider.tag);
+                
                 // 터치하는 것이 말일 경우
                 if (hit.collider.gameObject.CompareTag("Piece") && !_select)
                 {
-                    
                     //hit.collider.GetComponent<Renderer>().material.color = Color.red;
                     _select = true;
                     _selectedPiece = hit.collider.gameObject;
 
                     _enableNode = hit.collider.GetComponent<PathFinding>().PathFind(_selectedPiece, YutComponent.SelectNumber);
+                    
 
                 }
 
                 // 말을 터치한 후 갈 발판을 터치한 경우
                 else if (hit.collider.gameObject.CompareTag("FootHold") && _select && _enableNode.ContainsKey(hit.collider.name))
                 {
-
+                    
                     // when the pieces didn't start
-                    if(_enableNode[hit.collider.name] == null)
+                    if (_enableNode[hit.collider.name] == null)
                     {
                         if(_selectedPiece.GetComponent<Pieces>().PosName == "FootHold_0") { StartCoroutine(MoveTo(_selectedPiece, TreeComponent.NodeName["FootHold_29"].FootHold.transform.position, hit.collider.transform.position)); }
                         else { StartCoroutine(MoveTo(_selectedPiece, hit.collider.transform.position)); }
@@ -191,8 +192,8 @@ public class YutGameManager : MonoBehaviour
 
         float count = 0, count2 = 0;
         Vector3 wasPos = piece.transform.position;
-        throughPos.y = 4.0f;
-        toPos.y = 4.0f;
+        throughPos.y += 0.05f;
+        toPos.y += 0.05f;
         while (true)
         {
             count += Time.deltaTime;
@@ -224,7 +225,7 @@ public class YutGameManager : MonoBehaviour
 
         float count = 0;
         Vector3 wasPos = piece.transform.position;
-        toPos.y = 4.0f;
+        toPos.y += 0.05f;
         while (true)
         {
             count += Time.deltaTime;
