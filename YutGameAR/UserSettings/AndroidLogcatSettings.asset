@@ -1,0 +1,107 @@
+{
+    "m_SelectedDeviceId": "R3CN90RMPHH",
+    "m_SelectedPackage": {
+        "deviceId": "R3CN90RMPHH",
+        "name": "com.DefaultCompany.YutGameAR",
+        "processId": 3293,
+        "exited": false
+    },
+    "m_SelectedPriority": 1,
+    "m_KnownPackagesForSerialization": [
+        {
+            "deviceId": "R3CN90RMPHH",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 30145,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CN90RMPHH",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 31752,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CN90RMPHH",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 866,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CN90RMPHH",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 26948,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CN90RMPHH",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 31944,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CN90RMPHH",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 32483,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CN90RMPHH",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 3293,
+            "exited": false
+        }
+    ],
+    "m_Tags": {
+        "m_Entries": [
+            {
+                "m_Name": "Filter by all listed tags",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "No Filter",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "Tag Control...",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "Unity",
+                "m_Selected": true
+            },
+            {
+                "m_Name": "CRASH",
+                "m_Selected": false
+            }
+        ]
+    },
+    "m_MemoryViewerState": {
+        "MemoryWindowHeight": 300.0,
+        "MemoryWindowWidth": 170.0,
+        "MemoryTypeEnabled": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
+        "MemoryGroup": 2,
+        "Behavior": 0
+    },
+    "m_Filter": "",
+    "m_FilterIsRegularExpression": false,
+    "m_SymbolPaths": []
+}

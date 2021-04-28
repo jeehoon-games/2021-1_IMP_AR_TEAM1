@@ -19,7 +19,7 @@ public class PathFinding : MonoBehaviour
         _piece = piece;
         _pieceName = piece.GetComponent<Pieces>().PosName;
         _countNum = countNum;
-        _nodeName = GameObject.Find("Main Camera").GetComponent<YutTree>().NodeName;
+        _nodeName = GameObject.Find("YutGameManager").GetComponent<YutTree>().NodeName;
         _enableNode.Clear();
     }
 

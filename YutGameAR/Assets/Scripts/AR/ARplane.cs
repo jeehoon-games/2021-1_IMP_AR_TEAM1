@@ -45,7 +45,7 @@ public class ARplane : MonoBehaviour
 
             if (yutboard == null)
             {
-                yutboard = Instantiate(yutboard_Prefab, hitPose.position , hitPose.rotation);
+                yutboard = Instantiate(yutboard_Prefab, hitPose.position + new Vector3(0,0.3f,0) , hitPose.rotation);
             }
             
             

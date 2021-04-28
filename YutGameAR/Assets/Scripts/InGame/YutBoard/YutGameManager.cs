@@ -19,8 +19,8 @@ public class YutGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        YutComponent = GameObject.Find("Button").GetComponent<YutThrow>();
-        TreeComponent = GameObject.Find("Main Camera").GetComponent<YutTree>();
+        YutComponent = GameObject.Find("ThrowBtn").GetComponent<YutThrow>();
+        TreeComponent = GetComponent<YutTree>();
         PiecesSet = GameObject.FindGameObjectsWithTag("Piece");
         
     }
@@ -43,7 +43,7 @@ public class YutGameManager : MonoBehaviour
             
             if (hit.collider.gameObject != null)
             {
-                
+                Debug.Log("kjh       " + hit.collider.name);
                 // 터치하는 것이 말일 경우
                 if (hit.collider.gameObject.CompareTag("Piece") && !_select)
                 {
@@ -63,7 +63,7 @@ public class YutGameManager : MonoBehaviour
                     // when the pieces didn't start
                     if(_enableNode[hit.collider.name] == null)
                     {
-                        if(_selectedPiece.GetComponent<Pieces>().PosName == "FootHold_0") { StartCoroutine(MoveTo(_selectedPiece,new Vector3(20,0,-20), hit.collider.transform.position)); }
+                        if(_selectedPiece.GetComponent<Pieces>().PosName == "FootHold_0") { StartCoroutine(MoveTo(_selectedPiece, TreeComponent.NodeName["FootHold_29"].FootHold.transform.position, hit.collider.transform.position)); }
                         else { StartCoroutine(MoveTo(_selectedPiece, hit.collider.transform.position)); }
                     }
                     // else
