@@ -8,10 +8,12 @@ using UnityEngine.XR.ARSubsystems;
 public class ARplane : MonoBehaviour
 {
     private ARRaycastManager raycastManager;
-    private GameObject spawnObject;
+    private GameObject yutboard;
+    private GameObject yut_roll_board;
 
     [SerializeField]
-    private GameObject PlaceablePrefab;
+    private GameObject yutboard_Prefab;
+    
 
     static List<ARRaycastHit> s_hits = new List<ARRaycastHit>();
 
@@ -40,15 +42,14 @@ public class ARplane : MonoBehaviour
         if (raycastManager.Raycast(touchPosition, s_hits, TrackableType.PlaneWithinPolygon))
         {
             var hitPose = s_hits[0].pose;
-            if(spawnObject == null)
+
+            if (yutboard == null)
             {
-                spawnObject = Instantiate(PlaceablePrefab, hitPose.position+new Vector3(0,2,0), hitPose.rotation);
+                yutboard = Instantiate(yutboard_Prefab, hitPose.position + new Vector3(0,0.3f,0) , hitPose.rotation);
             }
-            else
-            {
-                spawnObject.transform.position = hitPose.position+new Vector3(0, 0.2f, 0);
-                spawnObject.transform.rotation = hitPose.rotation;
-            }
+            
+            
+
         }
     }
 }

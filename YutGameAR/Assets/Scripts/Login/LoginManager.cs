@@ -397,7 +397,7 @@ namespace LogIn
                 if (dest.Equals(authCvs) && FMSocketIOManager.instance.Ready)
                 {
                     _authTmpCvs = _currCvs;
-                    _authTimeTmp = 10f;
+                    _authTimeTmp = 600f;
                     DisplayTime(_authTimeTmp);
                     
                     if (FMSocketIOManager.instance.Ready)

@@ -62,7 +62,7 @@ public class YutThrow : MonoBehaviour
         int step = RandomNumber();
         _selectNumber.Add(step);
         
-        Debug.Log(_selectNumber[0]);
+        Debug.Log("kjh           "+_selectNumber[0]);
         if(step == 4 || step == 5)
         {
             Debug.Log("onemore!");

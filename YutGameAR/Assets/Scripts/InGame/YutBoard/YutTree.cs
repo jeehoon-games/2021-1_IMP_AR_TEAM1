@@ -36,14 +36,15 @@ public class YutTree : MonoBehaviour
         {
             _footSet.Add(GameObject.Find("FootHold_" + i));
         }
-        
         CreateTreeNode(_footSet);
         MakeTree();
         
+
     }
 
     void CreateTreeNode(List<GameObject> footset)
     {
+        
         for (int i = 0; i < footset.Count; i++)
         {
             _nodeName.Add(String.Format("FootHold_{0}", i.ToString()), new TreeNode(footset[i]));
@@ -104,6 +105,7 @@ public class YutTree : MonoBehaviour
 
 
         _rootNode = _nodeName["FootHold_" + 0];
+        
     }
 
     //교차로가 아니면서 빠른길들
