@@ -91,7 +91,7 @@ namespace LogIn
                             notice.text = "Wrong password.";
                             break;
                         case "Success":
-                            SceneManager.LoadScene("MainMenuScene");
+                            SceneManager.LoadScene("MainScene");
                             break;
                     }
                 });
@@ -565,6 +565,10 @@ namespace LogIn
                 else if(!pwField.text.Equals(pwConfirmField.text))
                 {
                     notice.text = "Password and password confirm do not match.";
+                }
+                else if (!_isEmailAuthed) 
+                {
+                    notice.text = "Please authenticate your email.";
                 }
                 else
                 {

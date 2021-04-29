@@ -15,8 +15,12 @@ namespace MainMenu
         
         #region public & private instance variable & Init Method
         
-        public Canvas PlaneDetectCvs;
-
+        public Canvas planeDetectCvs;
+        public Canvas menuCvs;
+        public GameObject createRoomMenu;
+        public GameObject findRoomMenu;
+        public GameObject GameTitle;
+        
         private const float MIN_PLANE_SIZE = 0.6f;
         private ARPlaneManager _arPlaneManager;
         private ARPlane _currPlane;
@@ -41,10 +45,10 @@ namespace MainMenu
             _arRaycastManager = FindObjectOfType<ARRaycastManager>();
             _hitList = new List<ARRaycastHit>();
             _indicator = transform.GetChild(0).gameObject;
-            //_indicator.SetActive(false);
+            _indicator.SetActive(false);
             _indicator.GetComponent<Renderer>().material.color = new Color(0.5f, 0.5f, 1, 1);
-            _planeAnnotationBottom = FindUiInCvs<TextMeshProUGUI>(PlaneDetectCvs, "PlaneAnnotationBottom");
-            _loadingBar = FindUiInCvs<Image>(PlaneDetectCvs, "LoadingBar");
+            _planeAnnotationBottom = FindUiInCvs<TextMeshProUGUI>(planeDetectCvs, "PlaneAnnotationBottom");
+            _loadingBar = FindUiInCvs<Image>(planeDetectCvs, "LoadingBar");
             _lBarRectTransform = _loadingBar.GetComponent<RectTransform>();
         }
         
@@ -133,13 +137,32 @@ namespace MainMenu
             if (Input.touchCount > 0)
             {
                 Touch t0 = Input.GetTouch(0);
-                if (t0.phase == TouchPhase.Began && _currPlane != null && _onFindProperPlane)
+                if (t0.phase == TouchPhase.Began && _currPlane != null && !_findPlane && _onFindProperPlane)
                 {
                     _findPlane = true;
                     _indicator.SetActive(false);
-                    PlaneDetectCvs.gameObject.SetActive(false);
+                    planeDetectCvs.gameObject.SetActive(false);
                     
-                    // spawn menu obj
+                    // set active menu obj
+                    if (!createRoomMenu.activeInHierarchy && !findRoomMenu.activeInHierarchy)
+                    {
+                        createRoomMenu.SetActive(true);
+                        findRoomMenu.SetActive(true);
+                        menuCvs.gameObject.SetActive(true);
+                        GameTitle.SetActive(true);
+                        Vector3 planeCenter = _currPlane.center;
+                        createRoomMenu.transform.position = planeCenter + new Vector3(-0.25f, 0.05f, 0);
+                        findRoomMenu.transform.position = planeCenter + new Vector3(0.25f, 0.05f, 0);
+                        GameTitle.transform.position = planeCenter + new Vector3(0, 0.2f, 0);
+                    }
+                }
+            }
+
+            if (_findPlane)
+            {
+                foreach (ARPlane plane in _arPlaneManager.trackables)
+                {
+                    plane.gameObject.SetActive(false);
                 }
             }
         }

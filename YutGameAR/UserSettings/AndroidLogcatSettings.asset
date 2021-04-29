@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "R39M304GYGX",
         "name": "com.manomotion.arfoundationssdkceexample",
-        "processId": 30446,
+        "processId": 11728,
         "exited": false
     },
     "m_SelectedPriority": 1,
@@ -102,6 +102,60 @@
             "deviceId": "R39M304GYGX",
             "name": "com.manomotion.arfoundationssdkceexample",
             "processId": 30446,
+            "exited": false
+        },
+        {
+            "deviceId": "R39M304GYGX",
+            "name": "com.manomotion.arfoundationssdkceexample",
+            "processId": 15349,
+            "exited": false
+        },
+        {
+            "deviceId": "R39M304GYGX",
+            "name": "com.manomotion.arfoundationssdkceexample",
+            "processId": 19951,
+            "exited": false
+        },
+        {
+            "deviceId": "R39M304GYGX",
+            "name": "com.manomotion.arfoundationssdkceexample",
+            "processId": 23109,
+            "exited": false
+        },
+        {
+            "deviceId": "R39M304GYGX",
+            "name": "com.manomotion.arfoundationssdkceexample",
+            "processId": 25416,
+            "exited": false
+        },
+        {
+            "deviceId": "R39M304GYGX",
+            "name": "com.manomotion.arfoundationssdkceexample",
+            "processId": 28737,
+            "exited": false
+        },
+        {
+            "deviceId": "R39M304GYGX",
+            "name": "com.manomotion.arfoundationssdkceexample",
+            "processId": 3879,
+            "exited": false
+        },
+        {
+            "deviceId": "R39M304GYGX",
+            "name": "com.manomotion.arfoundationssdkceexample",
+            "processId": 4923,
+            "exited": false
+        },
+        {
+            "deviceId": "R39M304GYGX",
+            "name": "com.manomotion.arfoundationssdkceexample",
+            "processId": 8049,
+            "exited": false
+        },
+        {
+            "deviceId": "R39M304GYGX",
+            "name": "com.manomotion.arfoundationssdkceexample",
+            "processId": 11728,
             "exited": false
         }
     ],
