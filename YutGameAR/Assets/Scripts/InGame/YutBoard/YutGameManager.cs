@@ -186,6 +186,8 @@ public class YutGameManager : MonoBehaviour
         while (true)
         {
             count += Time.deltaTime;
+            piece.transform.LookAt(throughPos);
+            piece.transform.Rotate(0, 180, 0);
             piece.transform.position = Vector3.Lerp(wasPos, throughPos, count);
             if (piece.transform.position == throughPos)
             {
@@ -193,6 +195,8 @@ public class YutGameManager : MonoBehaviour
                 piece.transform.position = Vector3.Lerp(throughPos, toPos, count2);
                 if (count2 >= 1)
                 {
+                    piece.transform.LookAt(toPos);
+                    piece.transform.Rotate(0, 180, 0);
                     piece.transform.position = toPos;
                     
                     // the piece reached the finish line 
@@ -218,6 +222,8 @@ public class YutGameManager : MonoBehaviour
         while (true)
         {
             count += Time.deltaTime;
+            piece.transform.LookAt(toPos);
+            piece.transform.Rotate(0, 180, 0);
             piece.transform.position = Vector3.Lerp(wasPos, toPos, count);
             if (count >= 1)
             {

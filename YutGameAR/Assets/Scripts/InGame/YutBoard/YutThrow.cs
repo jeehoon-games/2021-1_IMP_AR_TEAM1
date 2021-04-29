@@ -15,6 +15,7 @@ public class YutThrow : MonoBehaviour
     private List<int> _selectNumber;
     private YutManager _yutMgr;
     public Text text;
+    ManoGestureTrigger release;
 
     public bool Throwing 
     { 
@@ -52,6 +53,7 @@ public class YutThrow : MonoBehaviour
     
     void Start()
     {
+        release = ManoGestureTrigger.RELEASE_GESTURE;
         _yutMgr = yutPlate.GetComponent<YutManager>();
         _selectNumber = new List<int>();
     }
@@ -66,6 +68,15 @@ public class YutThrow : MonoBehaviour
             StartCoroutine(MakeResult());
         }
         */
+        
+        if (ManomotionManager.Instance.Hand_infos[0].hand_info.gesture_info.mano_gesture_trigger == release && !_throwing)
+        {
+            Debug.Log("kjh              11111111111 " );
+            _throwing = false;
+            _yutMgr.ThrowYut();
+            StartCoroutine(MakeResult());
+        }
+        /*
         if (Input.touchCount > 0 && !_throwing)
         {   
             Touch t0 = Input.GetTouch(0);
@@ -76,6 +87,7 @@ public class YutThrow : MonoBehaviour
                 StartCoroutine(MakeResult());
             }
         } 
+        */
     }
 
     /*void OnClickButton()
