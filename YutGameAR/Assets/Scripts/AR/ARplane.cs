@@ -51,7 +51,12 @@ public class ARplane : MonoBehaviour
             var hitPose = s_hits[0].pose;
             if (yutboard == null)
             {
-                yutboard = Instantiate(yutboard_Prefab, hitPose.position, Quaternion.identity);
+                
+                yutboard_Prefab.SetActive(true);
+                yutplate_Prefab.SetActive(true);
+                yutboard_Prefab.transform.position = hitPose.position + new Vector3(0, 0.2f, 0);
+                yutplate_Prefab.transform.position = hitPose.position + new Vector3(-0.5f, 0.2f, 0);
+                //yutboard = Instantiate(yutboard_Prefab, hitPose.position, Quaternion.identity);
                 HandUI.SetActive(true);
             }
         }

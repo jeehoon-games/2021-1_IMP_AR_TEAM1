@@ -50,10 +50,7 @@ public class YutGameManager : MonoBehaviour
                     //hit.collider.GetComponent<Renderer>().material.color = Color.red;
                     _select = true;
                     _selectedPiece = hit.collider.gameObject;
-
                     _enableNode = hit.collider.GetComponent<PathFinding>().PathFind(_selectedPiece, YutComponent.SelectNumber);
-                    
-
                 }
 
                 // 말을 터치한 후 갈 발판을 터치한 경우
@@ -63,40 +60,37 @@ public class YutGameManager : MonoBehaviour
                     // when the pieces didn't start
                     if (_enableNode[hit.collider.name] == null)
                     {
-                        if(_selectedPiece.GetComponent<Pieces>().PosName == "FootHold_0") { StartCoroutine(MoveTo(_selectedPiece, TreeComponent.NodeName["FootHold_29"].FootHold.transform.position, hit.collider.transform.position)); }
+                        Debug.Log("kjh    111111111  a"+ _enableNode[hit.collider.name]);
+                        if (_selectedPiece.GetComponent<Pieces>().PosName == "FootHold_0") { StartCoroutine(MoveTo(_selectedPiece, TreeComponent.NodeName["FootHold_29"].FootHold.transform.position, hit.collider.transform.position)); }
                         else { StartCoroutine(MoveTo(_selectedPiece, hit.collider.transform.position)); }
                     }
                     // else
                     else { StartCoroutine(MoveTo(_selectedPiece, _enableNode[hit.collider.name].FootHold.transform.position, hit.collider.transform.position)); }
 
-                    for(int i = 0; i < PiecesSet.Length; i++)
+                    //The pieces go to the same FootHold.
+                    //There are two cases when you are on the same team and when you are on a different team.
+                    for (int i = 0; i < PiecesSet.Length; i++)
                     {
-                        Debug.Log(PiecesSet[i].name);
+                        
                         if (hit.collider.name.Equals(PiecesSet[i].GetComponent<Pieces>().PosName))
                         {
                             Pieces ps = PiecesSet[i].GetComponent<Pieces>();
                             if (_selectedPiece.GetComponent<Pieces>().teamColor.Equals(ps.teamColor))
                             {
-                                
-                                
                                 ps.Point += 1;
                                 Debug.Log(ps.Point + "포인트");
                                 _selectedPiece.GetComponent<Pieces>().Point = 0;
                                 _selectedPiece.GetComponent<Pieces>().PosName = "FootHold_0";
                                 PiecesSet[i].SetActive(false);
-                                
-
                             }
                             else
                             {
                                 if(ps.Point > 1)
                                 {
-                                    
                                     for (int j = 0; j< PiecesSet.Length; j++)
                                     {
                                         if (!PiecesSet[j].activeInHierarchy)
                                         {
-                                            
                                             PiecesSet[j].SetActive(true);
                                             Pieces ps2 = PiecesSet[j].GetComponent<Pieces>();
                                             if (ps2.teamColor.Equals(ps.teamColor) && ps2.Point == 0)
@@ -116,10 +110,6 @@ public class YutGameManager : MonoBehaviour
                                 PiecesSet[i].transform.position = ps.InitPosition;
                                 ps.PosName = "FootHold_0";
                                 ps.Point = 1;
-                                
-                                
-
-
                             }
                         }
                     }
@@ -191,8 +181,8 @@ public class YutGameManager : MonoBehaviour
 
         float count = 0, count2 = 0;
         Vector3 wasPos = piece.transform.position;
-        throughPos.y += 0.05f;
-        toPos.y += 0.05f;
+        throughPos.y += 0.02f;
+        toPos.y += 0.02f;
         while (true)
         {
             count += Time.deltaTime;
@@ -224,7 +214,7 @@ public class YutGameManager : MonoBehaviour
 
         float count = 0;
         Vector3 wasPos = piece.transform.position;
-        toPos.y += 0.05f;
+        toPos.y += 0.02f;
         while (true)
         {
             count += Time.deltaTime;
