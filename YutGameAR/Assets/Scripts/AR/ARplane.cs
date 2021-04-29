@@ -14,6 +14,9 @@ public class ARplane : MonoBehaviour
     GameObject HandUI;
     [SerializeField]
     private GameObject yutboard_Prefab;
+    [SerializeField]
+    private GameObject yutplate_Prefab;
+    
 
 
     
