@@ -19,8 +19,8 @@ public class YutGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        YutComponent = GameObject.Find("Button").GetComponent<YutThrow>();
-        TreeComponent = GameObject.Find("Main Camera").GetComponent<YutTree>();
+        YutComponent = GetComponent<YutThrow>();
+        TreeComponent = GetComponent<YutTree>();
         PiecesSet = GameObject.FindGameObjectsWithTag("Piece");
         
     }
@@ -33,7 +33,7 @@ public class YutGameManager : MonoBehaviour
 
     void selectAndMove()
     {
-        // À·À» ´øÁø »óÅÂ¿¡¼­ ÅÍÄ¡¸¦ ÇÏ´Â °æ¿ì
+        // ìœ·ì„ ë˜ì§„ ìƒíƒœì—ì„œ í„°ì¹˜ë¥¼ í•˜ëŠ” ê²½ìš°
         if (Input.GetMouseButtonDown(0) && YutComponent.Throwing)
         {
             RaycastHit hit;
@@ -43,27 +43,27 @@ public class YutGameManager : MonoBehaviour
             
             if (hit.collider.gameObject != null)
             {
-                
-                // ÅÍÄ¡ÇÏ´Â °ÍÀÌ ¸»ÀÏ °æ¿ì
+                                
+                // í„°ì¹˜í•˜ëŠ” ê²ƒì´ ë§ì¼ ê²½ìš°
                 if (hit.collider.gameObject.CompareTag("Piece") && !_select)
                 {
-                    
                     //hit.collider.GetComponent<Renderer>().material.color = Color.red;
                     _select = true;
                     _selectedPiece = hit.collider.gameObject;
 
                     _enableNode = hit.collider.GetComponent<PathFinding>().PathFind(_selectedPiece, YutComponent.SelectNumber);
+                    
 
                 }
 
-                // ¸»À» ÅÍÄ¡ÇÑ ÈÄ °¥ ¹ßÆÇÀ» ÅÍÄ¡ÇÑ °æ¿ì
+                // ë§ì„ í„°ì¹˜í•œ í›„ ê°ˆ ë°œíŒì„ í„°ì¹˜í•œ ê²½ìš°
                 else if (hit.collider.gameObject.CompareTag("FootHold") && _select && _enableNode.ContainsKey(hit.collider.name))
                 {
-
+                    
                     // when the pieces didn't start
-                    if(_enableNode[hit.collider.name] == null)
+                    if (_enableNode[hit.collider.name] == null)
                     {
-                        if(_selectedPiece.GetComponent<Pieces>().PosName == "FootHold_0") { StartCoroutine(MoveTo(_selectedPiece,new Vector3(20,0,-20), hit.collider.transform.position)); }
+                        if(_selectedPiece.GetComponent<Pieces>().PosName == "FootHold_0") { StartCoroutine(MoveTo(_selectedPiece, TreeComponent.NodeName["FootHold_29"].FootHold.transform.position, hit.collider.transform.position)); }
                         else { StartCoroutine(MoveTo(_selectedPiece, hit.collider.transform.position)); }
                     }
                     // else
@@ -80,7 +80,7 @@ public class YutGameManager : MonoBehaviour
                                 
                                 
                                 ps.Point += 1;
-                                Debug.Log(ps.Point + "Æ÷ÀÎÆ®");
+                                Debug.Log(ps.Point + "í¬ì¸íŠ¸");
                                 _selectedPiece.GetComponent<Pieces>().Point = 0;
                                 _selectedPiece.GetComponent<Pieces>().PosName = "FootHold_0";
                                 PiecesSet[i].SetActive(false);
@@ -132,7 +132,7 @@ public class YutGameManager : MonoBehaviour
                     DestroyArrow();
                     
 
-                    // ¿©·¯¹ø ¿òÁ÷ÀÏ ¶§
+                    // ì—¬ëŸ¬ë²ˆ ì›€ì§ì¼ ë•Œ
                     if(YutComponent.SelectNumber.Count > 1)
                     {
                         YutComponent.SelectNumber.Remove(TreeComponent.NodeName[hit.collider.name].Step);
@@ -144,7 +144,7 @@ public class YutGameManager : MonoBehaviour
                     }
                 }
 
-                // ±× ¿ÜÀÇ °æ¿ì ÃÊ±â·Î µ¹·ÁÁÜ
+                // ê·¸ ì™¸ì˜ ê²½ìš° ì´ˆê¸°ë¡œ ëŒë ¤ì¤Œ
                 else
                 {
                     DestroyArrow();
@@ -191,8 +191,8 @@ public class YutGameManager : MonoBehaviour
 
         float count = 0, count2 = 0;
         Vector3 wasPos = piece.transform.position;
-        throughPos.y = 4.0f;
-        toPos.y = 4.0f;
+        throughPos.y += 0.05f;
+        toPos.y += 0.05f;
         while (true)
         {
             count += Time.deltaTime;
@@ -224,7 +224,7 @@ public class YutGameManager : MonoBehaviour
 
         float count = 0;
         Vector3 wasPos = piece.transform.position;
-        toPos.y = 4.0f;
+        toPos.y += 0.05f;
         while (true)
         {
             count += Time.deltaTime;

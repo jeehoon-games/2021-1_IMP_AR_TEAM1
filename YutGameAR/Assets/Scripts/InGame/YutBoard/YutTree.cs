@@ -36,14 +36,15 @@ public class YutTree : MonoBehaviour
         {
             _footSet.Add(GameObject.Find("FootHold_" + i));
         }
-        
         CreateTreeNode(_footSet);
         MakeTree();
         
+
     }
 
     void CreateTreeNode(List<GameObject> footset)
     {
+        
         for (int i = 0; i < footset.Count; i++)
         {
             _nodeName.Add(String.Format("FootHold_{0}", i.ToString()), new TreeNode(footset[i]));
@@ -58,10 +59,10 @@ public class YutTree : MonoBehaviour
 
     void MakeTree()
     {
-        //ºÎ¸ð°¡ ÇÏ³ªÀÎ ¾ÖµéÀº LeftParent·Î ÅëÀÏ
-        //ºÎ¸ð°¡ µÎ¸íÀÎ ¾ÖµéÀº ±×¸²´ë·Î
-        //¸ðµç node¿¡¼­ ºü¸¥°÷À¸·Î °¡´Â ±æÀº ¹«Á¶°Ç rightChild
-        //´ÙÀ½ ±³Â÷·Î³¢¸®ÀÇ ±æÀÌ ´À¸°±æÀÌ¸é leftchild
+        //ë¶€ëª¨ê°€ í•˜ë‚˜ì¸ ì• ë“¤ì€ LeftParentë¡œ í†µì¼
+        //ë¶€ëª¨ê°€ ë‘ëª…ì¸ ì• ë“¤ì€ ê·¸ë¦¼ëŒ€ë¡œ
+        //ëª¨ë“  nodeì—ì„œ ë¹ ë¥¸ê³³ìœ¼ë¡œ ê°€ëŠ” ê¸¸ì€ ë¬´ì¡°ê±´ rightChild
+        //ë‹¤ìŒ êµì°¨ë¡œë¼ë¦¬ì˜ ê¸¸ì´ ëŠë¦°ê¸¸ì´ë©´ leftchild
 
         //0~19 LeftParent and LeftChild
         
@@ -104,9 +105,10 @@ public class YutTree : MonoBehaviour
 
 
         _rootNode = _nodeName["FootHold_" + 0];
+        
     }
 
-    //±³Â÷·Î°¡ ¾Æ´Ï¸é¼­ ºü¸¥±æµé
+    //êµì°¨ë¡œê°€ ì•„ë‹ˆë©´ì„œ ë¹ ë¥¸ê¸¸ë“¤
     void ConnectLPAndRC(int up, int down)
     {
         _nodeName["FootHold_" + up].RightChild = _nodeName["FootHold_" + down];
