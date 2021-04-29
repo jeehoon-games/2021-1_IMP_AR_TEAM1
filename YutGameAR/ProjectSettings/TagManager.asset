@@ -12,6 +12,9 @@ TagManager:
   - ARPlane
   - FootHold
   - YutPlate
+  - baseSDK
+  - CreateRoomMenu
+  - FindRoomMenu
   layers:
   - Default
   - TransparentFX

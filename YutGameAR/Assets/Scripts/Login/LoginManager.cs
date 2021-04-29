@@ -91,6 +91,7 @@ namespace LogIn
                             notice.text = "Wrong password.";
                             break;
                         case "Success":
+                            Screen.orientation = ScreenOrientation.Landscape;
                             SceneManager.LoadScene("MainScene");
                             break;
                     }
