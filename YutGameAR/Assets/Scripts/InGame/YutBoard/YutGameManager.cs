@@ -11,7 +11,13 @@ public class YutGameManager : MonoBehaviour
     private int BlueScore = 0;
     private YutThrow YutComponent;
     private YutTree TreeComponent;
-    private GameObject[] PiecesSet; 
+    private GameObject[] PiecesSet;
+
+    private struct UserInfo
+    {
+        public string userColor;
+        public bool userTurn;
+    }
 
     public bool Select { get { return _select; } }
 
@@ -240,4 +246,6 @@ public class YutGameManager : MonoBehaviour
             yield return null;
         }
     }
+
+    FMSocketIOManager
 }
