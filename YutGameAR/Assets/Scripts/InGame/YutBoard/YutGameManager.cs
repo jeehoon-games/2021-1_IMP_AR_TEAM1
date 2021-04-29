@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class YutGameManager : MonoBehaviour
@@ -12,6 +13,7 @@ public class YutGameManager : MonoBehaviour
     private YutThrow YutComponent;
     private YutTree TreeComponent;
     private GameObject[] PiecesSet;
+
     public static YutGameManager YutManager;
     public string userColor;
 

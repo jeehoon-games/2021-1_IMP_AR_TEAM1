@@ -149,7 +149,6 @@ namespace MainMenu
                     {
                         createRoomMenu.SetActive(true);
                         findRoomMenu.SetActive(true);
-                        
                         GameTitle.SetActive(true);
                         Vector3 planeCenter = _currPlane.center;
                         createRoomMenu.transform.position = planeCenter + new Vector3(-0.25f, 0.05f, 0);

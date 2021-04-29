@@ -58,7 +58,6 @@ public class MainSceneManager : MonoBehaviour
                         room.roomLeader = NetworkCore.Instance.UserData.userNickName;
                         room.roomName = "MyRoom";
                         string roomToJson = JsonUtility.ToJson(room);
-                        YutGameManager.YutManager.userColor = "Red";
                         FMSocketIOManager.instance.Emit("Event_CreateRoom", roomToJson);
                     }
 
@@ -68,7 +67,7 @@ public class MainSceneManager : MonoBehaviour
                         user.roomName = "MyRoom";
                         user.uID = NetworkCore.Instance.UserData.uid;
                         string userToJson = JsonUtility.ToJson(user);
-                        YutGameManager.YutManager.userColor = "Blue";
+                        FindObjectOfType<YutGameManager>().userColor = "Blue";
                         FMSocketIOManager.instance.Emit("Event_JoinRoom", userToJson);
                     }
                 }
@@ -100,9 +99,15 @@ public class MainSceneManager : MonoBehaviour
                 case "Success":
                     Debug.Log("Success to create room");
                     // wating for another user
+                    Vector3 center = createRoomMenu.transform.position;
                     createRoomMenu.SetActive(false);
                     findRoomMenu.SetActive(false);
-                    MenuCanvas.gameObject.SetActive(true);
+                    
+                    yutBoard.SetActive(true);
+                    yutPlate.SetActive(true);
+                    yutBoard.transform.position = center + new Vector3(0, 0.2f, 0);
+                    yutPlate.transform.position = center + new Vector3(-0.5f, 0.2f, 0);
+                    FindObjectOfType<YutGameManager>().userColor = "Red";
                     break;
             }
         });
@@ -124,25 +129,18 @@ public class MainSceneManager : MonoBehaviour
                     Vector3 center = createRoomMenu.transform.position;
                     createRoomMenu.SetActive(false);
                     findRoomMenu.SetActive(false);
-                    MenuCanvas.gameObject.SetActive(true);
-                    
+
                     yutBoard.SetActive(true);
                     yutPlate.SetActive(true);
                     yutBoard.transform.position = center + new Vector3(0, 0.2f, 0);
                     yutPlate.transform.position = center + new Vector3(-0.5f, 0.2f, 0);
+                    FindObjectOfType<YutGameManager>().userColor = "Blue";
                     break;
             }
         });
         
         FMSocketIOManager.instance.On("Event_ClientJoinRoom", (e) =>
         {
-            string data = e.data.Substring(1, e.data.Length - 2);
-            Vector3 center = createRoomMenu.transform.position;
-            MenuCanvas.gameObject.SetActive(false);
-            yutBoard.SetActive(true);
-            yutPlate.SetActive(true);
-            yutBoard.transform.position = center + new Vector3(0, 0.2f, 0);
-            yutPlate.transform.position = center + new Vector3(-0.5f, 0.2f, 0);
         });
         
         FMSocketIOManager.instance.On("Event_RefreshRoom_Result", (e) =>
