@@ -19,7 +19,7 @@ public class PathFinding : MonoBehaviour
         _piece = piece;
         _pieceName = piece.GetComponent<Pieces>().PosName;
         _countNum = countNum;
-        _nodeName = GameObject.Find("YutGameManager").GetComponent<YutTree>().NodeName;
+        _nodeName = GameObject.Find("Main Camera").GetComponent<YutTree>().NodeName;
         _enableNode.Clear();
     }
 
@@ -27,7 +27,6 @@ public class PathFinding : MonoBehaviour
     // calculating the position of the foothold that the piece can go.
     public Dictionary<string, YutTree.TreeNode> PathFind(GameObject piece, List<int> countNum)
     {
-        
         Init(piece, countNum);
         _distictNum = countNum.Distinct().ToList();
         for (int i = 0; i < _distictNum.Count; i++)
@@ -52,12 +51,10 @@ public class PathFinding : MonoBehaviour
         bool exchange = false;
 
         startNode = _nodeName[Name];
-        
+
         //교차로가 아니면서 길이 하나인 node
         if (!_nodeName[Name].IsIntersection)
         {
-            
-            
             //교차로가 아닌 node들
             if (_nodeName[Name].RightChild == null)
             {
@@ -65,7 +62,6 @@ public class PathFinding : MonoBehaviour
                 //startNode = _nodeName[Name];
                 for (int i = 0; i < count; i++)
                 {
-                    
                     if (CheckTheEnd(startNode)) { break; }
                     nextNode = startNode.LeftChild;
                     if (nextNode.IsIntersection) { throughNode = nextNode; }
@@ -75,7 +71,6 @@ public class PathFinding : MonoBehaviour
             //21,22,23,24,27,28
             else
             {
-                
                 //startNode = _nodeName[Name];
                 for (int i = 0; i < count; i++)
                 {
@@ -186,8 +181,7 @@ public class PathFinding : MonoBehaviour
     // Marking the available FootHold
     private void MarkingFootHold(Vector3 postion)
     {
-        
-        Instantiate(Arrow, new Vector3(postion.x, postion.y + 0.03f, postion.z), Quaternion.identity);
+        Instantiate(Arrow, new Vector3(postion.x, postion.y + 5, postion.z), Quaternion.identity);
     }
 
 

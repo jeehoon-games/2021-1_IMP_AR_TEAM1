@@ -25,7 +25,7 @@ public class PieceMove : MonoBehaviour
 
     void selectAndMove()
     {
-        if (Input.GetMouseButtonDown(0) && GameObject.Find("ThrowBtn").GetComponent<YutThrow>().Throwing)
+        if (Input.GetMouseButtonDown(0) && GameObject.Find("Button").GetComponent<YutThrow>().Throwing)
         {
             //Debug.Log("pathfind");
             RaycastHit hit;
@@ -40,16 +40,16 @@ public class PieceMove : MonoBehaviour
                     _select = true;
                     _selectedPiece = hit.collider.gameObject;
                     
-                    hit.collider.GetComponent<PathFinding>().PathFind(_selectedPiece, GameObject.Find("ThrowBtn").GetComponent<YutThrow>().SelectNumber);
+                    hit.collider.GetComponent<PathFinding>().PathFind(_selectedPiece, GameObject.Find("Button").GetComponent<YutThrow>().SelectNumber);
                     
 
 
                 }
                 else if (hit.collider.gameObject.CompareTag("FootHold") && _select)
                 {
-                    int index = GameObject.Find("YutGameManager").GetComponent<YutTree>().FootSet.IndexOf(hit.collider.gameObject);
+                    int index = GameObject.Find("Main Camera").GetComponent<YutTree>().FootSet.IndexOf(hit.collider.gameObject);
                     Debug.Log(index);
-                    List<GameObject> set = GameObject.Find("YutGameManager").GetComponent<YutTree>().FootSet;
+                    List<GameObject> set = GameObject.Find("Main Camera").GetComponent<YutTree>().FootSet;
                    
                     
                     StartCoroutine(MoveTo(_selectedPiece, set[index-1].transform.position, set[index].transform.position));
@@ -58,7 +58,7 @@ public class PieceMove : MonoBehaviour
                     _selectedPiece.GetComponent<Renderer>().material.color = new Color(102 / 255f, 123 / 255f, 255 / 255f, 255 / 255f);
                     _select = false;
 
-                    GameObject.Find("ThrowBtn").GetComponent<YutThrow>().Throwing = false;
+                    GameObject.Find("Button").GetComponent<YutThrow>().Throwing = false;
 
 
                 }
