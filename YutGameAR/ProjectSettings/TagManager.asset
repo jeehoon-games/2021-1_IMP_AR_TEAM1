@@ -7,6 +7,11 @@ TagManager:
   - Ground
   - Network
   - Yut
+  - Piece
+  - Arrow
+  - ARPlane
+  - FootHold
+  - YutPlate
   layers:
   - Default
   - TransparentFX
