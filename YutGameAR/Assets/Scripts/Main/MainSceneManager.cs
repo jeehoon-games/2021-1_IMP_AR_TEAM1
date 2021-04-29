@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using Core;
+using UnityEditor;
 using UnityEngine;
 
 public class MainSceneManager : MonoBehaviour
 {
     #region public & private instance variables / Init method
     
-    public GameObject CreateRoomMenu;
-    public GameObject FindRoomMenu;
+    public GameObject createRoomMenu;
+    public GameObject findRoomMenu;
+    public GameObject yutBoard;
+    public GameObject yutPlate;
     public Canvas MenuCanvas;
     
     private struct Room
@@ -54,8 +57,6 @@ public class MainSceneManager : MonoBehaviour
                         Room room = new Room();
                         room.roomLeader = NetworkCore.Instance.UserData.userNickName;
                         room.roomName = "MyRoom";
-                        Debug.Log("Touch3");
-                        Debug.Log("Create Room: " + room.roomLeader + "/" + room.roomName);
                         string roomToJson = JsonUtility.ToJson(room);
                         FMSocketIOManager.instance.Emit("Event_CreateRoom", roomToJson);
                     }
@@ -97,7 +98,9 @@ public class MainSceneManager : MonoBehaviour
                 case "Success":
                     Debug.Log("Success to create room");
                     // wating for another user
-                    
+                    createRoomMenu.SetActive(false);
+                    findRoomMenu.SetActive(false);
+                    MenuCanvas.gameObject.SetActive(true);
                     break;
             }
         });
@@ -116,9 +119,28 @@ public class MainSceneManager : MonoBehaviour
                 case "Success":
                     Debug.Log("Success to join room");
                     // make yut board
+                    Vector3 center = createRoomMenu.transform.position;
+                    createRoomMenu.SetActive(false);
+                    findRoomMenu.SetActive(false);
+                    MenuCanvas.gameObject.SetActive(true);
                     
+                    yutBoard.SetActive(true);
+                    yutPlate.SetActive(true);
+                    yutBoard.transform.position = center + new Vector3(0, 0.2f, 0);
+                    yutPlate.transform.position = center + new Vector3(-0.5f, 0.2f, 0);
                     break;
             }
+        });
+        
+        FMSocketIOManager.instance.On("Event_ClientJoinRoom", (e) =>
+        {
+            string data = e.data.Substring(1, e.data.Length - 2);
+            Vector3 center = createRoomMenu.transform.position;
+            MenuCanvas.gameObject.SetActive(false);
+            yutBoard.SetActive(true);
+            yutPlate.SetActive(true);
+            yutBoard.transform.position = center + new Vector3(0, 0.2f, 0);
+            yutPlate.transform.position = center + new Vector3(-0.5f, 0.2f, 0);
         });
         
         FMSocketIOManager.instance.On("Event_RefreshRoom_Result", (e) =>

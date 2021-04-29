@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "R39M304GYGX",
         "name": "com.DefaultCompany.YutGameAR",
-        "processId": 30754,
+        "processId": 5907,
         "exited": false
     },
     "m_SelectedPriority": 1,
@@ -114,6 +114,30 @@
             "deviceId": "R39M304GYGX",
             "name": "com.DefaultCompany.YutGameAR",
             "processId": 30754,
+            "exited": false
+        },
+        {
+            "deviceId": "R39M304GYGX",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 32645,
+            "exited": false
+        },
+        {
+            "deviceId": "R39M304GYGX",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 2075,
+            "exited": false
+        },
+        {
+            "deviceId": "R39M304GYGX",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 2557,
+            "exited": false
+        },
+        {
+            "deviceId": "R39M304GYGX",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 5907,
             "exited": false
         }
     ],
