@@ -11,6 +11,7 @@ namespace Core
 {
     public class NetworkCore : MonoBehaviour
     {
+
         public static NetworkCore Instance;
         
         public Data.UserData UserData;
@@ -33,6 +34,7 @@ namespace Core
             DontDestroyOnLoad(gameObject);
             _networkThread = new Thread(Run);
             _networkThread.Start();
+            Screen.orientation = ScreenOrientation.Portrait;
         }
 
         private void Run()
