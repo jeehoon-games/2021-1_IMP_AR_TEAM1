@@ -37,7 +37,11 @@ public class YutManager : MonoBehaviour
         {
             ThrowYut();
         }
-        
+        if (ManomotionManager.Instance.Hand_infos[0].hand_info.gesture_info.mano_gesture_trigger == ManoGestureTrigger.RELEASE_GESTURE)
+        {
+            ThrowYut();
+            Debug.Log("roll");
+        }
         Debug.Log(yType);
     }
 
