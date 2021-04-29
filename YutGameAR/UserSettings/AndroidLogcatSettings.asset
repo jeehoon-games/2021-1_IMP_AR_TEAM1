@@ -1,9 +1,9 @@
 {
-    "m_SelectedDeviceId": "R39M304GYGX",
+    "m_SelectedDeviceId": "223d93c4470c7ece",
     "m_SelectedPackage": {
-        "deviceId": "R39M304GYGX",
+        "deviceId": "223d93c4470c7ece",
         "name": "com.DefaultCompany.YutGameAR",
-        "processId": 24900,
+        "processId": 26665,
         "exited": false
     },
     "m_SelectedPriority": 1,
@@ -127,6 +127,156 @@
             "name": "com.DefaultCompany.YutGameAR",
             "processId": 24900,
             "exited": false
+        },
+        {
+            "deviceId": "223d93c4470c7ece",
+            "name": "com.manomotion.arfoundationssdkceexample",
+            "processId": 10675,
+            "exited": true
+        },
+        {
+            "deviceId": "223d93c4470c7ece",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 14571,
+            "exited": true
+        },
+        {
+            "deviceId": "223d93c4470c7ece",
+            "name": "com.manomotion.arfoundationssdkceexample",
+            "processId": 24390,
+            "exited": true
+        },
+        {
+            "deviceId": "223d93c4470c7ece",
+            "name": "com.manomotion.arfoundationssdkceexample",
+            "processId": 25593,
+            "exited": true
+        },
+        {
+            "deviceId": "223d93c4470c7ece",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 30714,
+            "exited": true
+        },
+        {
+            "deviceId": "223d93c4470c7ece",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 2758,
+            "exited": false
+        },
+        {
+            "deviceId": "223d93c4470c7ece",
+            "name": "com.manomotion.arfoundationssdkceexample",
+            "processId": 25169,
+            "exited": false
+        },
+        {
+            "deviceId": "223d93c4470c7ece",
+            "name": "com.manomotion.arfoundationssdkceexample",
+            "processId": 26527,
+            "exited": false
+        },
+        {
+            "deviceId": "223d93c4470c7ece",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 1803,
+            "exited": false
+        },
+        {
+            "deviceId": "223d93c4470c7ece",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 5583,
+            "exited": false
+        },
+        {
+            "deviceId": "223d93c4470c7ece",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 7551,
+            "exited": false
+        },
+        {
+            "deviceId": "223d93c4470c7ece",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 9172,
+            "exited": false
+        },
+        {
+            "deviceId": "223d93c4470c7ece",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 12372,
+            "exited": false
+        },
+        {
+            "deviceId": "223d93c4470c7ece",
+            "name": "com.manomotion.arfoundationssdkceexample",
+            "processId": 13902,
+            "exited": false
+        },
+        {
+            "deviceId": "223d93c4470c7ece",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 15490,
+            "exited": false
+        },
+        {
+            "deviceId": "223d93c4470c7ece",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 20141,
+            "exited": false
+        },
+        {
+            "deviceId": "223d93c4470c7ece",
+            "name": "com.manomotion.arfoundationssdkceexample",
+            "processId": 20338,
+            "exited": false
+        },
+        {
+            "deviceId": "223d93c4470c7ece",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 21283,
+            "exited": false
+        },
+        {
+            "deviceId": "223d93c4470c7ece",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 22273,
+            "exited": false
+        },
+        {
+            "deviceId": "223d93c4470c7ece",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 23919,
+            "exited": false
+        },
+        {
+            "deviceId": "223d93c4470c7ece",
+            "name": "com.manomotion.arfoundationssdkceexample",
+            "processId": 25365,
+            "exited": false
+        },
+        {
+            "deviceId": "223d93c4470c7ece",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 26665,
+            "exited": false
+        },
+        {
+            "deviceId": "192.168.35.23:5555",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 14571,
+            "exited": true
+        },
+        {
+            "deviceId": "192.168.35.23:5555",
+            "name": "com.manomotion.arfoundationssdkceexample",
+            "processId": 24390,
+            "exited": true
+        },
+        {
+            "deviceId": "192.168.35.23:5555",
+            "name": "com.manomotion.arfoundationssdkceexample",
+            "processId": 25593,
+            "exited": false
         }
     ],
     "m_Tags": {
@@ -179,7 +329,7 @@
         "MemoryGroup": 2,
         "Behavior": 0
     },
-    "m_Filter": "kjh",
+    "m_Filter": "roll",
     "m_FilterIsRegularExpression": false,
     "m_SymbolPaths": []
 }

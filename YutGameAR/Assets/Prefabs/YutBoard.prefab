@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af195954657f4a54ab1a84946feb6bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yutPlate: {fileID: 8260882472274108119, guid: 9b6133e667c2bcf4a8130d8df11d0428, type: 3}
+  yutPlate: {fileID: 0}
 --- !u!1 &2026780701746877741
 GameObject:
   m_ObjectHideFlags: 0
