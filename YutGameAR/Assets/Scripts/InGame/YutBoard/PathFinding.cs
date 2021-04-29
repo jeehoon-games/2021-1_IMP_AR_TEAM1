@@ -187,7 +187,7 @@ public class PathFinding : MonoBehaviour
     private void MarkingFootHold(Vector3 postion)
     {
         
-        Instantiate(Arrow, new Vector3(postion.x, postion.y + 0.03f, postion.z), Quaternion.identity);
+        Instantiate(Arrow, new Vector3(postion.x, postion.y, postion.z), Quaternion.identity);
     }
 
 

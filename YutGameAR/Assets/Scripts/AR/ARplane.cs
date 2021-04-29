@@ -9,8 +9,8 @@ public class ARplane : MonoBehaviour
 {
     private ARRaycastManager raycastManager;
     private GameObject yutboard;
+    
 
-    ManoGestureTrigger release;
     GameObject HandUI;
     [SerializeField]
     private GameObject yutboard_Prefab;
@@ -25,7 +25,7 @@ public class ARplane : MonoBehaviour
 
     private void Awake()
     {
-        release = ManoGestureTrigger.RELEASE_GESTURE;
+        
         HandUI = GameObject.Find("BoardUI");
         HandUI.SetActive(false);
         raycastManager = GetComponent<ARRaycastManager>();
@@ -52,7 +52,7 @@ public class ARplane : MonoBehaviour
         if (raycastManager.Raycast(touchPosition, s_hits, TrackableType.PlaneWithinPolygon))
         {
             var hitPose = s_hits[0].pose;
-            if (yutboard == null)
+            if (!yutboard_Prefab.activeInHierarchy)
             {
                 
                 yutboard_Prefab.SetActive(true);
@@ -64,12 +64,6 @@ public class ARplane : MonoBehaviour
             }
         }
 
-        if (ManomotionManager.Instance.Hand_infos[0].hand_info.gesture_info.mano_gesture_trigger == release)
-            {
-                Application.Quit();
-                HandUI.SetActive(false);
-                //yutboard.GetComponentInChildren<YutManager>().ThrowYut();
-                Debug.Log("roll");
-            }
+        
      }
 }

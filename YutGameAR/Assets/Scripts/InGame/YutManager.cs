@@ -7,6 +7,7 @@ public class YutManager : MonoBehaviour
     public Queue<int> resultQueue;
     public int yType;   // -1: 빽도, 1: 도, 2: 개, 3: 걸, 4: 윷, 5: 모
     public bool done;
+    ManoGestureTrigger release;
     
     private struct YutForce
     {
