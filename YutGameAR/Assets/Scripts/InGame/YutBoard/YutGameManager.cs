@@ -247,5 +247,5 @@ public class YutGameManager : MonoBehaviour
         }
     }
 
-    FMSocketIOManager
+    //FMSocketIOManager
 }

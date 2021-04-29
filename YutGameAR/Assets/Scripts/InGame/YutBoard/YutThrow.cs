@@ -118,7 +118,7 @@ public class YutThrow : MonoBehaviour
             
         }
         //Debug.Log("kjh       222222222" + _yutMgr.yType);
-        //text.text = ""+_yutMgr.yType;
+        text.text = _yutMgr.yType + " 칸";
         _selectNumber.Add(_yutMgr.yType);
         
         if (_yutMgr.yType == 4 || _yutMgr.yType == 5)

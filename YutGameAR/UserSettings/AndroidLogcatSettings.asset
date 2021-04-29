@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "R3CN90RMPHH",
         "name": "com.DefaultCompany.YutGameAR",
-        "processId": 12723,
+        "processId": 14428,
         "exited": false
     },
     "m_SelectedPriority": 1,
@@ -204,6 +204,18 @@
             "deviceId": "R3CN90RMPHH",
             "name": "com.DefaultCompany.YutGameAR",
             "processId": 12723,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CN90RMPHH",
+            "name": "com.manomotion.arfoundationssdkceexample",
+            "processId": 14240,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CN90RMPHH",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 14428,
             "exited": false
         },
         {
