@@ -31,15 +31,7 @@ public class YutManager : MonoBehaviour
         Init();
     }
     
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            ThrowYut();
-        }
-        
-        Debug.Log(yType);
-    }
+    
 
     public void ThrowYut()
     {
@@ -49,10 +41,10 @@ public class YutManager : MonoBehaviour
 
         for (int i = 0; i < _forceArr.Length; i++)
         {
-            _forceArr[i].xTorque = Random.Range(200, 500);
-            _forceArr[i].yTorque = Random.Range(50, 100);
-            _forceArr[i].zTorque = Random.Range(50, 100);
-            _forceArr[i].yForce = Random.Range(50, 100);
+            _forceArr[i].xTorque = Random.Range(50 ,1000);
+            _forceArr[i].yTorque = Random.Range(800, 1000);
+            _forceArr[i].zTorque = Random.Range(10,300);
+            _forceArr[i].yForce = Random.Range(100,101);
             _yutContArr[i].Throw(_forceArr[i].xTorque, _forceArr[i].yTorque, _forceArr[i].zTorque, _forceArr[i].yForce, ForceMode.Force);
         }
         

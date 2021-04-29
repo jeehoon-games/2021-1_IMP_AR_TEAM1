@@ -14,6 +14,7 @@ public class YutThrow : MonoBehaviour
     //private int[] weight = { 384, 1152, 3456, 3456, 1296, 256 };
     private List<int> _selectNumber;
     private YutManager _yutMgr;
+    public Text text;
 
     public bool Throwing 
     { 
@@ -57,18 +58,24 @@ public class YutThrow : MonoBehaviour
 
     void Update()
     {
-        if (Input.touchCount > 0 && !_throwing)
+        /*
+        if(Input.GetMouseButtonDown(0) && !_throwing)
         {
-            
+            _throwing = false;
+            _yutMgr.ThrowYut();
+            StartCoroutine(MakeResult());
+        }
+        */
+        if (Input.touchCount > 0 && !_throwing)
+        {   
             Touch t0 = Input.GetTouch(0);
             if (t0.phase == TouchPhase.Began)
             {
-                
                 _throwing = false;
                 _yutMgr.ThrowYut();
                 StartCoroutine(MakeResult());
             }
-        }
+        } 
     }
 
     /*void OnClickButton()
@@ -98,13 +105,17 @@ public class YutThrow : MonoBehaviour
             yield return null;
             
         }
-        Debug.Log("kjh       222222222" + _yutMgr.yType);
+        //Debug.Log("kjh       222222222" + _yutMgr.yType);
+        text.text = ""+_yutMgr.yType;
         _selectNumber.Add(_yutMgr.yType);
         
         if (_yutMgr.yType == 4 || _yutMgr.yType == 5)
         {
+            /*
             _yutMgr.ThrowYut();
             StartCoroutine(MakeResult());
+            */
+            _throwing = false;
         }
         else
         {

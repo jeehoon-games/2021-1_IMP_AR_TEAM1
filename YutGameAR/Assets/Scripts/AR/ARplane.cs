@@ -52,8 +52,8 @@ public class ARplane : MonoBehaviour
                 
                 yutboard_Prefab.SetActive(true);
                 yutplate_Prefab.SetActive(true);
-                yutboard_Prefab.transform.position = hitPose.position + new Vector3(0, 0.3f, 0);
-                yutplate_Prefab.transform.position = hitPose.position + new Vector3(-0.3f, 0.3f, 0);
+                yutboard_Prefab.transform.position = hitPose.position + new Vector3(0, 0.2f, 0);
+                yutplate_Prefab.transform.position = hitPose.position + new Vector3(-0.5f, 0.2f, 0);
             }
             
             
