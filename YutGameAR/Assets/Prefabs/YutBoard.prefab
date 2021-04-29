@@ -58,6 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ab1a0f9bdc97a499933ae14b42c7a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  userColor: 
 --- !u!114 &2172775630978064212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2288,6 +2289,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2257432476071449536, guid: 128a80094e00bf34fa2555766a7eea0e, type: 3}
+      propertyPath: ID
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2257432476071449536, guid: 128a80094e00bf34fa2555766a7eea0e, type: 3}
       propertyPath: teamColor
       value: Red
       objectReference: {fileID: 0}
@@ -2370,6 +2375,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9129711389085173108, guid: 84493eaa65d75074ca2c6e2d8a90ff9a, type: 3}
+      propertyPath: ID
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129711389085173108, guid: 84493eaa65d75074ca2c6e2d8a90ff9a, type: 3}
       propertyPath: teamColor
       value: Blue
       objectReference: {fileID: 0}
@@ -2450,6 +2459,10 @@ PrefabInstance:
     - target: {fileID: 4744222756475520, guid: 128a80094e00bf34fa2555766a7eea0e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2257432476071449536, guid: 128a80094e00bf34fa2555766a7eea0e, type: 3}
+      propertyPath: ID
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2257432476071449536, guid: 128a80094e00bf34fa2555766a7eea0e, type: 3}
       propertyPath: teamColor
@@ -2600,6 +2613,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9129711389085173108, guid: 84493eaa65d75074ca2c6e2d8a90ff9a, type: 3}
+      propertyPath: ID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129711389085173108, guid: 84493eaa65d75074ca2c6e2d8a90ff9a, type: 3}
       propertyPath: teamColor
       value: Blue
       objectReference: {fileID: 0}
@@ -2680,6 +2697,10 @@ PrefabInstance:
     - target: {fileID: 4744222756475520, guid: 128a80094e00bf34fa2555766a7eea0e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2257432476071449536, guid: 128a80094e00bf34fa2555766a7eea0e, type: 3}
+      propertyPath: ID
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2257432476071449536, guid: 128a80094e00bf34fa2555766a7eea0e, type: 3}
       propertyPath: teamColor
@@ -2844,6 +2865,10 @@ PrefabInstance:
     - target: {fileID: 4274285055804658, guid: 84493eaa65d75074ca2c6e2d8a90ff9a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129711389085173108, guid: 84493eaa65d75074ca2c6e2d8a90ff9a, type: 3}
+      propertyPath: ID
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9129711389085173108, guid: 84493eaa65d75074ca2c6e2d8a90ff9a, type: 3}
       propertyPath: teamColor

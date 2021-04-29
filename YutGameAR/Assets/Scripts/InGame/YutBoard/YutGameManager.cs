@@ -12,14 +12,23 @@ public class YutGameManager : MonoBehaviour
     private YutThrow YutComponent;
     private YutTree TreeComponent;
     private GameObject[] PiecesSet;
+    public static YutGameManager YutManager;
+    public string userColor;
 
     private struct UserInfo
     {
-        public string userColor;
-        public bool userTurn;
+        public string userTurn;
+        public Vector3 throughPos;
+        public Vector3 endPos;
+        public int id;
     }
 
     public bool Select { get { return _select; } }
+
+    void Awake()
+    {
+        YutManager = this;
+    }
 
 
     // Start is called before the first frame update
@@ -51,7 +60,7 @@ public class YutGameManager : MonoBehaviour
             {
                                 
                 // 터치하는 것이 말일 경우
-                if (hit.collider.gameObject.CompareTag("Piece") && !_select)
+                if (hit.collider.gameObject.CompareTag("Piece") && !_select && hit.collider.gameObject.GetComponent<Pieces>().teamColor.Equals(userColor))
                 {
                     //hit.collider.GetComponent<Renderer>().material.color = Color.red;
                     _select = true;
@@ -62,16 +71,44 @@ public class YutGameManager : MonoBehaviour
                 // 말을 터치한 후 갈 발판을 터치한 경우
                 else if (hit.collider.gameObject.CompareTag("FootHold") && _select && _enableNode.ContainsKey(hit.collider.name))
                 {
-                    
+                    UserInfo info = new UserInfo();
+                    info.userTurn = "true";
+
                     // when the pieces didn't start
                     if (_enableNode[hit.collider.name] == null)
                     {
                         Debug.Log("kjh    111111111  a"+ _enableNode[hit.collider.name]);
-                        if (_selectedPiece.GetComponent<Pieces>().PosName == "FootHold_0") { StartCoroutine(MoveTo(_selectedPiece, TreeComponent.NodeName["FootHold_29"].FootHold.transform.position, hit.collider.transform.position)); }
-                        else { StartCoroutine(MoveTo(_selectedPiece, hit.collider.transform.position)); }
+                        if (_selectedPiece.GetComponent<Pieces>().PosName == "FootHold_0") 
+                        {
+                            
+                            info.throughPos = TreeComponent.NodeName["FootHold_29"].FootHold.transform.position;
+                            info.endPos = hit.collider.transform.position;
+                            info.id = _selectedPiece.GetComponent<Pieces>().ID;
+                            string data = JsonUtility.ToJson(info);
+                            FMSocketIOManager.instance.Emit("Event_SendPos", data);
+                            StartCoroutine(MoveTo(_selectedPiece, TreeComponent.NodeName["FootHold_29"].FootHold.transform.position, hit.collider.transform.position)); 
+                        }
+                        else 
+                        {
+                            
+                            info.throughPos = Vector3.zero;
+                            info.endPos = hit.collider.transform.position;
+                            info.id = _selectedPiece.GetComponent<Pieces>().ID;
+                            string data = JsonUtility.ToJson(info);
+                            FMSocketIOManager.instance.Emit("Event_SendPos", data);
+                            StartCoroutine(MoveTo(_selectedPiece, hit.collider.transform.position)); 
+                        }
                     }
                     // else
-                    else { StartCoroutine(MoveTo(_selectedPiece, _enableNode[hit.collider.name].FootHold.transform.position, hit.collider.transform.position)); }
+                    else 
+                    {
+                        info.throughPos = _enableNode[hit.collider.name].FootHold.transform.position;
+                        info.endPos = hit.collider.transform.position;
+                        info.id = _selectedPiece.GetComponent<Pieces>().ID;
+                        string data = JsonUtility.ToJson(info);
+                        FMSocketIOManager.instance.Emit("Event_SendPos", data);
+                        StartCoroutine(MoveTo(_selectedPiece, _enableNode[hit.collider.name].FootHold.transform.position, hit.collider.transform.position)); 
+                    }
 
                     //The pieces go to the same FootHold.
                     //There are two cases when you are on the same team and when you are on a different team.
@@ -247,5 +284,39 @@ public class YutGameManager : MonoBehaviour
         }
     }
 
-    //FMSocketIOManager
+    IEnumerator RegisterSocketIOEvent()
+    {
+        while (FMSocketIOManager.instance == null)
+            yield return null;
+
+        while (!FMSocketIOManager.instance.Ready)
+            yield return null;
+
+        FMSocketIOManager.instance.On("Event_SendPos_Result", (e) =>
+        {
+            
+            UserInfo info = JsonUtility.FromJson<UserInfo>(e.data);
+            GameObject piece = null;
+            for (int i = 0; i < PiecesSet.Length; i++)
+            {
+                if(!PiecesSet[i].GetComponent<Pieces>().teamColor.Equals(userColor) && PiecesSet[i].GetComponent<Pieces>().ID == info.id)
+                {
+                    piece = PiecesSet[i];
+                    break;
+                }
+            }
+
+            if (info.throughPos != Vector3.zero)
+            {
+                StartCoroutine(MoveTo(piece, info.throughPos, info.endPos));
+            }
+            else
+            {
+                StartCoroutine(MoveTo(piece, info.endPos));
+            }
+
+        });
+
+        
+    }
 }

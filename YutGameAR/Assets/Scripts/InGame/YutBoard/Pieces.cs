@@ -8,7 +8,7 @@ public class Pieces : MonoBehaviour
     private int _point = 1;
     private Vector3 _initPosition;
     public string teamColor;
-
+    public int ID;
 
     void Start()
     {
