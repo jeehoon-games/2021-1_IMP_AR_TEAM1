@@ -13,6 +13,7 @@ public class MainSceneManager : MonoBehaviour
     public GameObject yutBoard;
     public GameObject yutPlate;
     public Canvas MenuCanvas;
+    private AudioSource audioSource;
     
     private struct Room
     {
@@ -29,6 +30,7 @@ public class MainSceneManager : MonoBehaviour
     private void Init()
     {
         StartCoroutine(RegisterSocketIOEvent());
+        audioSource = FindObjectOfType<AudioSource>();
     }
     
     #endregion
@@ -39,6 +41,7 @@ public class MainSceneManager : MonoBehaviour
     void Start()
     {
         Init();
+
     }
     
     void Update()
@@ -107,6 +110,7 @@ public class MainSceneManager : MonoBehaviour
                     yutBoard.transform.position = center + new Vector3(0, 0.2f, 0);
                     yutPlate.transform.position = center + new Vector3(-0.5f, 0.2f, 0);
                     FindObjectOfType<YutGameManager>().userColor = "Red";
+                    audioSource.Play();
                     break;
             }
         });
@@ -134,6 +138,7 @@ public class MainSceneManager : MonoBehaviour
                     yutBoard.transform.position = center + new Vector3(0, 0.2f, 0);
                     yutPlate.transform.position = center + new Vector3(-0.5f, 0.2f, 0);
                     FindObjectOfType<YutGameManager>().userColor = "Blue";
+                    audioSource.Play();
                     break;
             }
         });
