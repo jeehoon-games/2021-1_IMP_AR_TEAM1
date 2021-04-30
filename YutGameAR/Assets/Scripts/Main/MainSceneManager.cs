@@ -67,7 +67,6 @@ public class MainSceneManager : MonoBehaviour
                         user.roomName = "MyRoom";
                         user.uID = NetworkCore.Instance.UserData.uid;
                         string userToJson = JsonUtility.ToJson(user);
-                        FindObjectOfType<YutGameManager>().userColor = "Blue";
                         FMSocketIOManager.instance.Emit("Event_JoinRoom", userToJson);
                     }
                 }

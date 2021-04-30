@@ -20,8 +20,8 @@ public class YutGameManager : MonoBehaviour
     private struct UserInfo
     {
         public string userTurn;
-        public Vector3 throughPos;
-        public Vector3 endPos;
+        public string throughPos;
+        public string endPos;
         public int id;
     }
 
@@ -39,7 +39,8 @@ public class YutGameManager : MonoBehaviour
         YutComponent = GetComponent<YutThrow>();
         TreeComponent = GetComponent<YutTree>();
         PiecesSet = GameObject.FindGameObjectsWithTag("Piece");
-        
+        StartCoroutine(SocketIOEvent());
+
     }
 
     // Update is called once per frame
@@ -82,9 +83,9 @@ public class YutGameManager : MonoBehaviour
                         Debug.Log("kjh    111111111  a"+ _enableNode[hit.collider.name]);
                         if (_selectedPiece.GetComponent<Pieces>().PosName == "FootHold_0") 
                         {
-                            
-                            info.throughPos = TreeComponent.NodeName["FootHold_29"].FootHold.transform.position;
-                            info.endPos = hit.collider.transform.position;
+
+                            info.throughPos = "FootHold_29";
+                            info.endPos = hit.collider.name;
                             info.id = _selectedPiece.GetComponent<Pieces>().ID;
                             string data = JsonUtility.ToJson(info);
                             FMSocketIOManager.instance.Emit("Event_SendPos", data);
@@ -92,9 +93,9 @@ public class YutGameManager : MonoBehaviour
                         }
                         else 
                         {
-                            
-                            info.throughPos = Vector3.zero;
-                            info.endPos = hit.collider.transform.position;
+
+                            info.throughPos = " ";
+                            info.endPos = hit.collider.name;
                             info.id = _selectedPiece.GetComponent<Pieces>().ID;
                             string data = JsonUtility.ToJson(info);
                             FMSocketIOManager.instance.Emit("Event_SendPos", data);
@@ -104,8 +105,8 @@ public class YutGameManager : MonoBehaviour
                     // else
                     else 
                     {
-                        info.throughPos = _enableNode[hit.collider.name].FootHold.transform.position;
-                        info.endPos = hit.collider.transform.position;
+                        info.throughPos = _enableNode[hit.collider.name].FootHold.name;
+                        info.endPos = hit.collider.name;
                         info.id = _selectedPiece.GetComponent<Pieces>().ID;
                         string data = JsonUtility.ToJson(info);
                         FMSocketIOManager.instance.Emit("Event_SendPos", data);
@@ -286,7 +287,7 @@ public class YutGameManager : MonoBehaviour
         }
     }
 
-    IEnumerator RegisterSocketIOEvent()
+    IEnumerator SocketIOEvent()
     {
         while (FMSocketIOManager.instance == null)
             yield return null;
@@ -299,22 +300,25 @@ public class YutGameManager : MonoBehaviour
             
             UserInfo info = JsonUtility.FromJson<UserInfo>(e.data);
             GameObject piece = null;
+            Debug.Log("kjh           11111" + e.data);
             for (int i = 0; i < PiecesSet.Length; i++)
             {
                 if(!PiecesSet[i].GetComponent<Pieces>().teamColor.Equals(userColor) && PiecesSet[i].GetComponent<Pieces>().ID == info.id)
                 {
                     piece = PiecesSet[i];
+                    Debug.Log("kjh          22222222 " + piece);
                     break;
                 }
             }
 
-            if (info.throughPos != Vector3.zero)
+            if (info.throughPos != " ")
             {
-                StartCoroutine(MoveTo(piece, info.throughPos, info.endPos));
+                Debug.Log("kjh          33333333 " + info.endPos);
+                StartCoroutine(MoveTo(piece, TreeComponent.NodeName[info.throughPos].FootHold.transform.position, TreeComponent.NodeName[info.endPos].FootHold.transform.position));
             }
             else
             {
-                StartCoroutine(MoveTo(piece, info.endPos));
+                StartCoroutine(MoveTo(piece, TreeComponent.NodeName[info.endPos].FootHold.transform.position));
             }
 
         });
