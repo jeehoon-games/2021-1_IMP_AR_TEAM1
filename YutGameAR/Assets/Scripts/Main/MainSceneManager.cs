@@ -13,6 +13,7 @@ public class MainSceneManager : MonoBehaviour
     public GameObject yutBoard;
     public GameObject yutPlate;
     public Canvas MenuCanvas;
+    public GameObject gameTitle;
     private AudioSource audioSource;
     
     private struct Room
@@ -104,7 +105,7 @@ public class MainSceneManager : MonoBehaviour
                     Vector3 center = createRoomMenu.transform.position;
                     createRoomMenu.SetActive(false);
                     findRoomMenu.SetActive(false);
-                    
+                    gameTitle.SetActive(false);
                     yutBoard.SetActive(true);
                     yutPlate.SetActive(true);
                     yutBoard.transform.position = center + new Vector3(0, 0.2f, 0);
@@ -132,7 +133,7 @@ public class MainSceneManager : MonoBehaviour
                     Vector3 center = createRoomMenu.transform.position;
                     createRoomMenu.SetActive(false);
                     findRoomMenu.SetActive(false);
-
+                    gameTitle.SetActive(false);
                     yutBoard.SetActive(true);
                     yutPlate.SetActive(true);
                     yutBoard.transform.position = center + new Vector3(0, 0.2f, 0);

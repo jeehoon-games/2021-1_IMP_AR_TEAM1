@@ -1092,6 +1092,7 @@ MonoBehaviour:
   yutBoard: {fileID: 1709191848}
   yutPlate: {fileID: 1177996921}
   MenuCanvas: {fileID: 859175102}
+  gameTitle: {fileID: 910909507}
 --- !u!4 &724997032
 Transform:
   m_ObjectHideFlags: 0

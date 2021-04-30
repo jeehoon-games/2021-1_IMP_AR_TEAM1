@@ -153,7 +153,7 @@ namespace MainMenu
                         Vector3 planeCenter = _currPlane.center;
                         createRoomMenu.transform.position = planeCenter + new Vector3(-0.25f, 0.05f, 0);
                         findRoomMenu.transform.position = planeCenter + new Vector3(0.25f, 0.05f, 0);
-                        GameTitle.transform.position = planeCenter + new Vector3(0, 0.2f, 0);
+                        GameTitle.transform.position = planeCenter + new Vector3(0, 0.5f, 0);
                     }
                 }
             }
