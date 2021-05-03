@@ -112,10 +112,7 @@ public class YutGameManager : MonoBehaviour
                         FMSocketIOManager.instance.Emit("Event_SendPos", data);
                         StartCoroutine(MoveTo(_selectedPiece, _enableNode[hit.collider.name].FootHold.transform.position, hit.collider.transform.position, hit.collider.name)); 
                     }
-                    CatchPiece(hit.collider.name, _selectedPiece);
-                   
-                    
-                    
+                    //CatchPiece(hit.collider.name, _selectedPiece);
                     _selectedPiece.GetComponent<Pieces>().PosName = hit.collider.name;
                     //_selectedPiece.GetComponent<Renderer>().material.color = new Color(102 / 255f, 123 / 255f, 255 / 255f, 255 / 255f);
                     _select = false;

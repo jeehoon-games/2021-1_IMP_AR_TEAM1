@@ -474,7 +474,7 @@ MonoBehaviour:
   AutoInit: 0
   NetworkType: 1
   Settings:
-    IP: 125.130.209.31
+    IP: 59.11.215.88
     port: 8001
     sslEnabled: 0
     sslProtocols: 240
