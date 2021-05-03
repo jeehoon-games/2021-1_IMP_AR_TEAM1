@@ -180,6 +180,10 @@ public class YutGameManager : MonoBehaviour
                 {
                     if (ps.Point > 1)
                     {
+                        ps.PosName = "FootHold_0";
+                        ps.transform.position = ps.InitPosition;
+                        ps.Point = 1;
+
                         for (int j = 0; j < PiecesSet.Length; j++)
                         {
                             if (!PiecesSet[j].activeInHierarchy)
