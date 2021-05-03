@@ -164,7 +164,7 @@ public class YutGameManager : MonoBehaviour
         for (int i = 0; i < PiecesSet.Length; i++)
         {
 
-            if (hitName.Equals(PiecesSet[i].GetComponent<Pieces>().PosName))
+            if (hitName.Equals(PiecesSet[i].GetComponent<Pieces>().PosName) && !_selectedPiece.Equals(PiecesSet[i]))
             {
                 Pieces ps = PiecesSet[i].GetComponent<Pieces>();
                 if (_selectedPiece.GetComponent<Pieces>().teamColor.Equals(ps.teamColor))
@@ -184,7 +184,7 @@ public class YutGameManager : MonoBehaviour
                         {
                             if (!PiecesSet[j].activeInHierarchy)
                             {
-                                PiecesSet[j].SetActive(true);
+                                //PiecesSet[j].SetActive(true);
                                 Pieces ps2 = PiecesSet[j].GetComponent<Pieces>();
                                 if (ps2.teamColor.Equals(ps.teamColor) && ps2.Point == 0)
                                 {
@@ -323,6 +323,7 @@ public class YutGameManager : MonoBehaviour
                     break;
                 }
             }
+            
 
             if (info.throughPos != " ")
             {
@@ -332,7 +333,7 @@ public class YutGameManager : MonoBehaviour
             {
                 StartCoroutine(MoveTo(piece, TreeComponent.NodeName[info.endPos].FootHold.transform.position, info.endPos));
             }
-
+            piece.GetComponent<Pieces>().PosName = info.endPos;
         });
 
         
