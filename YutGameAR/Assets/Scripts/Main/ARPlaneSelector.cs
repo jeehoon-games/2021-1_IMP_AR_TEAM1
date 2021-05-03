@@ -22,7 +22,7 @@ namespace MainMenu
         public GameObject findRoomMenu;
         public GameObject GameTitle;
         
-        private const float MIN_PLANE_SIZE = 0.6f;
+        private const float MIN_PLANE_SIZE = 0.4f;
         private ARPlaneManager _arPlaneManager;
         private ARPlane _currPlane;
         private ARRaycastManager _arRaycastManager;
@@ -118,7 +118,7 @@ namespace MainMenu
                             _onFindProperPlane = true;
                         }
                         
-                        _lBarRectTransform.localScale = new Vector3(size / (0.5f + size),1.0f, 1.0f);
+                        _lBarRectTransform.localScale = new Vector3(Mathf.Clamp(size - 0.1f, 0, 1), 1.0f, 1.0f);
                         _loadingBar.material.color = matColor;
                         _indicator.GetComponent<MeshRenderer>().material.color = matColor;
                     }

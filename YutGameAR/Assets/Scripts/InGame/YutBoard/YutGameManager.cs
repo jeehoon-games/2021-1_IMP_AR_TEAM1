@@ -80,16 +80,16 @@ public class YutGameManager : MonoBehaviour
                     // when the pieces didn't start
                     if (_enableNode[hit.collider.name] == null)
                     {
-                        Debug.Log("kjh    111111111  a"+ _enableNode[hit.collider.name]);
                         if (_selectedPiece.GetComponent<Pieces>().PosName == "FootHold_0") 
                         {
 
                             info.throughPos = "FootHold_29";
                             info.endPos = hit.collider.name;
+                            
                             info.id = _selectedPiece.GetComponent<Pieces>().ID;
                             string data = JsonUtility.ToJson(info);
                             FMSocketIOManager.instance.Emit("Event_SendPos", data);
-                            StartCoroutine(MoveTo(_selectedPiece, TreeComponent.NodeName["FootHold_29"].FootHold.transform.position, hit.collider.transform.position)); 
+                            StartCoroutine(MoveTo(_selectedPiece, TreeComponent.NodeName["FootHold_29"].FootHold.transform.position, hit.collider.transform.position, hit.collider.name)); 
                         }
                         else 
                         {
@@ -99,7 +99,7 @@ public class YutGameManager : MonoBehaviour
                             info.id = _selectedPiece.GetComponent<Pieces>().ID;
                             string data = JsonUtility.ToJson(info);
                             FMSocketIOManager.instance.Emit("Event_SendPos", data);
-                            StartCoroutine(MoveTo(_selectedPiece, hit.collider.transform.position)); 
+                            StartCoroutine(MoveTo(_selectedPiece, hit.collider.transform.position, hit.collider.name)); 
                         }
                     }
                     // else
@@ -110,56 +110,10 @@ public class YutGameManager : MonoBehaviour
                         info.id = _selectedPiece.GetComponent<Pieces>().ID;
                         string data = JsonUtility.ToJson(info);
                         FMSocketIOManager.instance.Emit("Event_SendPos", data);
-                        StartCoroutine(MoveTo(_selectedPiece, _enableNode[hit.collider.name].FootHold.transform.position, hit.collider.transform.position)); 
+                        StartCoroutine(MoveTo(_selectedPiece, _enableNode[hit.collider.name].FootHold.transform.position, hit.collider.transform.position, hit.collider.name)); 
                     }
-
-                    //The pieces go to the same FootHold.
-                    //There are two cases when you are on the same team and when you are on a different team.
-                    for (int i = 0; i < PiecesSet.Length; i++)
-                    {
-                        
-                        if (hit.collider.name.Equals(PiecesSet[i].GetComponent<Pieces>().PosName))
-                        {
-                            Pieces ps = PiecesSet[i].GetComponent<Pieces>();
-                            if (_selectedPiece.GetComponent<Pieces>().teamColor.Equals(ps.teamColor))
-                            {
-                                ps.Point += 1;
-                                Debug.Log(ps.Point + "포인트");
-                                _selectedPiece.GetComponent<Pieces>().Point = 0;
-                                _selectedPiece.GetComponent<Pieces>().PosName = "FootHold_0";
-                                PiecesSet[i].SetActive(false);
-                            }
-                            else
-                            {
-                                if(ps.Point > 1)
-                                {
-                                    for (int j = 0; j< PiecesSet.Length; j++)
-                                    {
-                                        if (!PiecesSet[j].activeInHierarchy)
-                                        {
-                                            PiecesSet[j].SetActive(true);
-                                            Pieces ps2 = PiecesSet[j].GetComponent<Pieces>();
-                                            if (ps2.teamColor.Equals(ps.teamColor) && ps2.Point == 0)
-                                            {
-                                                //ps2.PosName = "FootHold_0";
-                                                PiecesSet[j].transform.position = ps2.InitPosition;
-                                                ps2.Point = 1;
-                                                Debug.Log(ps2.PosName);
-                                                Debug.Log(ps2.Point);
-                                                //PiecesSet[j].SetActive(true);
-                                            }
-                                        }
-                                        
-                                    }
-                                }
-                                
-                                PiecesSet[i].transform.position = ps.InitPosition;
-                                ps.PosName = "FootHold_0";
-                                ps.Point = 1;
-                            }
-                        }
-                    }
-                        
+                    CatchPiece(hit.collider.name, _selectedPiece);
+                   
                     
                     
                     _selectedPiece.GetComponent<Pieces>().PosName = hit.collider.name;
@@ -204,6 +158,68 @@ public class YutGameManager : MonoBehaviour
         */
     }
 
+
+    //The pieces go to the same FootHold.
+    //There are two cases when you are on the same team and when you are on a different team.
+    void CatchPiece(string hitName, GameObject _selectedPiece)
+    {
+        
+        for (int i = 0; i < PiecesSet.Length; i++)
+        {
+
+            if (hitName.Equals(PiecesSet[i].GetComponent<Pieces>().PosName))
+            {
+                Pieces ps = PiecesSet[i].GetComponent<Pieces>();
+                if (_selectedPiece.GetComponent<Pieces>().teamColor.Equals(ps.teamColor))
+                {
+                    ps.Point += 1;
+                    Debug.Log(ps.Point + "포인트");
+                    _selectedPiece.GetComponent<Pieces>().Point = 0;
+                    _selectedPiece.GetComponent<Pieces>().PosName = "FootHold_0";
+                    _selectedPiece.SetActive(false);
+                    
+                }
+                else
+                {
+                    if (ps.Point > 1)
+                    {
+                        for (int j = 0; j < PiecesSet.Length; j++)
+                        {
+                            if (!PiecesSet[j].activeInHierarchy)
+                            {
+                                PiecesSet[j].SetActive(true);
+                                Pieces ps2 = PiecesSet[j].GetComponent<Pieces>();
+                                if (ps2.teamColor.Equals(ps.teamColor) && ps2.Point == 0)
+                                {
+                                    //ps2.PosName = "FootHold_0";
+                                    PiecesSet[j].transform.position = ps2.InitPosition;
+                                    ps2.Point = 1;
+                                    PiecesSet[j].SetActive(true);
+                                    //Debug.Log(ps2.PosName);
+                                    //Debug.Log(ps2.Point);
+
+                                }
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        ps.PosName = "FootHold_0";
+                        ps.transform.position = ps.InitPosition;
+                    }
+                    
+                }
+            }
+        }
+    }
+
+
+
+
+
+
+
     // Destroy the arrows when the piece is out of focus.
     void DestroyArrow()
     {
@@ -222,7 +238,7 @@ public class YutGameManager : MonoBehaviour
 
 
 
-    IEnumerator MoveTo(GameObject piece, Vector3 throughPos, Vector3 toPos)
+    IEnumerator MoveTo(GameObject piece, Vector3 throughPos, Vector3 toPos, string hitName)
     {
 
         float count = 0, count2 = 0;
@@ -232,8 +248,8 @@ public class YutGameManager : MonoBehaviour
         while (true)
         {
             count += Time.deltaTime;
-            piece.transform.LookAt(throughPos);
-            piece.transform.Rotate(0, 180, 0);
+            //piece.transform.LookAt(throughPos);
+            //piece.transform.Rotate(0, 180, 0);
             piece.transform.position = Vector3.Lerp(wasPos, throughPos, count);
             if (piece.transform.position == throughPos)
             {
@@ -241,10 +257,11 @@ public class YutGameManager : MonoBehaviour
                 piece.transform.position = Vector3.Lerp(throughPos, toPos, count2);
                 if (count2 >= 1)
                 {
-                    piece.transform.LookAt(toPos);
-                    piece.transform.Rotate(0, 180, 0);
+                    //piece.transform.LookAt(toPos);
+                    //piece.transform.Rotate(0, 180, 0);
                     piece.transform.position = toPos;
-                    
+                    CatchPiece(hitName, piece);
+
                     // the piece reached the finish line 
                     if (toPos.x == TreeComponent.NodeName["FootHold_30"].FootHold.transform.position.x)
                     {
@@ -259,7 +276,7 @@ public class YutGameManager : MonoBehaviour
         }
     }
 
-    IEnumerator MoveTo(GameObject piece, Vector3 toPos)
+    IEnumerator MoveTo(GameObject piece, Vector3 toPos, string hitName)
     {
 
         float count = 0;
@@ -268,12 +285,13 @@ public class YutGameManager : MonoBehaviour
         while (true)
         {
             count += Time.deltaTime;
-            piece.transform.LookAt(toPos);
-            piece.transform.Rotate(0, 180, 0);
+            //piece.transform.LookAt(toPos);
+            //piece.transform.Rotate(0, 180, 0);
             piece.transform.position = Vector3.Lerp(wasPos, toPos, count);
             if (count >= 1)
             {
                 piece.transform.position = toPos;
+                CatchPiece(hitName, piece);
 
                 if (toPos.x == TreeComponent.NodeName["FootHold_30"].FootHold.transform.position.x)
                 {
@@ -300,25 +318,22 @@ public class YutGameManager : MonoBehaviour
             
             UserInfo info = JsonUtility.FromJson<UserInfo>(e.data);
             GameObject piece = null;
-            Debug.Log("kjh           11111" + e.data);
             for (int i = 0; i < PiecesSet.Length; i++)
             {
                 if(!PiecesSet[i].GetComponent<Pieces>().teamColor.Equals(userColor) && PiecesSet[i].GetComponent<Pieces>().ID == info.id)
                 {
                     piece = PiecesSet[i];
-                    Debug.Log("kjh          22222222 " + piece);
                     break;
                 }
             }
 
             if (info.throughPos != " ")
             {
-                Debug.Log("kjh          33333333 " + info.endPos);
-                StartCoroutine(MoveTo(piece, TreeComponent.NodeName[info.throughPos].FootHold.transform.position, TreeComponent.NodeName[info.endPos].FootHold.transform.position));
+                StartCoroutine(MoveTo(piece, TreeComponent.NodeName[info.throughPos].FootHold.transform.position, TreeComponent.NodeName[info.endPos].FootHold.transform.position, info.endPos));
             }
             else
             {
-                StartCoroutine(MoveTo(piece, TreeComponent.NodeName[info.endPos].FootHold.transform.position));
+                StartCoroutine(MoveTo(piece, TreeComponent.NodeName[info.endPos].FootHold.transform.position, info.endPos));
             }
 
         });

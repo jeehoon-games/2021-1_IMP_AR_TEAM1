@@ -1124,7 +1124,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &818403217
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1204,7 +1204,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &859175100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2482,6 +2482,10 @@ PrefabInstance:
     - target: {fileID: 9008500822743402928, guid: 718bbf9bb1c32c5448d345d0f77d0312, type: 3}
       propertyPath: m_Name
       value: YutGameTitle
+      objectReference: {fileID: 0}
+    - target: {fileID: 9008500822743402928, guid: 718bbf9bb1c32c5448d345d0f77d0312, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9008500822743402935, guid: 718bbf9bb1c32c5448d345d0f77d0312, type: 3}
       propertyPath: m_RootOrder

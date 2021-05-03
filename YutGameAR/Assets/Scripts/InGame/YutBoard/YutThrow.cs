@@ -71,7 +71,6 @@ public class YutThrow : MonoBehaviour
         
         if (ManomotionManager.Instance.Hand_infos[0].hand_info.gesture_info.mano_gesture_trigger == release && !_throwing)
         {
-            Debug.Log("kjh              11111111111 " );
             _throwing = false;
             _yutMgr.ThrowYut();
             StartCoroutine(MakeResult());
@@ -117,7 +116,6 @@ public class YutThrow : MonoBehaviour
             yield return null;
             
         }
-        //Debug.Log("kjh       222222222" + _yutMgr.yType);
         text.text = _yutMgr.yType + " 칸";
         _selectNumber.Add(_yutMgr.yType);
         
