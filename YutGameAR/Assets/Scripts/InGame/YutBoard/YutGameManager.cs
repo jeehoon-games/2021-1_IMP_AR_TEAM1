@@ -170,6 +170,8 @@ public class YutGameManager : MonoBehaviour
                 if (_selectedPiece.GetComponent<Pieces>().teamColor.Equals(ps.teamColor))
                 {
                     ps.Point += 1;
+                    ps.SetRidingText("X" + ps.Point);
+                    ps.HideText(true);
                     Debug.Log(ps.Point + "포인트");
                     _selectedPiece.GetComponent<Pieces>().Point = 0;
                     _selectedPiece.GetComponent<Pieces>().PosName = "FootHold_0";
@@ -183,6 +185,7 @@ public class YutGameManager : MonoBehaviour
                         ps.PosName = "FootHold_0";
                         ps.transform.position = ps.InitPosition;
                         ps.Point = 1;
+                        ps.HideText(false);
 
                         for (int j = 0; j < PiecesSet.Length; j++)
                         {

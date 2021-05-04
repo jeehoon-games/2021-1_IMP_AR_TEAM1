@@ -61,16 +61,18 @@ public class PathFinding : MonoBehaviour
             //교차로가 아닌 node들
             if (_nodeName[Name].RightChild == null)
             {
-                
                 //startNode = _nodeName[Name];
                 for (int i = 0; i < count; i++)
                 {
-                    
                     if (CheckTheEnd(startNode)) { break; }
                     nextNode = startNode.LeftChild;
                     if (nextNode.IsIntersection) { throughNode = nextNode; }
                     startNode = nextNode;
-                }       
+                }
+                if (startNode.FootHold.name.Equals("FootHold_5"))
+                {
+                    throughNode = null;
+                }
             }
             //21,22,23,24,27,28
             else
