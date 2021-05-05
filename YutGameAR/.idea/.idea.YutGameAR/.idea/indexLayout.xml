@@ -20,6 +20,7 @@
       <Path>Library/PackageCache/com.unity.xr.interaction.toolkit@1.0.0-pre.3</Path>
       <Path>Library/PackageCache/com.unity.xr.legacyinputhelpers@2.1.7</Path>
       <Path>Library/PackageCache/com.unity.xr.management@4.0.3</Path>
+      <Path>Library/PackageCache/jillejr.newtonsoft.json-for-unity@f2c6cb0981</Path>
       <Path>Packages</Path>
       <Path>ProjectSettings</Path>
     </explicitIncludes>

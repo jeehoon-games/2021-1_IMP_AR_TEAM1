@@ -13,6 +13,7 @@
     "com.unity.xr.arfoundation": "4.0.12",
     "com.unity.xr.interaction.toolkit": "1.0.0-pre.3",
     "com.unity.xr.management": "4.0.3",
+    "jillejr.newtonsoft.json-for-unity": "https://github.com/jilleJr/Newtonsoft.Json-for-Unity.git#upm",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
@@ -44,5 +45,14 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  }
+  },
+  "scopedRegistries": [
+    {
+      "name": "jilleJr",
+      "url": "https://npm.cloudsmith.io/jillejr/newtonsoft-json-for-unity",
+      "scopes": [
+        "jillejr.newtonsoft.json-for-unity"
+      ]
+    }
+  ]
 }

@@ -5,26 +5,26 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LogoScene.unity
     guid: d693df411afbe3342b270c96590e87a7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LoginScene.unity
     guid: 879de50e4c8c01d40b2b7af1e1e8f417
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: a17c322c1cad320419051f4e01fecae7
   - enabled: 0
-    path: Assets/Scenes/YutExample.unity
+    path: Assets/Scenes/Temp/YutExample.unity
     guid: 6e365e8ed25d9f84397320ae1d4960ac
   - enabled: 0
-    path: Assets/Scenes/YutGame.unity
+    path: Assets/Scenes/Temp/YutGame.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 0
-    path: Assets/Scenes/AR/ARYut.unity
+    path: Assets/Scenes/Temp/AR/ARYut.unity
     guid: 3c3dea065525a6c4fb48cd2ec1c67dff
   - enabled: 0
-    path: Assets/Scenes/AR/ARTest.unity
+    path: Assets/Scenes/Temp/AR/ARTest.unity
     guid: 11080e425e01ba247994898ebfcd1f0b
   - enabled: 0
     path: Assets/ManoMotion 1/ManoMotion ARFoundation/Scenes/ManoMotion SDK CE ARFoundation
