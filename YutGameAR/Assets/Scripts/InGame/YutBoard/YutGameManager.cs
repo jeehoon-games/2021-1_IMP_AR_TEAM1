@@ -6,7 +6,7 @@ using TMPro;
 
 public class YutGameManager : MonoBehaviour
 {
-    public string RedName, BlueName;
+    
     
     public string rName;
     private bool _select = false;
@@ -18,19 +18,30 @@ public class YutGameManager : MonoBehaviour
     private YutThrow YutComponent;
     private YutTree TreeComponent;
     private GameObject[] PiecesSet;
+    
+    private int _notificationTimer;
 
     public static YutGameManager YutManager;
     public string userColor;
+    public bool MyTurn = false;
+    public string RedName, BlueName;
     public Canvas InGameCanvas;
 
     private struct UserInfo
     {
-        public string userTurn;
+        
         public string throughPos;
         public string endPos;
         public string roomName;
         public int id;
     }
+
+    private struct UserTurn
+    {
+        public bool userTurn;
+        public string roomName;
+    }
+    
 
     public bool Select { get { return _select; } }
 
@@ -40,16 +51,17 @@ public class YutGameManager : MonoBehaviour
         YutComponent = GetComponent<YutThrow>();
         TreeComponent = GetComponent<YutTree>();
         PiecesSet = GameObject.FindGameObjectsWithTag("Piece");
+        StartCoroutine(NotificationTimer());
         StartCoroutine(SocketIOEvent());
-        InGameCanvas.transform.Find("RedName").GetComponent<TextMeshProUGUI>().text = RedName;
-        InGameCanvas.transform.Find("BlueName").GetComponent<TextMeshProUGUI>().text = BlueName;
+        
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        InGameCanvas.transform.Find("RedName").GetComponent<TextMeshProUGUI>().text = RedName;
+        InGameCanvas.transform.Find("BlueName").GetComponent<TextMeshProUGUI>().text = BlueName;
     }
 
     // Update is called once per frame
@@ -61,7 +73,7 @@ public class YutGameManager : MonoBehaviour
     void selectAndMove()
     {
         // 윷을 던진 상태에서 터치를 하는 경우
-        if (Input.GetMouseButtonDown(0) && YutComponent.Throwing)
+        if (Input.GetMouseButtonDown(0) && YutComponent.Throwing && MyTurn)
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -70,15 +82,10 @@ public class YutGameManager : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 // 터치하는 것이 말일 경우
-                Debug.Log("Hit: " + hit.collider.gameObject.CompareTag("Piece"));
                 if (hit.collider.gameObject.CompareTag("Piece") && !_select && hit.collider.gameObject.GetComponent<Pieces>().teamColor.Equals(userColor))
                 {
-                    //hit.collider.GetComponent<Renderer>().material.color = Color.red;
                     _select = true;
                     _selectedPiece = hit.collider.gameObject;
-                    Debug.Log("kjh 6666      " + hit.collider.GetComponent<PathFinding>());
-                    Debug.Log("kjh 7777      " + _selectedPiece.name);
-                    Debug.Log("kjh 8888      " + YutComponent.SelectNumber);
                     _enableNode = hit.collider.GetComponent<PathFinding>().PathFind(_selectedPiece, YutComponent.SelectNumber);
                 }
 
@@ -86,8 +93,10 @@ public class YutGameManager : MonoBehaviour
                 else if (hit.collider.gameObject.CompareTag("FootHold") && _select && _enableNode.ContainsKey(hit.collider.name))
                 {
                     UserInfo info = new UserInfo();
+                    UserTurn turn = new UserTurn();
                     info.roomName = rName;
-                    info.userTurn = "true";
+                    turn.roomName = rName;
+                    
 
                     // when the pieces didn't start
                     if (_enableNode[hit.collider.name] == null)
@@ -138,6 +147,10 @@ public class YutGameManager : MonoBehaviour
                     {
                         YutComponent.Throwing = false;
                         YutComponent.SelectNumber.Clear();
+                        MyTurn = false;
+                        turn.userTurn = true;
+                        string data = JsonUtility.ToJson(turn);
+                        FMSocketIOManager.instance.Emit("Turn_Change", data);
                     }
                 }
 
@@ -182,7 +195,6 @@ public class YutGameManager : MonoBehaviour
                     ps.Point += 1;
                     ps.SetRidingText("X" + ps.Point);
                     ps.HideText(true);
-                    Debug.Log(ps.Point + "포인트");
                     _selectedPiece.GetComponent<Pieces>().Point = 0;
                     _selectedPiece.GetComponent<Pieces>().PosName = "FootHold_0";
                     _selectedPiece.SetActive(false);
@@ -221,17 +233,13 @@ public class YutGameManager : MonoBehaviour
                     {
                         ps.PosName = "FootHold_0";
                         ps.transform.position = ps.InitPosition;
+
                     }
                     
                 }
             }
         }
     }
-
-
-
-
-
 
 
     // Destroy the arrows when the piece is out of focus.
@@ -246,22 +254,23 @@ public class YutGameManager : MonoBehaviour
     {
         if (piece.GetComponent<Pieces>().teamColor.Equals("Red"))
         {
-            RedScore += 1;
+            RedScore += piece.GetComponent<Pieces>().Point;
             InGameCanvas.transform.Find("RedPoint").GetComponent<TextMeshProUGUI>().text = RedScore + " Pts";
         }
         else
         {
-            BlueScore += 1;
+            BlueScore += piece.GetComponent<Pieces>().Point;
             InGameCanvas.transform.Find("BluePoint").GetComponent<TextMeshProUGUI>().text = BlueScore + " Pts";
         }
         piece.SetActive(false);
-
+        //Destroy(piece);
         if(RedScore == 4)
         {
             if (userColor.Equals("Red"))
                 InGameCanvas.transform.Find("Result").GetComponent<TextMeshProUGUI>().text = "WIN :)";
             else
                 InGameCanvas.transform.Find("Result").GetComponent<TextMeshProUGUI>().text = "LOSE :(";
+            StopCoroutine(NotificationTimer());
         }
         else if(BlueScore == 4)
         {
@@ -269,6 +278,7 @@ public class YutGameManager : MonoBehaviour
                 InGameCanvas.transform.Find("Result").GetComponent<TextMeshProUGUI>().text = "LOSE :(";
             else
                 InGameCanvas.transform.Find("Result").GetComponent<TextMeshProUGUI>().text = "WIN :)";
+            StopCoroutine(NotificationTimer());
         }
     }
 
@@ -376,6 +386,29 @@ public class YutGameManager : MonoBehaviour
             piece.GetComponent<Pieces>().PosName = info.endPos;
         });
 
+        FMSocketIOManager.instance.On("Turn_Result", (e) =>
+         {
+             UserTurn turn = JsonUtility.FromJson<UserTurn>(e.data);
+             MyTurn = turn.userTurn;
+             _notificationTimer += 0;
+             InGameCanvas.transform.Find("TurnText").gameObject.SetActive(true);
+
+         });
         
+    }
+
+    IEnumerator NotificationTimer()
+    {
+        while (true)
+        {
+            _notificationTimer += 1;
+            if (_notificationTimer >= 90)
+            {
+                InGameCanvas.transform.Find("TurnText").gameObject.SetActive(false);
+                _notificationTimer = 0;
+            }
+
+            yield return null;
+        }
     }
 }

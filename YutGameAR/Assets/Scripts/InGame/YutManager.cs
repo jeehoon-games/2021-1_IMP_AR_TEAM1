@@ -7,6 +7,7 @@ public class YutManager : MonoBehaviour
     public Queue<int> resultQueue;
     public int yType;   // -1: 빽도, 1: 도, 2: 개, 3: 걸, 4: 윷, 5: 모
     public bool done;
+    private AudioSource _audioSource;
     ManoGestureTrigger release;
     
     private struct YutForce
@@ -25,6 +26,8 @@ public class YutManager : MonoBehaviour
         resultQueue = new Queue<int>();
         _forceArr = new YutForce[4];
         _yutContArr = GetComponentsInChildren<YutController>();
+        _audioSource = GetComponent<AudioSource>();
+        
     }
     
     void Start()
@@ -48,6 +51,7 @@ public class YutManager : MonoBehaviour
             _forceArr[i].yForce = Random.Range(100,101);
             _yutContArr[i].Throw(_forceArr[i].xTorque, _forceArr[i].yTorque, _forceArr[i].zTorque, _forceArr[i].yForce, ForceMode.Force);
         }
+        _audioSource.Play();
         
         StartCoroutine(MakeResult());
     }

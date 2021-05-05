@@ -154,7 +154,6 @@ namespace Main
             FMSocketIOManager.instance.On("Event_GameStart_Result", (e) =>
             {
                 string data = e.data.Substring(1, e.data.Length - 2);
-
                 switch (data)
                 {
                     case "Success":
@@ -163,10 +162,14 @@ namespace Main
                         yutPlate.SetActive(true);
                         yutBoard.transform.Find("YutGameManager").GetComponent<YutGameManager>().rName = roomName;
                         if (_isRoomLeader)
+                        {
                             yutBoard.transform.Find("YutGameManager").GetComponent<YutGameManager>().userColor = "Red";
+                            yutBoard.transform.Find("YutGameManager").GetComponent<YutGameManager>().MyTurn = true;
+                        }
                         else
                             yutBoard.transform.Find("YutGameManager").GetComponent<YutGameManager>().userColor = "Blue";
-
+                        yutBoard.transform.Find("YutGameManager").GetComponent<YutGameManager>().RedName = _redUserName.text;
+                        yutBoard.transform.Find("YutGameManager").GetComponent<YutGameManager>().BlueName = _blueUserName.text;
                         yutBoard.transform.position = ARPlaneInfo.Instance.center + new Vector3(-0.3f, 0, 0.3f);
                         yutPlate.transform.position = ARPlaneInfo.Instance.center + new Vector3(0.3f, 0, 0.3f);
                         gameObject.SetActive(false);
