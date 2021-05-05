@@ -9,9 +9,6 @@ public class YutTree : MonoBehaviour
     private Dictionary<string, TreeNode> _nodeName = new Dictionary<string, TreeNode>();
     private TreeNode _rootNode;
     
-    public GameObject go;
-
-    
     public List<GameObject> FootSet
     {
         get { return _footSet; }
@@ -27,7 +24,6 @@ public class YutTree : MonoBehaviour
         get { return _nodeName; }
     }
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -36,11 +32,8 @@ public class YutTree : MonoBehaviour
         {
             _footSet.Add(GameObject.Find("FootHold_" + i));
         }
-        Debug.Log("kjh 5555        " + _footSet);
         CreateTreeNode(_footSet);
         MakeTree();
-        
-
     }
 
     void CreateTreeNode(List<GameObject> footset)
@@ -50,12 +43,6 @@ public class YutTree : MonoBehaviour
         {
             _nodeName.Add(String.Format("FootHold_{0}", i.ToString()), new TreeNode(footset[i]));
         }
-        /*
-        for (int i = 0; i < footset.Count; i++)
-        {
-            Debug.Log(nodeName["treeNode" + i].FootHold.name);
-        }
-        */
     }
 
     void MakeTree()
@@ -205,7 +192,6 @@ public class YutTree : MonoBehaviour
             get { return _step; }
             set { _step = value; }
         }
-
 
     }
 }

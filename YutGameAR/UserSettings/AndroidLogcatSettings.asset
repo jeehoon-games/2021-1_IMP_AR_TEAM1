@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "R3CN90RMPHH",
         "name": "com.DefaultCompany.YutGameAR",
-        "processId": 6509,
+        "processId": 9466,
         "exited": false
     },
     "m_SelectedPriority": 1,
@@ -78,6 +78,12 @@
             "deviceId": "R3CN90RMPHH",
             "name": "com.DefaultCompany.YutGameAR",
             "processId": 6509,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CN90RMPHH",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 9466,
             "exited": false
         },
         {

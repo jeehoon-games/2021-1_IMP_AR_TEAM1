@@ -27,8 +27,6 @@ public class PathFinding : MonoBehaviour
     // calculating the position of the foothold that the piece can go.
     public Dictionary<string, YutTree.TreeNode> PathFind(GameObject piece, List<int> countNum)
     {
-        Debug.Log("kjh1111     " + piece);
-        Debug.Log("kjh2222    " +  countNum[0]);
         Init(piece, countNum);
         _distictNum = countNum.Distinct().ToList();
         for (int i = 0; i < _distictNum.Count; i++)
@@ -48,20 +46,17 @@ public class PathFinding : MonoBehaviour
 
     private void Path(string Name, int count)
     {
-        Debug.Log("kjh 3333       " + Name);
-        Debug.Log("kjh 4444       " + count);
         YutTree.TreeNode startNode, nextNode;
         YutTree.TreeNode throughNode = null;
         bool exchange = false;
 
         startNode = _nodeName[Name];
         
-        //교차로가 아니면서 길이 하나인 node
+        //Not Intersection And route is one
         if (!_nodeName[Name].IsIntersection)
         {
-            
-            
-            //교차로가 아닌 node들
+
+            //Not Intersection
             if (_nodeName[Name].RightChild == null)
             {
                 //startNode = _nodeName[Name];
@@ -77,7 +72,7 @@ public class PathFinding : MonoBehaviour
                     throughNode = null;
                 }
             }
-            //21,22,23,24,27,28
+            //21,22,23,24,27,28 FootHold
             else
             {
                 
@@ -103,10 +98,9 @@ public class PathFinding : MonoBehaviour
                     }
                 }   
             }
-            
         }
 
-        //교차로이면서 갈수 있는 길이 2개인 node (5,10,20)
+        //Intersection And route is two (5,10,20)
         else if (_nodeName[Name].IsIntersection && _nodeName[Name].IsTwoway)
         {
             for (int i = 0; i < count; i++)
@@ -124,10 +118,9 @@ public class PathFinding : MonoBehaviour
                     startNode = nextNode;
                 }
             }
-            
         }
-        
-        //교차로이면서 길이 하나인 node (15번)
+
+        //Intersection And route is one (15번)
         else if (_nodeName[Name].IsIntersection && !_nodeName[Name].IsTwoway)
         {
             for (int i = 0; i < count; i++)
@@ -138,13 +131,6 @@ public class PathFinding : MonoBehaviour
             }
             
         }
-        /*
-        //마지막 node
-        else if (_nodeName[Name].FootHold.name == "FootHold_29")
-        {
-            startNode = _nodeName["FootHold_30"];
-        }
-        */
         MarkingFootHold(startNode.FootHold.transform.position);
         _enableNode.Add(startNode.FootHold.name, throughNode);
         startNode.Step = count;
@@ -152,7 +138,6 @@ public class PathFinding : MonoBehaviour
     }
 
     // the path of the piece when it is BackDo(빽도)
-    //윷 빽도 나왔을때 즉,말이 없는상태로 백도가 나왓을때 경우 고칠것!
     private void BackPath(string Name, int count)
     {
         YutTree.TreeNode startNode, nextNode;
@@ -191,31 +176,7 @@ public class PathFinding : MonoBehaviour
     // Marking the available FootHold
     private void MarkingFootHold(Vector3 postion)
     {
-        
         Instantiate(Arrow, new Vector3(postion.x, postion.y, postion.z), Quaternion.identity);
     }
 
-
-
-
-
-
-
-
-
-    // marking the foothold that can go.
-    /*
-    public void markingFootHold(List<int> num)
-    {
-        
-        List<GameObject> Set = GameObject.Find("Main Camera").GetComponent<GameManager>().FootSet;
-        Vector3 Pos;
-        for (int i = 0; i < num.Count; i++)
-        {
-            Pos = Set[num[i]].transform.position;
-            Instantiate(Arrow, new Vector3(Pos.x, Pos.y + 5, Pos.z), Quaternion.identity);
-        }
-        
-    }
-    */
 }

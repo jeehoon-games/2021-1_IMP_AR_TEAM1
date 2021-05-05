@@ -16,10 +16,6 @@ public class ARplane : MonoBehaviour
     private GameObject yutboard_Prefab;
     [SerializeField]
     private GameObject yutplate_Prefab;
-    
-
-
-    
 
     static List<ARRaycastHit> s_hits = new List<ARRaycastHit>();
 

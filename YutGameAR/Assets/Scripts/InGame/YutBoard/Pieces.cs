@@ -15,7 +15,6 @@ public class Pieces : MonoBehaviour
 
     void Start()
     {
-        
         _initPosition = transform.position;
         _text = GetComponentInChildren<TextMeshPro>();
     }

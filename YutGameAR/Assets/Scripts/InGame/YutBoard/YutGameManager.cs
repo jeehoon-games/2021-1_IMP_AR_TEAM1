@@ -18,15 +18,14 @@ public class YutGameManager : MonoBehaviour
     private YutThrow YutComponent;
     private YutTree TreeComponent;
     private GameObject[] PiecesSet;
-    
     private int _notificationTimer;
+    private AudioSource _audioSource;
 
     public static YutGameManager YutManager;
     public string userColor;
     public bool MyTurn;
     public string RedName, BlueName;
     public Canvas InGameCanvas;
-    private AudioSource _audioSource;
     public AudioClip GoalInClip;
 
     private struct UserInfo
@@ -44,7 +43,6 @@ public class YutGameManager : MonoBehaviour
         public string roomName;
     }
     
-
     public bool Select { get { return _select; } }
 
     void Awake()
@@ -58,7 +56,6 @@ public class YutGameManager : MonoBehaviour
         StartCoroutine(SocketIOEvent());
         
     }
-
 
     // Start is called before the first frame update
     void Start()
@@ -80,7 +77,6 @@ public class YutGameManager : MonoBehaviour
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //DestroyArrow();
             
             if (Physics.Raycast(ray, out hit))
             {
@@ -100,7 +96,6 @@ public class YutGameManager : MonoBehaviour
                     info.roomName = rName;
                     turn.roomName = rName;
                     
-
                     // when the pieces didn't start
                     if (_enableNode[hit.collider.name] == null)
                     {
@@ -115,7 +110,6 @@ public class YutGameManager : MonoBehaviour
                         }
                         else 
                         {
-
                             info.throughPos = " ";
                             info.endPos = hit.collider.name;
                             info.id = _selectedPiece.GetComponent<Pieces>().ID;
@@ -134,12 +128,9 @@ public class YutGameManager : MonoBehaviour
                         FMSocketIOManager.instance.Emit("Event_SendPos", data);
                         StartCoroutine(MoveTo(_selectedPiece, _enableNode[hit.collider.name].FootHold.transform.position, hit.collider.transform.position, hit.collider.name)); 
                     }
-                    //CatchPiece(hit.collider.name, _selectedPiece);
                     _selectedPiece.GetComponent<Pieces>().PosName = hit.collider.name;
-                    //_selectedPiece.GetComponent<Renderer>().material.color = new Color(102 / 255f, 123 / 255f, 255 / 255f, 255 / 255f);
                     _select = false;
                     DestroyArrow();
-                    
 
                     // 여러번 움직일 때
                     if(YutComponent.SelectNumber.Count > 1)
@@ -162,25 +153,10 @@ public class YutGameManager : MonoBehaviour
                 {
                     DestroyArrow();
                     _select = false;
-                    //_selectedPiece.GetComponent<Renderer>().material.color = new Color(102 / 255f, 123 / 255f, 255 / 255f, 255 / 255f);
                 }
             }
-            
         }
-        /*
-        if(Input.GetMouseButtonDown(0))
-        {
-            if (_select)
-            {
-                DestroyArrow();
-                _select = false;
-                _selectedPiece.GetComponent<Renderer>().material.color = new Color(102 / 255f, 123 / 255f, 255 / 255f, 255 / 255f);
-            }
-            
-        }
-        */
     }
-
 
     //The pieces go to the same FootHold.
     //There are two cases when you are on the same team and when you are on a different team.
@@ -216,17 +192,12 @@ public class YutGameManager : MonoBehaviour
                         {
                             if (!PiecesSet[j].activeInHierarchy)
                             {
-                                //PiecesSet[j].SetActive(true);
                                 Pieces ps2 = PiecesSet[j].GetComponent<Pieces>();
                                 if (ps2.teamColor.Equals(ps.teamColor) && ps2.Point == 0)
                                 {
-                                    //ps2.PosName = "FootHold_0";
                                     PiecesSet[j].transform.position = ps2.InitPosition;
                                     ps2.Point = 1;
                                     PiecesSet[j].SetActive(true);
-                                    //Debug.Log(ps2.PosName);
-                                    //Debug.Log(ps2.Point);
-
                                 }
                             }
 
@@ -267,7 +238,6 @@ public class YutGameManager : MonoBehaviour
         }
         piece.SetActive(false);
         _audioSource.PlayOneShot(GoalInClip);
-        //Destroy(piece);
         if(RedScore == 4)
         {
             if (userColor.Equals("Red"))
@@ -286,9 +256,6 @@ public class YutGameManager : MonoBehaviour
         }
     }
 
-
-
-
     IEnumerator MoveTo(GameObject piece, Vector3 throughPos, Vector3 toPos, string hitName)
     {
 
@@ -299,8 +266,6 @@ public class YutGameManager : MonoBehaviour
         while (true)
         {
             count += Time.deltaTime;
-            //piece.transform.LookAt(throughPos);
-            //piece.transform.Rotate(0, 180, 0);
             piece.transform.position = Vector3.Lerp(wasPos, throughPos, count);
             if (piece.transform.position == throughPos)
             {
@@ -308,8 +273,6 @@ public class YutGameManager : MonoBehaviour
                 piece.transform.position = Vector3.Lerp(throughPos, toPos, count2);
                 if (count2 >= 1)
                 {
-                    //piece.transform.LookAt(toPos);
-                    //piece.transform.Rotate(0, 180, 0);
                     piece.transform.position = toPos;
                     CatchPiece(hitName, piece);
 
@@ -317,7 +280,6 @@ public class YutGameManager : MonoBehaviour
                     if (toPos.x == TreeComponent.NodeName["FootHold_30"].FootHold.transform.position.x)
                     {
                         GoalInSetting(piece);
-
                     }
 
                     break;
@@ -336,8 +298,6 @@ public class YutGameManager : MonoBehaviour
         while (true)
         {
             count += Time.deltaTime;
-            //piece.transform.LookAt(toPos);
-            //piece.transform.Rotate(0, 180, 0);
             piece.transform.position = Vector3.Lerp(wasPos, toPos, count);
             if (count >= 1)
             {
@@ -347,9 +307,7 @@ public class YutGameManager : MonoBehaviour
                 if (toPos.x == TreeComponent.NodeName["FootHold_30"].FootHold.transform.position.x)
                 {
                     GoalInSetting(piece);
-
                 }
-
                 break;
             }
             yield return null;
@@ -377,7 +335,6 @@ public class YutGameManager : MonoBehaviour
                     break;
                 }
             }
-            
 
             if (info.throughPos != " ")
             {
@@ -396,9 +353,7 @@ public class YutGameManager : MonoBehaviour
              MyTurn = turn.userTurn;
              _notificationTimer += 0;
              InGameCanvas.transform.Find("TurnText").gameObject.SetActive(true);
-
-         });
-        
+         }); 
     }
 
     IEnumerator NotificationTimer()
@@ -411,7 +366,6 @@ public class YutGameManager : MonoBehaviour
                 InGameCanvas.transform.Find("TurnText").gameObject.SetActive(false);
                 _notificationTimer = 0;
             }
-
             yield return null;
         }
     }
