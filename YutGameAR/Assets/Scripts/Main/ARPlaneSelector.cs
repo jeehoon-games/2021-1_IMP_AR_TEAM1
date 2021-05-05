@@ -159,6 +159,9 @@ namespace MainMenu
                     mainMenuGroup.transform.Find("CreateRoomMenu").position = planeCenter + new Vector3(-0.25f, 0.0f, 0);
                     mainMenuGroup.transform.Find("FindRoomMenu").position = planeCenter + new Vector3(0.25f, 0.0f, 0);
                     mainMenuGroup.transform.Find("YutGameTitle").position = planeCenter + new Vector3(0, 0.4f, 0);
+
+                    ARPlaneInfo.Instance.plane = _currPlane;
+                    ARPlaneInfo.Instance.center = _currPlane.center;
                 }
             }
 

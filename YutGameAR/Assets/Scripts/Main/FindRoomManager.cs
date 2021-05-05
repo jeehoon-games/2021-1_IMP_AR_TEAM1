@@ -47,10 +47,15 @@ namespace Main
             StartCoroutine(NotificationTimer());
             StartCoroutine(RegisterSocketIOEvent());
         }
-        
-        void Start()
+
+        void Awake()
         {
             Init();
+        }
+
+        void Start()
+        {
+            FMSocketIOManager.instance.Emit("Event_RefreshRoomList");
         }
 
         void Update()
@@ -61,11 +66,6 @@ namespace Main
                 mainMenuGroup.GetComponent<MainMenuManager>().Reset();
                 StopCoroutine(NotificationTimer());
                 gameObject.SetActive(false);
-            }
-
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                RefreshRoomList();
             }
         }
 
@@ -81,15 +81,18 @@ namespace Main
         {
             for (int i = 0; i < _scrollViewContent.transform.childCount; i++)
                 Destroy(_scrollViewContent.transform.GetChild(i).gameObject);
-
-            int j = 0;
-            foreach (string rName in _currRoomTable.Keys)
+            
+            if (_currRoomTable != null)
             {
-                GameObject panel = Instantiate(roomPanel, new Vector3(0, -75 + (-155) * j, 0), Quaternion.identity);
-                RoomPanelManager pMgr = panel.GetComponent<RoomPanelManager>();
-                pMgr.SetRoomInfo(rName, _currRoomTable[rName]);
-                panel.transform.SetParent(_scrollViewContent.transform);
-                j++;
+                int j = 0;
+                foreach (string rName in _currRoomTable.Keys)
+                {
+                    GameObject panel = Instantiate(roomPanel, new Vector3(0, -75 + (-155) * j, 0), Quaternion.identity);
+                    RoomPanelManager pMgr = panel.GetComponent<RoomPanelManager>();
+                    pMgr.SetRoomInfo(rName, _currRoomTable[rName]);
+                    panel.transform.SetParent(_scrollViewContent.transform);
+                    j++;
+                }
             }
         }
 
@@ -150,6 +153,7 @@ namespace Main
                 string data = e.data.Replace("\\", "");
                 data = data.Substring(1, data.Length - 2);
                 _currRoomTable = JsonConvert.DeserializeObject<Dictionary<string, Room>>(data);
+                Debug.Log(data);
                 RefreshRoomList();
             });
             

@@ -47,11 +47,15 @@ namespace Main
             StartCoroutine(NotificationTimer());
             StartCoroutine(RegisterSocketIOEvent());
         }
-
+        
         void Awake()
         {
             Init();
+        }
 
+        void Start()
+        {
+            
             if (_isRoomLeader)
             {
                 _redUserName.text = NetworkCore.Instance.UserData.userName;
@@ -151,7 +155,9 @@ namespace Main
                 switch (data)
                 {
                     case "Success":
-                        
+                        gameGroup.SetActive(true);
+                        manomotionGroup.SetActive(true);
+                        gameObject.SetActive(false);
                         break;
                     case "Fail":
                         _notificationTimer = 0;
@@ -167,9 +173,6 @@ namespace Main
                 switch (data)
                 {
                     case "Success":
-                        gameGroup.SetActive(true);
-                        manomotionGroup.SetActive(true);
-                        gameObject.SetActive(false);
                         break;
                     case "Fail":
                         _notificationTimer = 0;

@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "R39M304GYGX",
         "name": "com.DefaultCompany.YutGameAR",
-        "processId": 26084,
+        "processId": 22078,
         "exited": false
     },
     "m_SelectedPriority": 1,
@@ -211,6 +211,18 @@
             "name": "com.DefaultCompany.YutGameAR",
             "processId": 26084,
             "exited": false
+        },
+        {
+            "deviceId": "R39M304GYGX",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 19068,
+            "exited": false
+        },
+        {
+            "deviceId": "R39M304GYGX",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 22078,
+            "exited": false
         }
     ],
     "m_Tags": {
@@ -263,7 +275,7 @@
         "MemoryGroup": 2,
         "Behavior": 0
     },
-    "m_Filter": "room1",
+    "m_Filter": "",
     "m_FilterIsRegularExpression": false,
     "m_SymbolPaths": []
 }

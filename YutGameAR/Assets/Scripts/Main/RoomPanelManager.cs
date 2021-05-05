@@ -24,6 +24,11 @@ namespace Main
             _playButton.onClick.AddListener(delegate { OnPlayBtnClick(); });
         }
 
+        void Awake()
+        {
+            Init();
+        }
+
         void OnPlayBtnClick()
         {
             FindObjectOfType<FindRoomManager>().selectedPanelMgr = this;
@@ -35,11 +40,6 @@ namespace Main
             this.room = room;
             _roomNameTMP.text = room.roomLeader + "'s Room: " + roomName;
             _currPlayerCntTMP.text = room.currUserCnt + " / " + room.maxUserCnt;
-        }
-        
-        void Start()
-        {
-            Init();
         }
     }   
 }

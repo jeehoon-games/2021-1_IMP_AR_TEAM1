@@ -120,6 +120,8 @@ namespace Main
                         lobbyGroup.gameObject.SetActive(true);
                         lobbyGroup.gameObject.GetComponent<LobbyManager>().SetIsRoomLeader(true);
                         lobbyGroup.gameObject.GetComponent<LobbyManager>().roomName = _roomNameInputField.text;
+                        lobbyGroup.transform.Find("TeamRed").position = ARPlaneInfo.Instance.center + new Vector3(-0.25f, 0.0f, 0);
+                        lobbyGroup.transform.Find("TeamBlue").position = ARPlaneInfo.Instance.center + new Vector3(0.25f, 0.0f, 0);
                         break;
                     case "Duplicate":
                         _notificationTimer = 0;
