@@ -23,7 +23,7 @@ public class YutGameManager : MonoBehaviour
 
     public static YutGameManager YutManager;
     public string userColor;
-    public bool MyTurn = false;
+    public bool MyTurn;
     public string RedName, BlueName;
     public Canvas InGameCanvas;
 
