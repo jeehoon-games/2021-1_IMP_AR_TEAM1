@@ -58,7 +58,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ab1a0f9bdc97a499933ae14b42c7a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RedName: 
+  BlueName: 
+  rName: 
   userColor: 
+  InGameCanvas: {fileID: 0}
 --- !u!114 &2172775630978064212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1032,7 +1036,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3342981662444621015, guid: 1204c2c4b8ed2a546a40b1a5b4743a4b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 24.7
+      value: 24.2
       objectReference: {fileID: 0}
     - target: {fileID: 3342981662444621015, guid: 1204c2c4b8ed2a546a40b1a5b4743a4b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1040,7 +1044,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3342981662444621015, guid: 1204c2c4b8ed2a546a40b1a5b4743a4b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -25.7
+      value: -24.3
       objectReference: {fileID: 0}
     - target: {fileID: 3342981662444621015, guid: 1204c2c4b8ed2a546a40b1a5b4743a4b, type: 3}
       propertyPath: m_LocalRotation.w

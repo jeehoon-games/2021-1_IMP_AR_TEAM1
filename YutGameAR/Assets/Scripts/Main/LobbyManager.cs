@@ -167,8 +167,8 @@ namespace Main
                         else
                             yutBoard.transform.Find("YutGameManager").GetComponent<YutGameManager>().userColor = "Blue";
 
-                        yutBoard.transform.position = ARPlaneInfo.Instance.center = new Vector3(-0.3f, 0, 0.3f);
-                        yutPlate.transform.position = ARPlaneInfo.Instance.center = new Vector3(0.3f, 0, 0.3f);
+                        yutBoard.transform.position = ARPlaneInfo.Instance.center + new Vector3(-0.3f, 0, 0.3f);
+                        yutPlate.transform.position = ARPlaneInfo.Instance.center + new Vector3(0.3f, 0, 0.3f);
                         gameObject.SetActive(false);
                         StopCoroutine(NotificationTimer());
                         break;

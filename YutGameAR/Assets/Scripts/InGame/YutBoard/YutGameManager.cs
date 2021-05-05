@@ -2,21 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using TMPro;
 
 public class YutGameManager : MonoBehaviour
 {
+    public string RedName, BlueName;
+    
     public string rName;
     private bool _select = false;
     private GameObject _selectedPiece;
     private Dictionary<string, YutTree.TreeNode> _enableNode;
 
     private int BlueScore = 0;
+    private int RedScore = 0;
     private YutThrow YutComponent;
     private YutTree TreeComponent;
     private GameObject[] PiecesSet;
 
     public static YutGameManager YutManager;
     public string userColor;
+    public Canvas InGameCanvas;
 
     private struct UserInfo
     {
@@ -36,6 +41,8 @@ public class YutGameManager : MonoBehaviour
         TreeComponent = GetComponent<YutTree>();
         PiecesSet = GameObject.FindGameObjectsWithTag("Piece");
         StartCoroutine(SocketIOEvent());
+        InGameCanvas.transform.Find("RedName").GetComponent<TextMeshProUGUI>().text = RedName;
+        InGameCanvas.transform.Find("BlueName").GetComponent<TextMeshProUGUI>().text = BlueName;
     }
 
 
@@ -237,9 +244,32 @@ public class YutGameManager : MonoBehaviour
 
     void GoalInSetting(GameObject piece)
     {
-        Destroy(piece);
-        BlueScore += 1;
-        Debug.Log("BlueScore : " + BlueScore);
+        if (piece.GetComponent<Pieces>().teamColor.Equals("Red"))
+        {
+            RedScore += 1;
+            InGameCanvas.transform.Find("RedPoint").GetComponent<TextMeshProUGUI>().text = RedScore + " Pts";
+        }
+        else
+        {
+            BlueScore += 1;
+            InGameCanvas.transform.Find("BluePoint").GetComponent<TextMeshProUGUI>().text = BlueScore + " Pts";
+        }
+        piece.SetActive(false);
+
+        if(RedScore == 4)
+        {
+            if (userColor.Equals("Red"))
+                InGameCanvas.transform.Find("Result").GetComponent<TextMeshProUGUI>().text = "WIN :)";
+            else
+                InGameCanvas.transform.Find("Result").GetComponent<TextMeshProUGUI>().text = "LOSE :(";
+        }
+        else if(BlueScore == 4)
+        {
+            if (userColor.Equals("Red"))
+                InGameCanvas.transform.Find("Result").GetComponent<TextMeshProUGUI>().text = "LOSE :(";
+            else
+                InGameCanvas.transform.Find("Result").GetComponent<TextMeshProUGUI>().text = "WIN :)";
+        }
     }
 
 
