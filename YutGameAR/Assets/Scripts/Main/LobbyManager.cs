@@ -11,7 +11,8 @@ namespace Main
 {
     public class LobbyManager : MonoBehaviour
     {
-        public string roomName;
+        public string roomName;     // create room menu -> (roomName) -> lobby 
+        public string leaderName;   // find room menu -> (leaderName) -> lobby
         public GameObject gameGroup;
         public GameObject manomotionGroup;
         private struct AbsenceOfLeader
@@ -58,11 +59,12 @@ namespace Main
             
             if (_isRoomLeader)
             {
-                _redUserName.text = NetworkCore.Instance.UserData.userName;
+                _redUserName.text = NetworkCore.Instance.UserData.userNickName;
             }
             else
             {
-                _blueUserName.text = NetworkCore.Instance.UserData.userName;   
+                _redUserName.text = leaderName;
+                _blueUserName.text = NetworkCore.Instance.UserData.userNickName;   
             }
         }
         

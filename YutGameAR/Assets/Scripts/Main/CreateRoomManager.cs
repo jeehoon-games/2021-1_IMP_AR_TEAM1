@@ -75,7 +75,7 @@ namespace Main
             if (_gameModeSelector.value > 0)
             {
                 // gameModeSelector.value 0: Not Selected, 1: 1 vs 1, 2: 2 vs 2
-                GameRoom room = new GameRoom(_roomNameInputField.text, NetworkCore.Instance.UserData.userName,
+                GameRoom room = new GameRoom(_roomNameInputField.text, NetworkCore.Instance.UserData.userNickName,
                     _gameModeSelector.value);
                 FMSocketIOManager.instance.Emit("Event_CreateRoom", JsonUtility.ToJson(room));
             }

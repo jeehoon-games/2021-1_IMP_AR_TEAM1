@@ -25,6 +25,7 @@ namespace Main
         private struct JoinInfo
         {
             public string roomName;
+            public string userName;
         }
         
         private Dictionary<string, Room> _currRoomTable;
@@ -117,6 +118,7 @@ namespace Main
                     {
                         JoinInfo joinInfo = new JoinInfo();
                         joinInfo.roomName = selectedPanelMgr.roomName;
+                        joinInfo.userName = NetworkCore.Instance.UserData.userNickName;
                         FMSocketIOManager.instance.Emit("Event_JoinRoom", JsonUtility.ToJson(joinInfo));
                     }
                     else { _notification.text = "Please select the room."; }
@@ -168,6 +170,7 @@ namespace Main
                         gameObject.SetActive(false);
                         lobbyGroup.gameObject.SetActive(true);
                         lobbyGroup.gameObject.GetComponent<LobbyManager>().SetIsRoomLeader(false);
+                        lobbyGroup.gameObject.GetComponent<LobbyManager>().leaderName = selectedPanelMgr.room.roomLeader;
                         break;
                     case "FullyOccupied":
                         _notification.text = "The room is full.";

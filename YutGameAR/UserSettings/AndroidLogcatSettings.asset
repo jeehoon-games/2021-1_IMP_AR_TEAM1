@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "R39M304GYGX",
         "name": "com.DefaultCompany.YutGameAR",
-        "processId": 22078,
+        "processId": 29176,
         "exited": false
     },
     "m_SelectedPriority": 1,
@@ -222,6 +222,12 @@
             "deviceId": "R39M304GYGX",
             "name": "com.DefaultCompany.YutGameAR",
             "processId": 22078,
+            "exited": false
+        },
+        {
+            "deviceId": "R39M304GYGX",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 29176,
             "exited": false
         }
     ],
