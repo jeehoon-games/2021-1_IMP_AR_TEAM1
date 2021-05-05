@@ -162,6 +162,11 @@ namespace Main
                         yutBoard.SetActive(true);
                         yutPlate.SetActive(true);
                         yutBoard.transform.Find("YutGameManager").GetComponent<YutGameManager>().rName = roomName;
+                        if (_isRoomLeader)
+                            yutBoard.transform.Find("YutGameManager").GetComponent<YutGameManager>().userColor = "Red";
+                        else
+                            yutBoard.transform.Find("YutGameManager").GetComponent<YutGameManager>().userColor = "Blue";
+
                         yutBoard.transform.position = ARPlaneInfo.Instance.center = new Vector3(-0.3f, 0, 0.3f);
                         yutPlate.transform.position = ARPlaneInfo.Instance.center = new Vector3(0.3f, 0, 0.3f);
                         gameObject.SetActive(false);

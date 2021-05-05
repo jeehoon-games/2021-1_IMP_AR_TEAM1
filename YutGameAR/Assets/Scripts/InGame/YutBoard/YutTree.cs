@@ -36,6 +36,7 @@ public class YutTree : MonoBehaviour
         {
             _footSet.Add(GameObject.Find("FootHold_" + i));
         }
+        Debug.Log("kjh 5555        " + _footSet);
         CreateTreeNode(_footSet);
         MakeTree();
         

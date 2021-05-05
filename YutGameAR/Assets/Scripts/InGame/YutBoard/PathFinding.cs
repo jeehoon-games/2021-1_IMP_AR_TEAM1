@@ -27,7 +27,8 @@ public class PathFinding : MonoBehaviour
     // calculating the position of the foothold that the piece can go.
     public Dictionary<string, YutTree.TreeNode> PathFind(GameObject piece, List<int> countNum)
     {
-        
+        Debug.Log("kjh1111     " + piece);
+        Debug.Log("kjh2222    " +  countNum[0]);
         Init(piece, countNum);
         _distictNum = countNum.Distinct().ToList();
         for (int i = 0; i < _distictNum.Count; i++)
@@ -47,18 +48,20 @@ public class PathFinding : MonoBehaviour
 
     private void Path(string Name, int count)
     {
+        Debug.Log("kjh 3333       " + Name);
+        Debug.Log("kjh 4444       " + count);
         YutTree.TreeNode startNode, nextNode;
         YutTree.TreeNode throughNode = null;
         bool exchange = false;
 
         startNode = _nodeName[Name];
         
-        //±³Â÷·Î°¡ ¾Æ´Ï¸é¼­ ±æÀÌ ÇÏ³ªÀÎ node
+        //êµì°¨ë¡œê°€ ì•„ë‹ˆë©´ì„œ ê¸¸ì´ í•˜ë‚˜ì¸ node
         if (!_nodeName[Name].IsIntersection)
         {
             
             
-            //±³Â÷·Î°¡ ¾Æ´Ñ nodeµé
+            //êµì°¨ë¡œê°€ ì•„ë‹Œ nodeë“¤
             if (_nodeName[Name].RightChild == null)
             {
                 //startNode = _nodeName[Name];
@@ -103,7 +106,7 @@ public class PathFinding : MonoBehaviour
             
         }
 
-        //±³Â÷·ÎÀÌ¸é¼­ °¥¼ö ÀÖ´Â ±æÀÌ 2°³ÀÎ node (5,10,20)
+        //êµì°¨ë¡œì´ë©´ì„œ ê°ˆìˆ˜ ìžˆëŠ” ê¸¸ì´ 2ê°œì¸ node (5,10,20)
         else if (_nodeName[Name].IsIntersection && _nodeName[Name].IsTwoway)
         {
             for (int i = 0; i < count; i++)
@@ -124,7 +127,7 @@ public class PathFinding : MonoBehaviour
             
         }
         
-        //±³Â÷·ÎÀÌ¸é¼­ ±æÀÌ ÇÏ³ªÀÎ node (15¹ø)
+        //êµì°¨ë¡œì´ë©´ì„œ ê¸¸ì´ í•˜ë‚˜ì¸ node (15ë²ˆ)
         else if (_nodeName[Name].IsIntersection && !_nodeName[Name].IsTwoway)
         {
             for (int i = 0; i < count; i++)
@@ -136,7 +139,7 @@ public class PathFinding : MonoBehaviour
             
         }
         /*
-        //¸¶Áö¸· node
+        //ë§ˆì§€ë§‰ node
         else if (_nodeName[Name].FootHold.name == "FootHold_29")
         {
             startNode = _nodeName["FootHold_30"];
@@ -148,8 +151,8 @@ public class PathFinding : MonoBehaviour
 
     }
 
-    // the path of the piece when it is BackDo(»ªµµ)
-    //À· »ªµµ ³ª¿ÔÀ»¶§ Áï,¸»ÀÌ ¾ø´Â»óÅÂ·Î ¹éµµ°¡ ³ª¿ÓÀ»¶§ °æ¿ì °íÄ¥°Í!
+    // the path of the piece when it is BackDo(ë¹½ë„)
+    //ìœ· ë¹½ë„ ë‚˜ì™”ì„ë•Œ ì¦‰,ë§ì´ ì—†ëŠ”ìƒíƒœë¡œ ë°±ë„ê°€ ë‚˜ì™“ì„ë•Œ ê²½ìš° ê³ ì¹ ê²ƒ!
     private void BackPath(string Name, int count)
     {
         YutTree.TreeNode startNode, nextNode;
@@ -159,7 +162,7 @@ public class PathFinding : MonoBehaviour
 
         if(Name.Equals("FootHold_20") || Name.Equals("FootHold_29"))
         {
-            //³ªÁß¿¡ Ãß°¡ÇÒ ¿¹Á¤ »ªµµ
+            //ë‚˜ì¤‘ì— ì¶”ê°€í•  ì˜ˆì • ë¹½ë„
         }
         else
         {

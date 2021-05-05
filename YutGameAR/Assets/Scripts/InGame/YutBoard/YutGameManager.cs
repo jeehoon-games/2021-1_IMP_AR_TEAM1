@@ -32,16 +32,17 @@ public class YutGameManager : MonoBehaviour
     void Awake()
     {
         YutManager = this;
+        YutComponent = GetComponent<YutThrow>();
+        TreeComponent = GetComponent<YutTree>();
+        PiecesSet = GameObject.FindGameObjectsWithTag("Piece");
+        StartCoroutine(SocketIOEvent());
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        YutComponent = GetComponent<YutThrow>();
-        TreeComponent = GetComponent<YutTree>();
-        PiecesSet = GameObject.FindGameObjectsWithTag("Piece");
-        StartCoroutine(SocketIOEvent());
+        
     }
 
     // Update is called once per frame
@@ -57,10 +58,9 @@ public class YutGameManager : MonoBehaviour
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Physics.Raycast(ray, out hit);
             //DestroyArrow();
-
-            if (hit.collider.gameObject != null)
+            
+            if (Physics.Raycast(ray, out hit))
             {
                 // 터치하는 것이 말일 경우
                 Debug.Log("Hit: " + hit.collider.gameObject.CompareTag("Piece"));
@@ -69,6 +69,9 @@ public class YutGameManager : MonoBehaviour
                     //hit.collider.GetComponent<Renderer>().material.color = Color.red;
                     _select = true;
                     _selectedPiece = hit.collider.gameObject;
+                    Debug.Log("kjh 6666      " + hit.collider.GetComponent<PathFinding>());
+                    Debug.Log("kjh 7777      " + _selectedPiece.name);
+                    Debug.Log("kjh 8888      " + YutComponent.SelectNumber);
                     _enableNode = hit.collider.GetComponent<PathFinding>().PathFind(_selectedPiece, YutComponent.SelectNumber);
                 }
 
@@ -84,10 +87,8 @@ public class YutGameManager : MonoBehaviour
                     {
                         if (_selectedPiece.GetComponent<Pieces>().PosName == "FootHold_0") 
                         {
-
                             info.throughPos = "FootHold_29";
                             info.endPos = hit.collider.name;
-                            
                             info.id = _selectedPiece.GetComponent<Pieces>().ID;
                             string data = JsonUtility.ToJson(info);
                             FMSocketIOManager.instance.Emit("Event_SendPos", data);

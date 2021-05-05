@@ -1,9 +1,9 @@
 {
     "m_SelectedDeviceId": "R39M304GYGX",
     "m_SelectedPackage": {
-        "deviceId": "R39M304GYGX",
-        "name": "com.DefaultCompany.YutGameAR",
-        "processId": 18836,
+        "deviceId": "",
+        "name": "",
+        "processId": 0,
         "exited": false
     },
     "m_SelectedPriority": 1,
@@ -131,61 +131,37 @@
         {
             "deviceId": "R39M304GYGX",
             "name": "com.DefaultCompany.YutGameAR",
-            "processId": 19068,
-            "exited": true
-        },
-        {
-            "deviceId": "R39M304GYGX",
-            "name": "com.DefaultCompany.YutGameAR",
-            "processId": 22078,
-            "exited": true
-        },
-        {
-            "deviceId": "R39M304GYGX",
-            "name": "com.DefaultCompany.YutGameAR",
-            "processId": 29176,
-            "exited": true
-        },
-        {
-            "deviceId": "R39M304GYGX",
-            "name": "com.DefaultCompany.YutGameAR",
-            "processId": 29960,
-            "exited": true
-        },
-        {
-            "deviceId": "R39M304GYGX",
-            "name": "com.DefaultCompany.YutGameAR",
-            "processId": 2534,
-            "exited": true
-        },
-        {
-            "deviceId": "R39M304GYGX",
-            "name": "com.DefaultCompany.YutGameAR",
-            "processId": 5232,
-            "exited": false
-        },
-        {
-            "deviceId": "R39M304GYGX",
-            "name": "com.DefaultCompany.YutGameAR",
-            "processId": 9145,
-            "exited": false
-        },
-        {
-            "deviceId": "R39M304GYGX",
-            "name": "com.DefaultCompany.YutGameAR",
-            "processId": 10968,
-            "exited": false
-        },
-        {
-            "deviceId": "R39M304GYGX",
-            "name": "com.DefaultCompany.YutGameAR",
-            "processId": 11443,
-            "exited": false
-        },
-        {
-            "deviceId": "R39M304GYGX",
-            "name": "com.DefaultCompany.YutGameAR",
             "processId": 18836,
+            "exited": true
+        },
+        {
+            "deviceId": "R39M304GYGX",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 22354,
+            "exited": true
+        },
+        {
+            "deviceId": "R39M304GYGX",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 25952,
+            "exited": true
+        },
+        {
+            "deviceId": "R39M304GYGX",
+            "name": "com.manomotion.arfoundationssdkceexample",
+            "processId": 26187,
+            "exited": true
+        },
+        {
+            "deviceId": "R39M304GYGX",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 3606,
+            "exited": true
+        },
+        {
+            "deviceId": "R39M304GYGX",
+            "name": "com.DefaultCompany.YutGameAR",
+            "processId": 8284,
             "exited": false
         }
     ],
