@@ -159,7 +159,10 @@ namespace Main
                     case "Success":
                         gameGroup.SetActive(true);
                         manomotionGroup.SetActive(true);
+                        gameGroup.transform.Find("YutBoard").position = ARPlaneInfo.Instance.center = new Vector3(-0.3f, 0.1f, 0);
+                        gameGroup.transform.Find("YutPlate").position = ARPlaneInfo.Instance.center = new Vector3(0.3f, 0.1f, 0);
                         gameObject.SetActive(false);
+                        StopCoroutine(NotificationTimer());
                         break;
                     case "Fail":
                         _notificationTimer = 0;
