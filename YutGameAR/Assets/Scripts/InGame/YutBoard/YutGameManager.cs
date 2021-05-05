@@ -26,6 +26,8 @@ public class YutGameManager : MonoBehaviour
     public bool MyTurn;
     public string RedName, BlueName;
     public Canvas InGameCanvas;
+    private AudioSource _audioSource;
+    public AudioClip GoalInClip;
 
     private struct UserInfo
     {
@@ -51,6 +53,7 @@ public class YutGameManager : MonoBehaviour
         YutComponent = GetComponent<YutThrow>();
         TreeComponent = GetComponent<YutTree>();
         PiecesSet = GameObject.FindGameObjectsWithTag("Piece");
+        _audioSource = GetComponent<AudioSource>();
         StartCoroutine(NotificationTimer());
         StartCoroutine(SocketIOEvent());
         
@@ -263,6 +266,7 @@ public class YutGameManager : MonoBehaviour
             InGameCanvas.transform.Find("BluePoint").GetComponent<TextMeshProUGUI>().text = BlueScore + " Pts";
         }
         piece.SetActive(false);
+        _audioSource.PlayOneShot(GoalInClip);
         //Destroy(piece);
         if(RedScore == 4)
         {

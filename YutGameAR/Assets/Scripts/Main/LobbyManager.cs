@@ -16,6 +16,7 @@ namespace Main
         public GameObject manomotionGroup;
         public GameObject yutBoard;
         public GameObject yutPlate;
+        public Canvas ingameCanvas;
         private struct AbsenceOfLeader
         {
             public bool onAbsence;
@@ -160,6 +161,7 @@ namespace Main
                         manomotionGroup.SetActive(true);
                         yutBoard.SetActive(true);
                         yutPlate.SetActive(true);
+                        ingameCanvas.gameObject.SetActive(true);
                         yutBoard.transform.Find("YutGameManager").GetComponent<YutGameManager>().rName = roomName;
                         if (_isRoomLeader)
                         {
@@ -170,8 +172,8 @@ namespace Main
                             yutBoard.transform.Find("YutGameManager").GetComponent<YutGameManager>().userColor = "Blue";
                         yutBoard.transform.Find("YutGameManager").GetComponent<YutGameManager>().RedName = _redUserName.text;
                         yutBoard.transform.Find("YutGameManager").GetComponent<YutGameManager>().BlueName = _blueUserName.text;
-                        yutBoard.transform.position = ARPlaneInfo.Instance.center + new Vector3(-0.3f, 0, 0.3f);
-                        yutPlate.transform.position = ARPlaneInfo.Instance.center + new Vector3(0.3f, 0, 0.3f);
+                        yutBoard.transform.position = ARPlaneInfo.Instance.center + new Vector3(-0.3f, 0, 0.2f);
+                        yutPlate.transform.position = ARPlaneInfo.Instance.center + new Vector3(0.3f, 0, 0.2f);
                         gameObject.SetActive(false);
                         StopCoroutine(NotificationTimer());
                         break;

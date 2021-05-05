@@ -172,6 +172,8 @@ namespace Main
                         lobbyGroup.gameObject.GetComponent<LobbyManager>().SetIsRoomLeader(false);
                         lobbyGroup.gameObject.GetComponent<LobbyManager>().leaderName = selectedPanelMgr.room.roomLeader;
                         lobbyGroup.gameObject.GetComponent<LobbyManager>().roomName = selectedPanelMgr.roomName;
+                        lobbyGroup.transform.Find("TeamRed").position = ARPlaneInfo.Instance.center + new Vector3(-0.25f, 0.0f, 0);
+                        lobbyGroup.transform.Find("TeamBlue").position = ARPlaneInfo.Instance.center + new Vector3(0.25f, 0.0f, 0);
                         break;
                     case "FullyOccupied":
                         _notification.text = "The room is full.";
