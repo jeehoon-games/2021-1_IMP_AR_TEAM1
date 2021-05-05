@@ -171,6 +171,7 @@ namespace Main
                         lobbyGroup.gameObject.SetActive(true);
                         lobbyGroup.gameObject.GetComponent<LobbyManager>().SetIsRoomLeader(false);
                         lobbyGroup.gameObject.GetComponent<LobbyManager>().leaderName = selectedPanelMgr.room.roomLeader;
+                        lobbyGroup.gameObject.GetComponent<LobbyManager>().roomName = selectedPanelMgr.roomName;
                         break;
                     case "FullyOccupied":
                         _notification.text = "The room is full.";

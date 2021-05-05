@@ -13,8 +13,9 @@ namespace Main
     {
         public string roomName;     // create room menu -> (roomName) -> lobby 
         public string leaderName;   // find room menu -> (leaderName) -> lobby
-        public GameObject gameGroup;
         public GameObject manomotionGroup;
+        public GameObject yutBoard;
+        public GameObject yutPlate;
         private struct AbsenceOfLeader
         {
             public bool onAbsence;
@@ -157,10 +158,12 @@ namespace Main
                 switch (data)
                 {
                     case "Success":
-                        gameGroup.SetActive(true);
                         manomotionGroup.SetActive(true);
-                        gameGroup.transform.Find("YutBoard").position = ARPlaneInfo.Instance.center = new Vector3(-0.3f, 0.1f, 0);
-                        gameGroup.transform.Find("YutPlate").position = ARPlaneInfo.Instance.center = new Vector3(0.3f, 0.1f, 0);
+                        yutBoard.SetActive(true);
+                        yutPlate.SetActive(true);
+                        yutBoard.transform.Find("YutGameManager").GetComponent<YutGameManager>().rName = roomName;
+                        yutBoard.transform.position = ARPlaneInfo.Instance.center = new Vector3(-0.3f, 0, 0.3f);
+                        yutPlate.transform.position = ARPlaneInfo.Instance.center = new Vector3(0.3f, 0, 0.3f);
                         gameObject.SetActive(false);
                         StopCoroutine(NotificationTimer());
                         break;

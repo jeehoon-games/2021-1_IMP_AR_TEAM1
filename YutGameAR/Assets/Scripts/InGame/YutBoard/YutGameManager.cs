@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class YutGameManager : MonoBehaviour
 {
+    public string rName;
     private bool _select = false;
     private GameObject _selectedPiece;
     private Dictionary<string, YutTree.TreeNode> _enableNode;
@@ -22,6 +23,7 @@ public class YutGameManager : MonoBehaviour
         public string userTurn;
         public string throughPos;
         public string endPos;
+        public string roomName;
         public int id;
     }
 
@@ -40,7 +42,6 @@ public class YutGameManager : MonoBehaviour
         TreeComponent = GetComponent<YutTree>();
         PiecesSet = GameObject.FindGameObjectsWithTag("Piece");
         StartCoroutine(SocketIOEvent());
-
     }
 
     // Update is called once per frame
@@ -58,11 +59,11 @@ public class YutGameManager : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Physics.Raycast(ray, out hit);
             //DestroyArrow();
-            
+
             if (hit.collider.gameObject != null)
             {
-                                
                 // 터치하는 것이 말일 경우
+                Debug.Log("Hit: " + hit.collider.gameObject.CompareTag("Piece"));
                 if (hit.collider.gameObject.CompareTag("Piece") && !_select && hit.collider.gameObject.GetComponent<Pieces>().teamColor.Equals(userColor))
                 {
                     //hit.collider.GetComponent<Renderer>().material.color = Color.red;
@@ -75,6 +76,7 @@ public class YutGameManager : MonoBehaviour
                 else if (hit.collider.gameObject.CompareTag("FootHold") && _select && _enableNode.ContainsKey(hit.collider.name))
                 {
                     UserInfo info = new UserInfo();
+                    info.roomName = rName;
                     info.userTurn = "true";
 
                     // when the pieces didn't start
